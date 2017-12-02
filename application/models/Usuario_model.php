@@ -12,11 +12,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Usuario_Model extends CI_Model {
 
 	/**
-	* @var String 	$table 		Nome da tabela
 	* @var array 	$array 		Dados do objeto
 	*/
-
-	private $table = 'usuarios';
 
 	/** Método construtor. */
 	public function __construct() {
@@ -27,14 +24,16 @@ class Usuario_Model extends CI_Model {
 	 * Insere um novo registro na tabela.
 	 * @return bool
 	 */
-	public function inserir( $objeto ) {
+	public function inserir( $table, $objeto ) {
 
 		if( ! is_object( $objeto ) && empty( $objeto ) ) {
 			return false;
 		}
 
+		var_dump( $objeto );
+
 		$this->db->set( $objeto->to_array( $objeto) );
-		return $this->db->insert( $this->table );
+		return $this->db->insert( $table );
 
 	}
 
@@ -42,35 +41,35 @@ class Usuario_Model extends CI_Model {
 	 * Deleta um registro no banco de dados.
 	 * @return bool
 	 */
-	public function remover( $objeto ) {
+	public function remover( $table, $objeto ) {
 
 		if( ! is_object( $objeto )  ) {
 			return false;
 		}
 
 		$this->db->where('id', $objeto->getID() );
-		return $this->db->delete( $this->table );
+		return $this->db->delete( $table );
 	}
 
 	/**
 	 * Atualiza um registro no banco de dados.
 	 * @return bool
 	 */
-	public function atualizar( $objeto ) {
+	public function atualizar( $table, $objeto ) {
 
 		if( ! is_object( $objeto )  ){
 			return false;
 		}
 		
 		$this->db->where('id', $objeto->getID() );
-		return $this->db->update( $this->table, $objeto->to_array( $objeto ) );
+		return $this->db->update( $table, $objeto->to_array( $objeto ) );
 	}
 
 	/**
 	 * Seleciona um registro pelo seu id.
 	 * @return object
 	 */
-	public function selecionar( $objeto ) {
+	public function selecionar( $table, $objeto ) {
 
 		$this->db->select();
 		$this->db->from( $this->table );
@@ -88,7 +87,7 @@ class Usuario_Model extends CI_Model {
 	 * Lista os registros do banco
 	 * @return array
 	 */
-	public function listar($params = null, $type = 'OR') {
+	public function listar($table, $params = null, $type = 'OR') {
 
 		$i = 0;
 		$this->db->select();
@@ -118,7 +117,7 @@ class Usuario_Model extends CI_Model {
 		endif;
 		
 		$this->db->order_by('nome', 'ASC');
-		$query = $this->db->get( $this->table );
+		$query = $this->db->get( $table );
 		return $query->result_array();
 	}
 
@@ -126,9 +125,9 @@ class Usuario_Model extends CI_Model {
 	 * Conta os registros existentes no banco.
 	 * @return int
 	 */
-	public function contar_registros() {
+	public function contar_registros( $table ) {
 
-		return $this->db->count_all( $this->table );
+		return $this->db->count_all( $table );
 
 	}
 

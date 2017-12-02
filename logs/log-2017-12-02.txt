@@ -1,0 +1,183 @@
+DEBUG - 2017-12-02 14:57:12 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 14:57:12 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 14:57:12 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 14:57:12 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-02 14:57:12 --> Total execution time: 0.3643
+DEBUG - 2017-12-02 14:59:36 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 14:59:36 --> Client sent : pessoas
+ERROR - 2017-12-02 14:59:36 --> Severity: Notice --> Undefined offset: 0 C:\Projetos\tim\system\core\Router.php 342
+ERROR - 2017-12-02 14:59:36 --> Severity: Notice --> Undefined offset: 0 C:\Projetos\tim\system\core\Router.php 346
+DEBUG - 2017-12-02 14:59:36 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2017-12-02 14:59:36 --> 404 Page Not Found: pessoas//index
+DEBUG - 2017-12-02 15:00:39 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:00:39 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2017-12-02 15:00:39 --> 404 Page Not Found: Pessoas/index
+DEBUG - 2017-12-02 15:00:39 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:00:39 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2017-12-02 15:00:39 --> 404 Page Not Found: Faviconico/index
+DEBUG - 2017-12-02 15:00:57 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:00:57 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2017-12-02 15:00:57 --> 404 Page Not Found: Teste/pessoas
+DEBUG - 2017-12-02 15:01:04 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:01:04 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:01:04 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-02 15:01:04 --> Total execution time: 0.1620
+DEBUG - 2017-12-02 15:01:57 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:01:57 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:01:57 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-02 15:01:57 --> Total execution time: 0.1771
+DEBUG - 2017-12-02 15:14:21 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:14:21 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2017-12-02 15:14:21 --> 404 Page Not Found: /index
+DEBUG - 2017-12-02 15:14:31 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:14:31 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:14:31 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:14:32 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+ERROR - 2017-12-02 15:14:32 --> Severity: error --> Exception: Class 'CI_Template' not found C:\Projetos\tim\system\core\Common.php 196
+DEBUG - 2017-12-02 15:15:57 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:15:57 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:15:57 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:15:57 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+ERROR - 2017-12-02 15:15:57 --> Severity: error --> Exception: Class 'CI_Template' not found C:\Projetos\tim\system\core\Common.php 196
+DEBUG - 2017-12-02 15:15:59 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:15:59 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:15:59 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:15:59 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+ERROR - 2017-12-02 15:15:59 --> Severity: error --> Exception: Class 'CI_Template' not found C:\Projetos\tim\system\core\Common.php 196
+DEBUG - 2017-12-02 15:17:34 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:17:34 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:17:34 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:17:34 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+ERROR - 2017-12-02 15:17:34 --> Severity: error --> Exception: Class 'CI_Template' not found C:\Projetos\tim\system\core\Common.php 196
+DEBUG - 2017-12-02 15:17:35 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:17:35 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:17:35 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:17:35 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+ERROR - 2017-12-02 15:17:35 --> Severity: error --> Exception: Class 'CI_Template' not found C:\Projetos\tim\system\core\Common.php 196
+DEBUG - 2017-12-02 15:19:22 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:19:22 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:19:22 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:19:22 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+ERROR - 2017-12-02 15:19:22 --> Severity: error --> Exception: Class 'CI_Template' not found C:\Projetos\tim\system\core\Common.php 196
+DEBUG - 2017-12-02 15:19:46 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:19:46 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:19:46 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:19:46 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+ERROR - 2017-12-02 15:19:46 --> Severity: error --> Exception: Class 'CI_Template' not found C:\Projetos\tim\system\core\Common.php 196
+DEBUG - 2017-12-02 15:20:18 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:20:18 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:20:18 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:20:18 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-02 15:20:18 --> Total execution time: 0.1764
+DEBUG - 2017-12-02 15:20:46 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:20:46 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:20:46 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:20:46 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-02 15:20:46 --> Total execution time: 0.1621
+DEBUG - 2017-12-02 15:20:59 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:20:59 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:20:59 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:20:59 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-02 15:20:59 --> Total execution time: 0.1676
+DEBUG - 2017-12-02 15:21:48 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:21:48 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:21:48 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:21:49 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+ERROR - 2017-12-02 15:21:49 --> Severity: error --> Exception: Class 'CI_Template' not found C:\Projetos\tim\system\core\Common.php 196
+DEBUG - 2017-12-02 15:22:32 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:22:32 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:22:32 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:22:32 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+ERROR - 2017-12-02 15:22:32 --> Severity: error --> Exception: Class 'Usuario_Model' not found C:\Projetos\tim\application\controllers\Usuario.php 48
+DEBUG - 2017-12-02 15:22:53 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:22:53 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:22:53 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:22:53 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-02 15:22:53 --> Total execution time: 0.2119
+DEBUG - 2017-12-02 15:23:46 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:23:46 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:23:46 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:23:46 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+ERROR - 2017-12-02 15:23:46 --> Severity: error --> Exception: Too few arguments to function Usuario_Model::__construct(), 0 passed in C:\Projetos\tim\system\core\Loader.php on line 353 and exactly 1 expected C:\Projetos\tim\application\models\Usuario_model.php 22
+DEBUG - 2017-12-02 15:24:25 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:24:25 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:24:25 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:24:25 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+ERROR - 2017-12-02 15:24:25 --> Severity: error --> Exception: Too few arguments to function Usuario_Model::__construct(), 0 passed in C:\Projetos\tim\system\core\Loader.php on line 353 and exactly 1 expected C:\Projetos\tim\application\models\Usuario_model.php 22
+DEBUG - 2017-12-02 15:26:32 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:26:32 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:26:32 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:26:33 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+ERROR - 2017-12-02 15:26:33 --> Severity: error --> Exception: Too few arguments to function Usuario_Model::__construct(), 0 passed in C:\Projetos\tim\system\core\Loader.php on line 353 and exactly 1 expected C:\Projetos\tim\application\models\Usuario_model.php 22
+DEBUG - 2017-12-02 15:26:53 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:26:53 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:26:53 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:26:53 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+ERROR - 2017-12-02 15:26:53 --> Severity: error --> Exception: Too few arguments to function Usuario_Model::__construct(), 0 passed in C:\Projetos\tim\system\core\Loader.php on line 353 and exactly 1 expected C:\Projetos\tim\application\models\Usuario_model.php 22
+DEBUG - 2017-12-02 15:29:58 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:29:58 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:29:58 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:29:59 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+ERROR - 2017-12-02 15:29:59 --> Severity: error --> Exception: Too few arguments to function Usuario_Model::__construct(), 0 passed in C:\Projetos\tim\system\core\Loader.php on line 353 and exactly 1 expected C:\Projetos\tim\application\models\Usuario_model.php 22
+DEBUG - 2017-12-02 15:30:08 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:30:08 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:30:09 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:30:09 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+ERROR - 2017-12-02 15:30:09 --> Severity: error --> Exception: Too few arguments to function Usuario_Model::__construct(), 0 passed in C:\Projetos\tim\system\core\Loader.php on line 353 and exactly 1 expected C:\Projetos\tim\application\models\Usuario_model.php 22
+DEBUG - 2017-12-02 15:30:29 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:30:29 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:30:29 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:30:29 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+ERROR - 2017-12-02 15:30:29 --> Severity: Notice --> Array to string conversion C:\Projetos\tim\system\core\Loader.php 273
+ERROR - 2017-12-02 15:30:29 --> Severity: error --> Exception: Too few arguments to function Usuario_Model::__construct(), 0 passed in C:\Projetos\tim\system\core\Loader.php on line 353 and exactly 1 expected C:\Projetos\tim\application\models\Usuario_model.php 22
+DEBUG - 2017-12-02 15:31:05 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:31:05 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:31:05 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:31:05 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+ERROR - 2017-12-02 15:31:05 --> Severity: Notice --> Array to string conversion C:\Projetos\tim\system\core\Loader.php 273
+ERROR - 2017-12-02 15:31:05 --> Severity: error --> Exception: Too few arguments to function Usuario_Model::__construct(), 0 passed in C:\Projetos\tim\system\core\Loader.php on line 353 and exactly 1 expected C:\Projetos\tim\application\models\Usuario_model.php 22
+DEBUG - 2017-12-02 15:34:30 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:34:30 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:34:30 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:34:30 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-02 15:34:30 --> Total execution time: 0.2156
+DEBUG - 2017-12-02 15:34:36 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:34:36 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:34:36 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:34:36 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-02 15:34:36 --> Total execution time: 0.1890
+DEBUG - 2017-12-02 15:34:37 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:34:37 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:34:37 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:34:37 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-02 15:34:37 --> Total execution time: 0.1894
+DEBUG - 2017-12-02 15:34:37 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:34:37 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:34:37 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:34:37 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-02 15:34:37 --> Total execution time: 0.1929
+DEBUG - 2017-12-02 15:34:38 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:34:38 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:34:38 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:34:38 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-02 15:34:38 --> Total execution time: 0.1856
+DEBUG - 2017-12-02 15:35:46 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:35:46 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:35:46 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:35:46 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-02 15:35:46 --> Total execution time: 0.1848
+DEBUG - 2017-12-02 15:38:07 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:38:07 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:38:07 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:38:07 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-02 15:38:07 --> Total execution time: 0.2087
+DEBUG - 2017-12-02 15:38:51 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:38:51 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:38:51 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:38:51 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-02 15:38:51 --> Total execution time: 0.1905
+DEBUG - 2017-12-02 15:39:22 --> UTF-8 Support Enabled
+DEBUG - 2017-12-02 15:39:22 --> No URI present. Default controller set.
+DEBUG - 2017-12-02 15:39:22 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-02 15:39:22 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-02 15:39:22 --> Total execution time: 0.1948

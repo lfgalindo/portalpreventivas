@@ -10,7 +10,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Usuario {
+class Usuario_Class {
 
 	/**
 	 * Atributos de um Usuário
