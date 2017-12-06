@@ -51,7 +51,7 @@ class Usuario_Class {
                 'constraint' => '255',
               ),
               'cpf' => array(
-                'type' => 'INT',
+                'type' => 'BIGINT',
                 'null' => true
               ),
               'login' => array(
@@ -76,6 +76,10 @@ class Usuario_Class {
               'removido' => array(
                 'type' => 'INT',
                 'null' => true
+              ),
+              'id_perfil' => array(
+                'type' => 'BIGINT',
+                'unsigned' => true,
               )
            );
 

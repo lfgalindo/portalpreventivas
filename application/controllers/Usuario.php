@@ -52,7 +52,7 @@ class Usuario extends CI_Controller {
 		$usuario->setLogin("lfelipe");
 		$usuario->setSenha("senha");
 		$usuario->setMatricula("123");
-		$usuario->setTelefone('3342-1925');
+		$usuario->setTelefone('33421925');
 		$usuario->setRemovido( 0 );
 
 		$usuario_model->inserir( "usuarios", $usuario );

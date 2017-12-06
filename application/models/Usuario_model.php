@@ -131,6 +131,23 @@ class Usuario_Model extends CI_Model {
 
 	}
 
+	public function verificar_login( $table, $pessoa ) {
+
+		$this->db->where("login", $pessoa->getLogin() );
+		$this->db->where("senha", $pessoa->getSenha() );
+
+		$query = $this->db->get( $table );
+
+		if( $query->num_rows() == 1 ) {
+			
+			$pessoa = $query->result_array();
+
+			return $pessoa[0]['id'];
+		}
+
+		return false;
+	}
+
 } 
 
 ?>

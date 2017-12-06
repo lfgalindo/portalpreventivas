@@ -1,0 +1,81 @@
+DEBUG - 2017-12-03 10:16:08 --> UTF-8 Support Enabled
+DEBUG - 2017-12-03 10:16:09 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-03 10:16:09 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-03 10:16:09 --> Total execution time: 1.1681
+DEBUG - 2017-12-03 10:16:09 --> UTF-8 Support Enabled
+DEBUG - 2017-12-03 10:16:09 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2017-12-03 10:16:09 --> 404 Page Not Found: Faviconico/index
+DEBUG - 2017-12-03 10:17:05 --> UTF-8 Support Enabled
+DEBUG - 2017-12-03 10:17:05 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-03 10:17:05 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-03 10:17:05 --> Total execution time: 0.2151
+DEBUG - 2017-12-03 10:17:11 --> UTF-8 Support Enabled
+DEBUG - 2017-12-03 10:17:11 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-03 10:17:11 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-03 10:17:11 --> Total execution time: 0.2250
+DEBUG - 2017-12-03 10:17:16 --> UTF-8 Support Enabled
+DEBUG - 2017-12-03 10:17:16 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-03 10:17:16 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-03 10:17:16 --> Total execution time: 0.3827
+DEBUG - 2017-12-03 10:18:01 --> UTF-8 Support Enabled
+DEBUG - 2017-12-03 10:18:01 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-03 10:18:08 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-03 10:18:09 --> Migrating up from version 0 to version 001
+ERROR - 2017-12-03 10:18:09 --> Unable to load the requested class: Usuario
+DEBUG - 2017-12-03 10:18:54 --> UTF-8 Support Enabled
+DEBUG - 2017-12-03 10:18:54 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-03 10:18:57 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-03 10:18:58 --> Migrating up from version 0 to version 001
+ERROR - 2017-12-03 10:18:58 --> Unable to load the requested class: Perfil_class
+DEBUG - 2017-12-03 11:18:28 --> UTF-8 Support Enabled
+DEBUG - 2017-12-03 11:18:28 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-03 11:18:31 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-03 11:18:31 --> Migrating up from version 0 to version 001
+DEBUG - 2017-12-03 11:18:31 --> Finished migrating to 001
+DEBUG - 2017-12-03 11:18:31 --> Total execution time: 3.7173
+DEBUG - 2017-12-03 11:20:15 --> UTF-8 Support Enabled
+DEBUG - 2017-12-03 11:20:15 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-03 11:20:15 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-03 11:20:15 --> Total execution time: 0.2143
+DEBUG - 2017-12-03 11:21:07 --> UTF-8 Support Enabled
+DEBUG - 2017-12-03 11:21:07 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-03 11:21:08 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-03 11:21:08 --> Total execution time: 0.2055
+DEBUG - 2017-12-03 11:43:12 --> UTF-8 Support Enabled
+DEBUG - 2017-12-03 11:43:12 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-03 11:43:12 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-03 11:43:12 --> Migrating up from version 0 to version 001
+ERROR - 2017-12-03 11:43:12 --> Query error: Incorrect table definition; there can be only one auto column and it must be defined as a key - Invalid query: CREATE TABLE `usuarios` (
+	`id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
+	`nome` VARCHAR(255) NOT NULL,
+	`cpf` BIGINT NULL,
+	`login` VARCHAR(255) NULL,
+	`senha` VARCHAR(255) NULL,
+	`matricula` VARCHAR(255) NULL,
+	`telefone` INT NULL,
+	`removido` INT NULL,
+	`id_perfil` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
+	CONSTRAINT `pk_usuarios` PRIMARY KEY(`id`)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8 COLLATE = utf8_general_ci
+DEBUG - 2017-12-03 11:44:09 --> UTF-8 Support Enabled
+DEBUG - 2017-12-03 11:44:09 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-03 11:44:09 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-03 11:44:09 --> Migrating up from version 0 to version 001
+ERROR - 2017-12-03 11:44:09 --> Query error: Unknown table 'usuarios' - Invalid query: DROP TABLE `usuarios`
+DEBUG - 2017-12-03 11:44:30 --> UTF-8 Support Enabled
+DEBUG - 2017-12-03 11:44:30 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-03 11:44:30 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-03 11:44:30 --> Migrating up from version 0 to version 001
+DEBUG - 2017-12-03 11:44:30 --> Finished migrating to 001
+DEBUG - 2017-12-03 11:44:30 --> Total execution time: 0.2589
+DEBUG - 2017-12-03 11:45:39 --> UTF-8 Support Enabled
+DEBUG - 2017-12-03 11:45:39 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-03 11:45:39 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-03 11:45:39 --> Migrating up from version 0 to version 001
+DEBUG - 2017-12-03 11:45:39 --> Finished migrating to 001
+DEBUG - 2017-12-03 11:45:39 --> Total execution time: 0.3058
+DEBUG - 2017-12-03 11:47:52 --> UTF-8 Support Enabled
+DEBUG - 2017-12-03 11:47:52 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2017-12-03 11:47:52 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+DEBUG - 2017-12-03 11:47:52 --> Migrating up from version 0 to version 001
+ERROR - 2017-12-03 11:47:52 --> Query error: Can't create table 'teste.#sql-5a7f_1a239df' (errno: 150) - Invalid query: ALTER TABLE usuarios ADD CONSTRAINT usuarios_id_perfil_fk FOREIGN KEY (id_perfil) REFERENCES perfis( id_perfil ) ON DELETE RESTRICT ON UPDATE RESTRICT

@@ -13,14 +13,13 @@ class Migration_Incluir_tabelas extends CI_Migration {
 
     // Array com todas as Classes e tabelas do sistema
     private $tabelas = array(
-                        "Usuario" => "usuarios",
-                        "Perfil" => "perfis",
+                        "Usuario_Class" => "usuarios",
+                        "Site_Class"    => "sites",
+                        "Inventario_Class"    => "inventarios",
                         );
 
 
     public function __construct() {
-
-        //$this->load->helper("foreign_key");
 
         foreach ( $this->tabelas as $classe => $nome_tabela ){
 
@@ -53,6 +52,8 @@ class Migration_Incluir_tabelas extends CI_Migration {
 
     public function down() {
         
+        //drop_fk( 'usuarios', 'id_perfil' );
+
         foreach ( $this->tabelas as $nome_tabela ){
 
             $this->dbforge->drop_table( $nome_tabela );
