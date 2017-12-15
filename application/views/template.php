@@ -41,8 +41,30 @@
 	<body>
 
 		<div class="container-fluid" id="wrapper">
+
+			<div class="row" id="row_pre_menu">
+				<div class="col-md-8 col-md-offset-2" id="pre_menu">
+					<div id="logo">LOGO</div>
+					<div id="menu">USER</div>
+				</div>
+			</div>
+
+			<div class="row" id="row_content_menu">
+				<div class="col-md-8 col-md-offset-2" id="content_menu">
+					<ul id="menu">
+						<li><i class="fa fa-home" aria-hidden="true"></i>Início</li>
+						<li><i class="fa fa-map-signs" aria-hidden="true"></i>Sites</li>
+						<li><i class="fa fa-file-text-o" aria-hidden="true"></i>Inventários</li>
+						<li><i class="fa fa-line-chart" aria-hidden="true"></i>Relatórios</li>
+						<li><i class="fa fa-user" aria-hidden="true"></i>Usuários</li>
+					<ul>
+				</div>
+			</div>
+
 			<div class="row">
-				<?php echo $contents; ?>
+				<div class="col-md-8 col-md-offset-2" id="content_page">
+					<?php echo $contents; ?>
+				</div>
 			</div>
 		</div>
 
