@@ -58,7 +58,7 @@
 			<div class="botao_add">
 				<?php //if( check_permission('cadastrar_modelos')): ?>
 					<a href="<?php echo base_url('/usuarios/cadastrar'); ?>">
-						<button class="btn-novo" data-toggle="tooltip" data-placement="bottom" title="Cadastrar um usuário">Novo usuário</button>
+						<button class="btn-green" data-toggle="tooltip" data-placement="bottom" title="Cadastrar um usuário">Novo usuário</button>
 					</a>
 				<?php //endif; ?>
 			</div>

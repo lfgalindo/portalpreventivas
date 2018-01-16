@@ -87,12 +87,37 @@ h1.title-area{
     padding-bottom: 4px;
 }
 
-.btn-novo{
+h6.title-area{
+    font-size: 14px;
+    margin: 0px 0px 16px 0px;
+    border-bottom: 1px solid #cec;
+    padding-bottom: 4px;
+}
+
+.btn-green{
     background-color: #9fd037;
     border: solid 2px #9fd037;
     color: #fff;
     border-radius: 3px;
     padding: 3px 8px;
+}
+
+.btn-green:hover{
+    background-color: #8fbb32;
+    border: solid 2px #8fbb32;
+}
+
+.btn-red{
+    background-color: #e65858;
+    border: solid 2px #e65858;
+    color: #fff;
+    border-radius: 3px;
+    padding: 3px 8px;
+}
+
+.btn-red:hover{
+    background-color: #cf4f4f;
+    border: solid 2px #cf4f4f;
 }
 
 div.row.cadastro{
@@ -112,4 +137,17 @@ div.alerts{
     right: 15px;
     z-index: 9999;
     min-width: 20%;
+}
+
+label.permissoes{
+    font-weight: 400;
+    font-size: 13px;
+}
+
+@media screen and (max-width: 992px){
+
+    h6.permissao{
+        margin-top: 10px; 
+    }
+
 }

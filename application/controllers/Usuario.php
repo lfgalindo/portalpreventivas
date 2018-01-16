@@ -47,6 +47,9 @@ class Usuario extends CI_Controller {
 	//Método para inserir um novo registro no banco de dados
 	public function cadastrar(){
 
+		// Carregar variável com todas as permissões para enviar para a tela
+		$data['permissoes'] = todas_permissoes();
+
 		$this->form_validation->set_rules('nome', 'Nome do usúario', 'required');
 		$this->form_validation->set_rules('cpf',  'CPF do usúario',  'required');
 		
@@ -89,7 +92,7 @@ class Usuario extends CI_Controller {
 			if ( $existe_login == true )
 				$this->flashmessages->error( "O login informado já existe no sistema." );
 
-			$this->template->load('template.php', 'usuarios/cadastrar-view.php');
+			$this->template->load('template.php', 'usuarios/cadastrar-view.php', $data);
 
 		} else {
 

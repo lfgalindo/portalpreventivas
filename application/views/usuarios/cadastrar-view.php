@@ -129,8 +129,55 @@
 						?>
 					</div>
 				</div>
+
+				<div class="row cadastro" style="margin-top: 25px;">
+					<div class="col-md-3">Permissões:</div>
+
+					<div class="col-md-9">
+						<?php 
+
+							$cont = 0;
+
+							foreach ( $permissoes as $permissao ): 
+
+								$cont++;
+
+								if ( $cont == "1" )
+									echo '<div class="row cadastro">';
+
+								echo '<div class="col-md-4">';
+								echo '<h6 class="title-area permissao">' . $permissao['nome'] . '</h1>';
+
+								foreach ( $permissao['permissoes'] as $name => $text ) {
+									echo '<div class="row">';
+									echo '<div class="col-md-12">';
+									echo '<label class="permissoes">';
+									echo form_checkbox( 'permissoes', $name, FALSE);
+									echo $text;
+									echo '</label>';
+									echo '</div>';
+									echo '</div>';
+								}
+
+								echo '</div>';
+
+								if ( $cont == "3" ){
+
+									echo '</div>';
+									$cont = 0;
+
+								}
+
+							endforeach; 
+
+							if ( $cont != "0" )
+								echo '</div>';
+
+						?>
+					</div>
+				</div>
 				
-				<input type="submit" class="btn-novo" value="Cadastrar" data-toggle="tooltip" data-placement="bottom" title="Finalizar o cadastro" />
+				<input type="submit" class="btn-green" id="cadastrar" value="Cadastrar" data-toggle="tooltip" data-placement="bottom" title="Finalizar o cadastro" />
 			</div>
 		</div>
 	</div>
@@ -145,7 +192,7 @@
 
 	});
 	
-	$(document).on("click", ".btn-novo", function( e ){
+	$(document).on("click", "#cadastrar", function( e ){
 
 		e.preventDefault();
 
@@ -154,8 +201,8 @@
 		  text: 'Deseja realmente cadastrar esse usuário?',
 		  type: 'warning',
 		  showCancelButton: true,
-		  confirmButtonColor: '#2ac87d',
-		  cancelButtonColor: '#d33',
+		  confirmButtonColor: '#9fd037',
+		  cancelButtonColor: '#e65858',
 		  cancelButtonText: "Cancelar",
 		  confirmButtonText: 'Sim',
   		  reverseButtons: true
