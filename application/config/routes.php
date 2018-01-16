@@ -6,6 +6,8 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['usuarios'] = 'usuario';
+$route['usuarios/cadastrar'] = 'usuario/cadastrar';
+
 
 $route['sites'] = 'site';
 

@@ -34,6 +34,7 @@
 
 	    <script src="<?php echo base_url(); ?>assets/tether/js/tether.min.js"></script>
 	    <script src="<?php echo base_url(); ?>assets/jquery/jquery.min.js"></script>
+    	<script src="<?php echo base_url(); ?>assets/mask/jquery_mask.js"></script>
 	    <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap.min.js"></script>
 	    <script src="<?php echo base_url(); ?>assets/sweetalert/sweetalert.min.js"></script>
 	</head>
@@ -79,7 +80,24 @@
 					<?php echo $contents; ?>
 				</div>
 			</div>
+
+			<?php
+
+				// Exibe as mensagens de erro caso tenha.
+				if( $this->flashmessages->hasMessages() ) {
+				    echo '<div class="alerts">';
+				    $this->flashmessages->display();
+				    echo '</div>';
+				}
+
+			?>
 		</div>
 
 	</body>
 </html>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+});
+</script>

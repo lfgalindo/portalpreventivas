@@ -22,6 +22,7 @@ class Usuario_Class {
 	 * @var string 	$matricula		Matrícula TEL do usuário.
 	 * @var int 	$telefone		Telefone do usuário.
 	 * @var int 	$removido		Se usuário foi removido.
+	 * @var int 	$permissoes		Permissões de acesso do usuário.
 	 */
 
 	private $id;
@@ -32,6 +33,7 @@ class Usuario_Class {
 	private $matricula;
 	private $telefone;
 	private $removido;
+	private $permissoes;
 
 	/**
 	 * Método que define os campos da tabela de usuários no banco de dados.
@@ -70,16 +72,17 @@ class Usuario_Class {
                 'null' => true
               ),
               'telefone' => array(
-                'type' => 'INT',
+                'type' => 'VARCHAR',
+                'constraint' => '255',
                 'null' => true
               ),
               'removido' => array(
                 'type' => 'INT',
                 'null' => true
               ),
-              'id_perfil' => array(
-                'type' => 'BIGINT',
-                'unsigned' => true,
+              'permissoes' => array(
+                'type' => 'TEXT',
+                'null' => true
               )
            );
 
@@ -101,7 +104,8 @@ class Usuario_Class {
 			'senha' 		=> $usuario->getSenha(),
 			'matricula' 	=> $usuario->getMatricula(),
 			'telefone' 		=> $usuario->getTelefone(),
-			'removido' 		=> $usuario->getRemovido()
+			'removido' 		=> $usuario->getRemovido(),
+			'permissoes' 	=> $usuario->getPermissoes(),
 		);
 
 	}
@@ -121,6 +125,7 @@ class Usuario_Class {
 		$usuario->setMatricula(	$array['matricula']);
 		$usuario->setTelefone(	$array['telefone']);
 		$usuario->setRemovido(	$array['removido']);
+		$usuario->setPermissoes($array['permissoes']);
 
 		return $usuario;
 
@@ -189,6 +194,14 @@ class Usuario_Class {
 
 	public function setRemovido($removido){
 		$this->removido = $removido;
+	}
+
+	public function getPermissoes(){
+		return $this->permissoes;
+	}
+
+	public function setPermissoes($permissoes){
+		$this->permissoes = $permissoes;
 	}
 	/** Fim do Sets e Gets */
 }

@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
 body{
 	background-color: #eaeff2;
+    font-family: 'Raleway', sans-serif;
 }
 div#row_pre_menu{
     background-color: #3b3b48;
@@ -68,4 +71,45 @@ button.btn-table{
 
 a:hover{
     text-decoration: none;
+}
+
+div.area{
+    margin-top: 20px;
+    background-color: #f7f9fa;
+    padding: 16px;
+}
+
+h1.title-area{
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0px 0px 16px 0px;
+    border-bottom: 1px solid #cec;
+    padding-bottom: 4px;
+}
+
+.btn-novo{
+    background-color: #9fd037;
+    border: solid 2px #9fd037;
+    color: #fff;
+    border-radius: 3px;
+    padding: 3px 8px;
+}
+
+div.row.cadastro{
+    margin-bottom: 16px;
+}
+
+input.cadastro{
+    width: 100%;
+    padding: 4px;
+    border: 1px solid #dce2e7;
+    outline-color: #9fd037;
+}
+
+div.alerts{
+    position: absolute;
+    top: 65px;
+    right: 15px;
+    z-index: 9999;
+    min-width: 20%;
 }

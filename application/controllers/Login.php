@@ -44,17 +44,21 @@ class Login extends CI_Controller {
 		$this->form_validation->set_rules('senha', 'Senha', 'required|trim');
 
 		if( $this->form_validation->run() ) {
-	
-			$usuario_model = new Usuario_Model();
+
 			$usuario = new Usuario_Class();
 
 			$usuario->setLogin( $this->input->post("login") );
-			$usuario->setSenha( $this->input->post("senha") );
-			//$usuario->setSenha( hash('sha512', $this->input->post("senha") ) );
+			//$usuario->setSenha( $this->input->post("senha") );
+			$usuario->setSenha( hash('sha512', $this->input->post("senha") ) );
 
-			$id_usuario = $usuario_model->verificar_login( "usuarios", $usuario );
+			$id_usuario = $this->usuario_model->verificar_login( "usuarios", $usuario );
 
 			if( $id_usuario != false ) {
+
+				$usuario->setID( $id_usuario );
+				$usuario = $this->usuario_model->selecionar('usuarios', $usuario);
+
+				var_dump($usuario); die();
 
 				// Armazenamos os dados do usuário.
 				$data = array(
@@ -74,10 +78,12 @@ class Login extends CI_Controller {
 				$this->flashmessages->error( get_messages('erro_login') );
 				redirect('login');
 			}
+
 		} else {
 
 			$this->flashmessages->error( get_messages('erro_login') );		
 			redirect('login');
+
 		}
 	}
 

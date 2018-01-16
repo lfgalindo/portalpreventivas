@@ -72,7 +72,7 @@ class Usuario_Model extends CI_Model {
 	public function selecionar( $table, $objeto ) {
 
 		$this->db->select();
-		$this->db->from( $this->table );
+		$this->db->from( $table );
 		$this->db->where('id', $objeto->getID() );
 		$query = $this->db->get();
 
@@ -146,6 +146,25 @@ class Usuario_Model extends CI_Model {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Retorna se existe um registro de um determinado valor de um campo.
+	 * @return int
+	 */
+	public function existe_cadastro($table, $nome_campo, $valor_campo ){
+
+		$this->db->where( $nome_campo, $valor_campo );
+
+		$query = $this->db->get( $table );
+
+		if( $query->num_rows() >= 1 ) {
+			
+			return true;
+		}
+
+		return false;
+
 	}
 
 } 
