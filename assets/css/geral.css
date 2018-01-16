@@ -24,18 +24,48 @@ div#content_menu{
     align-items: center;
 }
 ul#menu{
-	list-style: none;
     display: flex;
     flex-direction: row;
-    align-items: center;
     height: 100%;
+    width: 100%;
     margin: 0;
     color: #d1d1e4;
     padding: 0;
 }
-ul#menu li{
-	margin-right: 50px;
+ul#menu a{
+    height: 100%;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    color: #d1d1e4;
 }
-ul#menu li i{
+
+ul#menu a:hover{
+    text-decoration: none;
+    color: #fff;
+}
+ul#menu a li{
+    list-style: none;
+}
+ul#menu a li i{
     margin-right: 7px;
+}
+
+table.listar{
+    background-color: #f5f8f9;
+    margin-top: 20px;
+    border: 1px solid #dce2e7;
+}
+
+button.btn-table{
+    background-color: transparent;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    color: #797b7b;
+    padding: 1px 8px;
+    outline: none;
+}
+
+a:hover{
+    text-decoration: none;
 }

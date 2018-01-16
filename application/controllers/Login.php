@@ -71,12 +71,12 @@ class Login extends CI_Controller {
 
 			} else {
 
-				$this->flashmessages->success( get_messages('erro_login') );
+				$this->flashmessages->error( get_messages('erro_login') );
 				redirect('login');
 			}
 		} else {
 
-			$this->flashmessages->success( get_messages('erro_login') );		
+			$this->flashmessages->error( get_messages('erro_login') );		
 			redirect('login');
 		}
 	}

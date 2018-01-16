@@ -52,11 +52,24 @@
 			<div class="row" id="row_content_menu">
 				<div class="col-md-8 col-md-offset-2" id="content_menu">
 					<ul id="menu">
-						<li><i class="fa fa-home" aria-hidden="true"></i>Início</li>
-						<li><i class="fa fa-map-signs" aria-hidden="true"></i>Sites</li>
-						<li><i class="fa fa-file-text-o" aria-hidden="true"></i>Inventários</li>
-						<li><i class="fa fa-line-chart" aria-hidden="true"></i>Relatórios</li>
-						<li><i class="fa fa-user" aria-hidden="true"></i>Usuários</li>
+						<a href="<?php echo site_url("inicio"); ?>">
+							<li><i class="fa fa-home" aria-hidden="true"></i>Início</li>
+						</a>
+						<a href="<?php echo site_url("sites"); ?>">
+							<li><i class="fa fa-map-signs" aria-hidden="true"></i>Sites</li>
+						</a>
+
+						<a href="<?php echo site_url("preventivas"); ?>">
+							<li><i class="fa fa-file-text-o" aria-hidden="true"></i>Preventivas</li>
+						</a>
+
+						<a href="<?php echo site_url("relatorios"); ?>">
+							<li><i class="fa fa-line-chart" aria-hidden="true"></i>Relatórios</li>
+						</a>
+
+						<a href="<?php echo site_url("usuarios"); ?>">
+							<li><i class="fa fa-user" aria-hidden="true"></i>Usuários</li>
+						</a>
 					<ul>
 				</div>
 			</div>

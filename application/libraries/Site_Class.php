@@ -13,12 +13,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Site_Class {
 
 	private $id;
-	private $localidade;
-	private $sigla_site;
-	private $cidade;
-	private $restricao;
-	private $concessionaria;
-	private $codigo_energia;
+	private $id_tim;
+	private $operadora;
+	private $rede;
+	private $tipo_ne;
+	private $fornecedor;
+	private $oper_msc_bsc;
+    private $ne_id;
+	private $restricao_acesso;
+    private $observacoes;
+    private $estado;
+    private $cidade;
+    private $ddd;
+    private $endereco;
+    private $bairro;
+    private $cm;
 
 	/**
 	 * Método que define os campos da tabela de perfis no banco de dados.
@@ -34,12 +43,51 @@ class Site_Class {
                 'unsigned' => true,
                 'auto_increment' => true
               ),
-              'localidade' => array(
+              'id_tim' => array(
+                'type' => 'BIGINT',
+                'unsigned' => true
+              ),
+              'operadora' => array(
                 'type' => 'VARCHAR',
                 'null'	=> TRUE,
                 'constraint' => '255',
               ),
-              'sigla_site' => array(
+              'rede' => array(
+                'type' => 'VARCHAR',
+                'null'	=> TRUE,
+                'constraint' => '255',
+              ),
+              'tipo_ne' => array(
+                'type' => 'VARCHAR',
+                'null'	=> TRUE,
+                'constraint' => '255',
+              ),
+              'fornecedor' => array(
+                'type' => 'VARCHAR',
+                'null'	=> TRUE,
+                'constraint' => '255',
+              ),
+              'oper_msc_bsc' => array(
+                'type' => 'VARCHAR',
+                'null'	=> TRUE,
+                'constraint' => '255',
+              ),
+              'ne_id' => array(
+                'type' => 'VARCHAR',
+                'null'	=> TRUE,
+                'constraint' => '255',
+              ),
+              'restricao_acesso' => array(
+                'type' => 'VARCHAR',
+                'null'	=> TRUE,
+                'constraint' => '255',
+              ),
+              'observacoes' => array(
+                'type' => 'VARCHAR',
+                'null'	=> TRUE,
+                'constraint' => '255',
+              ),
+              'estado' => array(
                 'type' => 'VARCHAR',
                 'null'	=> TRUE,
                 'constraint' => '255',
@@ -49,21 +97,26 @@ class Site_Class {
                 'null'	=> TRUE,
                 'constraint' => '255',
               ),
-              'restricao' => array(
+              'ddd' => array(
                 'type' => 'VARCHAR',
                 'null'	=> TRUE,
                 'constraint' => '255',
               ),
-              'concessionaria' => array(
+              'endereco' => array(
                 'type' => 'VARCHAR',
                 'null'	=> TRUE,
                 'constraint' => '255',
               ),
-              'codigo_energia' => array(
+              'bairro' => array(
                 'type' => 'VARCHAR',
                 'null'	=> TRUE,
                 'constraint' => '255',
               ),
+              'cm' => array(
+                'type' => 'VARCHAR',
+                'null'	=> TRUE,
+                'constraint' => '255',
+              )
            );
 
 	} /** Fim do método schema*/
@@ -77,13 +130,22 @@ class Site_Class {
 	public function to_array( $site ) {
 
 		return array(
-			'id'		 	 => $site->getID(),
-			'localidade'	 => $site->getLocalidade(),
-			'sigla_site'	 => $site->getSiglaSite(),
-			'cidade'		 => $site->getCidade(),
-			'restricao'		 => $site->getRestricao(),
-			'concessionaria' => $site->getConcessionaria(),
-			'codigo_energia' => $site->getCodigoEntrada(),
+			'id'		 		=> $site->getID(),
+			'id_tim' 			=> $site->getIDTim(),
+			'operadora'			=> $site->getOperadora(),
+			'rede'				=> $site->getRede(),	
+			'tipo_ne'			=> $site->getTipoNe(),
+			'fornecedor'		=> $site->getFornecedor(),
+			'oper_msc_bsc'		=> $site->getOperMscBsc(),
+    		'ne_id'				=> $site->getNeId(),
+			'restricao_acesso'	=> $site->getRestricaoAcesso(),
+		    'observacoes'		=> $site->getObservacoes(),
+			'estado'			=> $site->getEstado(),
+		    'cidade'			=> $site->getCidade(),
+		    'ddd'				=> $site->getDDD(),
+		    'endereco'			=> $site->getEndereco(),
+		    'bairro'			=> $site->getBairro(),
+		    'cm'				=> $site->getCm(),
 		);
 
 	}
@@ -96,12 +158,21 @@ class Site_Class {
 	public function to_object( $array, $site ) {
 
 		$site->setID( 				$array['id'] );
-		$site->setLocalidade(		$array['localidade']);
-		$site->setSiglaSite(		$array['sigla_site']);
+		$site->setIDTim(			$array['id_tim']);
+		$site->setOperadora(		$array['operadora']);
+		$site->setRede(				$array['rede']);
+		$site->setTipoNe(			$array['tipo_ne']);
+		$site->setFornecedor(		$array['fornecedor']);
+		$site->setOperMscBsc(		$array['oper_msc_bsc']);
+    	$site->setNeId(				$array['ne_id']);
+		$site->setRestricaoAcesso(	$array['restricao_acesso']);
+		$site->setObservacoes(		$array['observacoes']);
+		$site->setEstado(			$array['estado']);
 		$site->setCidade(			$array['cidade']);
-		$site->setRestricao(		$array['restricao']);
-		$site->setConcessionaria(	$array['concessionaria']);
-		$site->setCodigoEntrada(	$array['codigo_energia']);
+		$site->setDDD(				$array['ddd']);
+		$site->setEndereco(			$array['endereco']);
+		$site->setBairro(			$array['bairro']);
+		$site->setCm(				$array['cm']);
 
 		return $site;
 
@@ -116,20 +187,84 @@ class Site_Class {
 		$this->id = $id;
 	}
 
-	public function getLocalidade(){
-		return $this->localidade;
+	public function getIDTim(){
+		return $this->id_tim;
 	}
 
-	public function setLocalidade($localidade){
-		$this->localidade = $localidade;
+	public function setIDTim($id_tim){
+		$this->id_tim = $id_tim;
 	}
 
-	public function getSiglaSite(){
-		return $this->sigla_site;
+	public function getOperadora(){
+		return $this->operadora;
 	}
 
-	public function setSiglaSite($sigla_site){
-		$this->sigla_site = $sigla_site;
+	public function setOperadora($operadora){
+		$this->operadora = $operadora;
+	}
+
+	public function getRede(){
+		return $this->rede;
+	}
+
+	public function setRede($rede){
+		$this->rede = $rede;
+	}
+
+	public function getTipoNe(){
+		return $this->tipo_ne;
+	}
+
+	public function setTipoNe($tipo_ne){
+		$this->tipo_ne = $tipo_ne;
+	}
+
+	public function getFornecedor(){
+		return $this->fornecedor;
+	}
+
+	public function setFornecedor($fornecedor){
+		$this->fornecedor = $fornecedor;
+	}
+
+	public function getOperMscBsc(){
+		return $this->oper_msc_bsc;
+	}
+
+	public function setOperMscBsc($oper_msc_bsc){
+		$this->oper_msc_bsc = $oper_msc_bsc;
+	}
+
+	public function getNeId(){
+		return $this->ne_id;
+	}
+
+	public function setNeId($ne_id){
+		$this->ne_id = $ne_id;
+	}
+
+	public function getRestricaoAcesso(){
+		return $this->restricao_acesso;
+	}
+
+	public function setRestricaoAcesso($restricao_acesso){
+		$this->restricao_acesso = $restricao_acesso;
+	}
+
+	public function getObservacoes(){
+		return $this->observacoes;
+	}
+
+	public function setObservacoes($observacoes){
+		$this->observacoes = $observacoes;
+	}
+
+	public function getEstado(){
+		return $this->estado;
+	}
+
+	public function setEstado($estado){
+		$this->estado = $estado;
 	}
 
 	public function getCidade(){
@@ -140,28 +275,36 @@ class Site_Class {
 		$this->cidade = $cidade;
 	}
 
-	public function getRestricao(){
-		return $this->restricao;
+	public function getDDD(){
+		return $this->ddd;
 	}
 
-	public function setRestricao($restricao){
-		$this->restricao = $restricao;
+	public function setDDD($ddd){
+		$this->ddd = $ddd;
 	}
 
-	public function getConcessionaria(){
-		return $this->concessionaria;
+	public function getEndereco(){
+		return $this->endereco;
 	}
 
-	public function setConcessionaria($concessionaria){
-		$this->concessionaria = $concessionaria;
+	public function setEndereco($endereco){
+		$this->endereco = $endereco;
 	}
 
-	public function getCodigoEnergia(){
-		return $this->codigo_energia;
+	public function getBairro(){
+		return $this->bairro;
 	}
 
-	public function setCodigoEnergia($codigo_energia){
-		$this->codigo_energia = $codigo_energia;
+	public function setBairro($bairro){
+		$this->bairro = $bairro;
+	}
+
+	public function getCm(){
+		return $this->cm;
+	}
+
+	public function setCm($cm){
+		$this->cm = $cm;
 	}
 
 	/** Fim do Sets e Gets */

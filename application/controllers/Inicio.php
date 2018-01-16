@@ -22,12 +22,14 @@ class Inicio extends CI_Controller {
 		// Algumas models que iremos utilizar.
 		$this->load->model('usuario_model');
 
+		$this->template->set('title', 'Início');
+
 	}
 
 	public function index() {
 
 		
-		$this->load->view('index-view');
+		$this->template->load('template.php', 'index-view.php');
 
 
 	}

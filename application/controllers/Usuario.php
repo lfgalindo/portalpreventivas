@@ -22,7 +22,7 @@ class Usuario extends CI_Controller {
 
 		//Classes
 		$this->load->library('usuario_class');
-		//$this->load->library("form_validation");
+		$this->load->library('form_validation');
 
 		//Helpers
 		//$this->load->helper('paginacao_helper');
@@ -36,8 +36,11 @@ class Usuario extends CI_Controller {
 	 */
 	public function index() {
 
-		$this->template->load('template.php', 'usuarios/index.php');
+		$usuarios = $this->usuario_model->listar('usuarios');
 
+		$dados['usuarios'] = $usuarios;
+
+		$this->template->load('template.php', 'usuarios/index.php', $dados);
 
 	}//Fim do método index
 
