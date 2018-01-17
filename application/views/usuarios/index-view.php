@@ -87,7 +87,7 @@
 							<?php //if( check_permission('clonar_modelos') || check_permission('editar_modelos') || check_permission('excluir_modelos') ): ?>
 								<td>
 									<?php //if( check_permission('editar_modelos') ): ?>
-										<a href="<?php echo base_url('/painel/modelos/editar'); ?>">
+										<a href="<?php echo base_url('/usuarios/editar/') . $usuario['id']; ?>">
 											<button class="editar btn-table" data-toggle="tooltip"  data-placement="bottom" title="Editar">
 												<i class="fa fa-pencil" aria-hidden="true"></i>
 											</button>
@@ -95,7 +95,7 @@
 									<?php //endif; ?>
 
 									<?php //if( check_permission('excluir_modelos') ): ?>
-										<a href="<?php echo base_url('/painel/modelos/remover'); ?>">
+										<a href="<?php echo base_url('/usuarios/remover/') . $usuario['id']; ?>">
 											<button class="excluir btn-table" data-toggle="tooltip" data-placement="bottom" title="Excluir">
 												<i class="fa fa-times" aria-hidden="true"></i>
 											</button>
@@ -111,3 +111,34 @@
 <?php //echo $paginacao; ?>
 	</div>
 </div>
+
+<script type="text/javascript">
+	
+	$(document).on('click', '.excluir' , function( e ){
+
+			e.preventDefault();
+
+			var link = $(this).parent().attr('href');
+
+			swal({
+			  title: 'Atenção!',
+			  text: 'Deseja realmente remover esse usuário?',
+			  type: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#9fd037',
+			  cancelButtonColor: '#e65858',
+			  cancelButtonText: "Cancelar",
+			  confirmButtonText: 'Sim',
+	  		  reverseButtons: true
+			}).then((result) => {
+	 
+			  if (result) {
+
+			    window.location.href = link;
+
+			  }
+
+			});
+		});
+
+</script>

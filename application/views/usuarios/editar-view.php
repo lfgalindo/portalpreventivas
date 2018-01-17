@@ -2,7 +2,7 @@
 <?php
 
 /**
- * Tela que exibirá o formalário para cadastro de usuários
+ * Tela que exibirá o formalário para edição de usuários
  *
  * @category Usuario
  * @author Luiz Felipe <lfgalindo@live.com>
@@ -16,7 +16,7 @@
 		<div class="col-md-12">
 			<div class="area">
 
-				<h1 class="title-area">Novo usuário</h1>
+				<h1 class="title-area">Editar usuário</h1>
 
 				<div class="row cadastro">
 					<div class="col-md-3">Nome:</div>
@@ -25,7 +25,7 @@
 						<?php 
 							echo form_input( array(
 								"type" 	=> "text",
-								"value" => set_value('nome'),
+								"value" => set_value('nome') ? set_value('nome') : $usuario->getNome(),
 								"name" 	=> "nome",
 								"class" => "cadastro"
 								)
@@ -41,7 +41,7 @@
 						<?php 
 							echo form_input( array(
 								"type" 	=> "text",
-								"value" => set_value('matricula'),
+								"value" => set_value('matricula') ? set_value('matricula') : $usuario->getMatricula(),
 								"name" 	=> "matricula",
 								"class" => "cadastro"
 								)
@@ -57,7 +57,7 @@
 						<?php 
 							echo form_input( array(
 								"type" 	=> "text",
-								"value" => set_value('telefone'),
+								"value" => set_value('telefone') ? set_value('telefone') : $usuario->getTelefone(),
 								"name" 	=> "telefone",
 								"class" => "cadastro"
 								)
@@ -73,7 +73,7 @@
 						<?php 
 							echo form_input( array(
 								"type" 	=> "text",
-								"value" => set_value('cpf'),
+								"value" => set_value('cpf') ? set_value('cpf') : str_pad($usuario->getCPF(), 11, "0", STR_PAD_LEFT),
 								"name" 	=> "cpf",
 								"class" => "cadastro cpf"
 								)
@@ -89,7 +89,7 @@
 						<?php 
 							echo form_input( array(
 								"type" 	=> "text",
-								"value" => set_value('login'),
+								"value" => set_value('login') ? set_value('login') : $usuario->getLogin(),
 								"name" 	=> "login",
 								"class" => "cadastro"
 								)
@@ -177,7 +177,7 @@
 					</div>
 				</div>
 				
-				<input type="submit" class="btn-green" id="cadastrar" value="Cadastrar" data-toggle="tooltip" data-placement="bottom" title="Finalizar o cadastro" />
+				<input type="submit" class="btn-green" id="alterar" value="Salvar" data-toggle="tooltip" data-placement="bottom" title="Finalizar o cadastro" />
 			</div>
 		</div>
 	</div>
@@ -192,13 +192,13 @@
 
 	});
 	
-	$(document).on("click", "#cadastrar", function( e ){
+	$(document).on("click", "#alterar", function( e ){
 
 		e.preventDefault();
 
 		swal({
 		  title: 'Atenção!',
-		  text: 'Deseja realmente cadastrar esse usuário?',
+		  text: 'Deseja realmente salvar as alterações para esse usuário?',
 		  type: 'warning',
 		  showCancelButton: true,
 		  confirmButtonColor: '#9fd037',
