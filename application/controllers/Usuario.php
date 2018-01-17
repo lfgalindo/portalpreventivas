@@ -36,7 +36,24 @@ class Usuario extends CI_Controller {
 	 */
 	public function index() {
 
-		$usuarios = $this->usuario_model->listar('usuarios');
+		// Montar paginação
+		$maximo = "7";
+		$inicio = $this->input->get('inicio') ? $this->input->get('inicio') : 0;
+
+		$config['base_url'] 			= base_url('usuarios');	 
+		$config['total_rows'] 			= $this->usuario_model->contar_registros( 'usuarios' );
+		$config['enable_query_strings'] = true;
+		$config['page_query_string'] 	= true;
+		$config['query_string_segment'] = 'inicio';
+		$config['per_page'] 			= $maximo;
+		$config['first_link'] 			= "Primeira";
+		$config['last_link'] 			= "Última";
+
+		$this->pagination->initialize( $config );
+
+		$dados["paginacao"] = $this->pagination->create_links();
+
+		$usuarios = $this->usuario_model->listar('usuarios', $maximo, $inicio);
 
 		$dados['usuarios'] = $usuarios;
 

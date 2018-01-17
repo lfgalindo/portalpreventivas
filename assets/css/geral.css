@@ -57,6 +57,7 @@ ul#menu a li i{
 table.listar{
     background-color: #f5f8f9;
     margin-top: 20px;
+    margin-bottom: 0px;
     border: 1px solid #dce2e7;
 }
 
@@ -142,6 +143,27 @@ div.alerts{
 label.permissoes{
     font-weight: 400;
     font-size: 13px;
+}
+
+.pagination a{
+    padding: 8px 13px;
+    border: solid 1px #ccc;
+    border-radius: 2px;
+    margin-right: 2px;
+    color: #000;
+}
+
+.pagination a:hover{
+    background-color: #ccc;
+}
+
+.pagination strong{
+    padding: 9px 12px;
+    background-color: #9fd037;
+    border: solid 1px #ccc;
+    border-radius: 3px;
+    color: #fff;
+    margin-right: 2px;
 }
 
 @media screen and (max-width: 992px){

@@ -63,8 +63,6 @@
 				<?php //endif; ?>
 			</div>
 
-			<?php //echo $paginacao; ?>
-
 			<table class="table listar">
 				<thead>
 					<tr>
@@ -107,8 +105,12 @@
 					<?php endforeach; ?>
 				</tbody>
 			</table>
+
+			<div class="pagination">
+				<?php echo $paginacao; ?>
+			</div>
+
 		</div>
-<?php //echo $paginacao; ?>
 	</div>
 </div>
 

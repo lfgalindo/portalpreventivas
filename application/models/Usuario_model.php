@@ -87,42 +87,19 @@ class Usuario_Model extends CI_Model {
 	 * Lista os registros do banco
 	 * @return array
 	 */
-	public function listar($table, $params = null, $type = 'OR') {
+	public function listar( $table, $maximo, $inicio ) {
 
 		$i = 0;
 		$this->db->select();
 
-		if( is_array($params) && count($params) > 0):
-		
-			foreach( $params as $param ):
-
-				if( $type == 'AND' ):
-					$this->db->where( $param, 1 );
-				else:
-					if( $i == 0 ):
-						$this->db->where( $param,  1 );	
-					else:
-						$this->db->or_where( $param, 1 );
-					endif;	
-
-					$i++;
-				endif;
-
-			endforeach;
-		
-		elseif( is_string( $params ) ):
-
-			$this->db->where( $params, 1 );
-		
-		endif;
-		
+				
 		$this->db->group_start();
 		$this->db->where( 'removido !=', "1" );
 		$this->db->or_where( 'removido IS NULL' );
 		$this->db->group_end();
 		
 		$this->db->order_by('nome', 'ASC');
-		$query = $this->db->get( $table );
+		$query = $this->db->get( $table, $maximo, $inicio );
 		return $query->result_array();
 	}
 
@@ -132,7 +109,14 @@ class Usuario_Model extends CI_Model {
 	 */
 	public function contar_registros( $table ) {
 
-		return $this->db->count_all( $table );
+		$this->db->group_start();
+		$this->db->where( 'removido !=', "1" );
+		$this->db->or_where( 'removido IS NULL' );
+		$this->db->group_end();
+
+		$this->db->from( $table );
+
+		return $this->db->count_all_results();
 
 	}
 
