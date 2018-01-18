@@ -166,6 +166,20 @@ label.permissoes{
     margin-right: 2px;
 }
 
+.botao_add{
+    display: flex;  
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container-search{
+    width: 40%;
+}
+.container-search form{
+    display: flex;
+    width: 100%;
+}
+
 @media screen and (max-width: 992px){
 
     h6.permissao{

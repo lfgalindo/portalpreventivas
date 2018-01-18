@@ -87,11 +87,26 @@ class Usuario_Model extends CI_Model {
 	 * Lista os registros do banco
 	 * @return array
 	 */
-	public function listar( $table, $maximo, $inicio ) {
+	public function listar( $table, $maximo, $inicio, $search = "", $fields = null ) {
 
-		$i = 0;
 		$this->db->select();
 
+		if ( $search != "" || $fields != null ){
+
+			$i = 0;
+			$this->db->group_start();
+
+			foreach ($fields as $field) {
+				 
+				$i == 0 ? $this->db->like( $field, $search ) : $this->db->or_like( $field, $search );
+
+				$i++;
+
+			}
+
+			$this->db->group_end();
+
+		}
 				
 		$this->db->group_start();
 		$this->db->where( 'removido !=', "1" );
@@ -101,13 +116,31 @@ class Usuario_Model extends CI_Model {
 		$this->db->order_by('nome', 'ASC');
 		$query = $this->db->get( $table, $maximo, $inicio );
 		return $query->result_array();
+		
 	}
 
 	/**
 	 * Conta os registros existentes no banco.
 	 * @return int
 	 */
-	public function contar_registros( $table ) {
+	public function contar_registros( $table, $search = "", $fields = null ) {
+
+		if ( $search != "" || $fields != null ){
+
+			$i = 0;
+			$this->db->group_start();
+
+			foreach ($fields as $field) {
+				 
+				$i == 0 ? $this->db->like( $field, $search ) : $this->db->or_like( $field, $search );
+
+				$i++;
+
+			}
+
+			$this->db->group_end();
+
+		}
 
 		$this->db->group_start();
 		$this->db->where( 'removido !=', "1" );

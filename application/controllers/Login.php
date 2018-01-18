@@ -11,6 +11,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
 
+	public $not_hookable = TRUE;
+
 	public function __construct() {
 		parent::__construct();
 
@@ -58,17 +60,19 @@ class Login extends CI_Controller {
 				$usuario->setID( $id_usuario );
 				$usuario = $this->usuario_model->selecionar('usuarios', $usuario);
 
-				var_dump($usuario); die();
+				echo "<pre>";
+
+				var_dump($this->session);
 
 				// Armazenamos os dados do usuário.
 				$data = array(
 						'auth'	 		=> true,
-						'id_usuario'	=> $id_usuario
+						'id_usuario'	=> $id_usuario,
+						'permissoes' 	=> unserialize( $usuario->getPermissoes() )
 					);
 
 				// Criamos a sessão.
 				$this->session->set_userdata( $data );
-
 				
 				$this->flashmessages->success( get_messages('sucesso_login') );
 				redirect('inicio');
@@ -86,6 +90,7 @@ class Login extends CI_Controller {
 
 		}
 	}
+
 
 	/**
 	 * Método para deslogar o usuário.

@@ -36,24 +36,30 @@ class Usuario extends CI_Controller {
 	 */
 	public function index() {
 
+		$fields = array( 'nome', 'cpf', 'login', 'matricula', 'telefone' );
+
+		$search_string = $this->input->get('search') ? $this->input->get('search') : "";
+		$dados['search_string'] = $search_string;
+
 		// Montar paginação
 		$maximo = "7";
 		$inicio = $this->input->get('inicio') ? $this->input->get('inicio') : 0;
 
-		$config['base_url'] 			= base_url('usuarios');	 
-		$config['total_rows'] 			= $this->usuario_model->contar_registros( 'usuarios' );
 		$config['enable_query_strings'] = true;
 		$config['page_query_string'] 	= true;
-		$config['query_string_segment'] = 'inicio';
+		$config['reuse_query_string']	= true;
 		$config['per_page'] 			= $maximo;
-		$config['first_link'] 			= "Primeira";
+		$config['query_string_segment'] = 'inicio';
 		$config['last_link'] 			= "Última";
+		$config['first_link'] 			= "Primeira";
+		$config['base_url'] 			= base_url('usuarios');	 
+		$config['total_rows'] 			= $this->usuario_model->contar_registros( 'usuarios', $search_string, $fields );
 
 		$this->pagination->initialize( $config );
 
 		$dados["paginacao"] = $this->pagination->create_links();
 
-		$usuarios = $this->usuario_model->listar('usuarios', $maximo, $inicio);
+		$usuarios = $this->usuario_model->listar('usuarios', $maximo, $inicio, $search_string, $fields);
 
 		$dados['usuarios'] = $usuarios;
 
@@ -144,6 +150,13 @@ class Usuario extends CI_Controller {
 
 	//Método para editar um registro do banco
 	public function editar( $id ){
+
+		if ( is_numeric( $id ) ){
+			$this->flashmessages->success('Ocorreu um erro!');
+			redirect("usuarios");
+		}
+
+		$id = decrypt( $id );
 
 		if ( ! is_numeric( $id ) ){
 			$this->flashmessages->success('Ocorreu um erro!');
@@ -247,6 +260,13 @@ class Usuario extends CI_Controller {
 
 	//Método para remover um registro do banco
 	public function remover( $id ){
+		
+		if ( is_numeric( $id ) ){
+			$this->flashmessages->success('Ocorreu um erro!');
+			redirect("usuarios");
+		}
+
+		$id = decrypt( $id );
 
 		if ( ! is_numeric( $id ) ){
 			$this->flashmessages->success('Ocorreu um erro!');

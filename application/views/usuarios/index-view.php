@@ -12,43 +12,6 @@
 
 ?>
 
-<?php /**echo form_open( "", array('method' => 'GET' ) ); // Formulário para os inputs de busca ?>
-
-<div class="page-wrapper">
-
-	<div class="container-fluid">
-		<div class="row">
-
-			<?php
-
-				echo '<div class="col-md-3">';
-
-				echo form_label('Buscar:', 'buscar');
-				echo form_input( array(
-					'name' => 'search',
-					'id' => 'search',
-					'placeholder' => 'Digite aqui a sua busca...',
-					'value' => $search_string
-					)
-				);
-
-				echo '</div>';
-
-				echo '<div class="col-md-9">';
-
-				echo form_label('Quantidade por página:', 'quantidade');
-				echo form_dropdown('quantidade', qtd_pagina( $this->session->qtd_pagina ), $this->session->qtd_pagina );
-
-				echo '<input type="submit" value="Filtrar">';
-
-				echo '</div>';
-			?>
-		</div>
-	</div>
-</div>
-
-<?php echo form_close(); */?>
-
 <div class="row">
 	<div class="col-md-12">
 		<div class="area">
@@ -56,11 +19,40 @@
 			<h1 class="title-area">Usuários</h1>
 
 			<div class="botao_add">
-				<?php //if( check_permission('cadastrar_modelos')): ?>
-					<a href="<?php echo base_url('/usuarios/cadastrar'); ?>">
-						<button class="btn-green" data-toggle="tooltip" data-placement="bottom" title="Cadastrar um usuário">Novo usuário</button>
-					</a>
-				<?php //endif; ?>
+				<div>
+					<?php //if( check_permission('cadastrar_modelos')): ?>
+						<a href="<?php echo base_url('/usuarios/cadastrar'); ?>" >
+							<button class="btn-green" data-toggle="tooltip" data-placement="bottom" title="Cadastrar um usuário">Novo usuário</button>
+						</a>
+					<?php //endif; ?>
+				</div>
+
+					<div class="container-search">
+						<?php 
+
+							echo form_open( "", array('method' => 'GET' ) );
+
+							echo form_input( array(
+												'name' => 'search',
+												'id' => 'search',
+												'class' => 'cadastro',
+												'placeholder' => 'Digite aqui para buscar...',
+												'value' => $search_string
+												)
+											);
+
+							echo form_input( array(
+												'type' => 'submit',
+												'class' => 'btn-green',
+												'style' => 'margin-left: 5px;',
+												'value' => 'Buscar'
+												)
+											);
+
+							echo form_close(); 
+						?>
+					</div>
+
 			</div>
 
 			<table class="table listar">
@@ -85,20 +77,20 @@
 							<?php //if( check_permission('clonar_modelos') || check_permission('editar_modelos') || check_permission('excluir_modelos') ): ?>
 								<td>
 									<?php //if( check_permission('editar_modelos') ): ?>
-										<a href="<?php echo base_url('/usuarios/editar/') . $usuario['id']; ?>">
+										<a href="<?php echo base_url('/usuarios/editar/') . encrypt( $usuario['id'] ); ?>">
 											<button class="editar btn-table" data-toggle="tooltip"  data-placement="bottom" title="Editar">
 												<i class="fa fa-pencil" aria-hidden="true"></i>
 											</button>
 										</a>
 									<?php //endif; ?>
 
-									<?php //if( check_permission('excluir_modelos') ): ?>
-										<a href="<?php echo base_url('/usuarios/remover/') . $usuario['id']; ?>">
+									<?php if( check_permission('remover_usuarios') ): ?>
+										<a href="<?php echo base_url('/usuarios/remover/') . encrypt( $usuario['id'] ); ?>">
 											<button class="excluir btn-table" data-toggle="tooltip" data-placement="bottom" title="Excluir">
 												<i class="fa fa-times" aria-hidden="true"></i>
 											</button>
 										</a>
-									<?php //endif; ?>
+									<?php endif; ?>
 								</td>
 							<?php //endif; ?>
 						</tr>
