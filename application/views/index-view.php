@@ -1,3 +1,3 @@
 
-<?php echo "Logado"; ?>
+<?php echo "Página inicial do sistema"; ?>
 

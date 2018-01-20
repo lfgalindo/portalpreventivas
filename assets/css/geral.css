@@ -129,7 +129,8 @@ div.row.cadastro{
     margin-bottom: 16px;
 }
 
-input.cadastro{
+input.cadastro,
+select.cadastro{
     width: 100%;
     padding: 4px;
     border: 1px solid #dce2e7;
@@ -182,6 +183,16 @@ label.permissoes{
 .container-search form{
     display: flex;
     width: 100%;
+}
+
+i.com_permissao{
+    margin-right: 5px;
+    color: #9fd037;
+}
+
+i.sem_permissao{
+    margin-right: 5px;
+    color: #a92525;
 }
 
 @media screen and (max-width: 992px){

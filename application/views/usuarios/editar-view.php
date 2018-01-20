@@ -177,7 +177,7 @@
 					</div>
 				</div>
 				
-				<input type="submit" class="btn-green" id="alterar" value="Salvar" data-toggle="tooltip" data-placement="bottom" title="Finalizar o cadastro" />
+				<input type="submit" class="btn-green" id="alterar" value="Salvar" data-toggle="tooltip" data-placement="bottom" title="Salvar alterações" />
 			</div>
 		</div>
 	</div>
@@ -185,12 +185,6 @@
 <?php echo form_close(); ?>
 
 <script type="text/javascript">
-
-	$(document).ready( function(){
-
-		$('.cpf').mask('000.000.000-00', {reverse: true});
-
-	});
 	
 	$(document).on("click", "#alterar", function( e ){
 

@@ -68,6 +68,32 @@ if ( ! function_exists('todas_permissoes') ){
 									'remover_sites'							=> 'visualizar_sites'
 								)
 						),
+						// Permissões para preventivas
+						'preventivas' => array(
+								'nome' => 'Preventivas',
+								'permissoes' => array(
+									'visualizar_preventivas' 				=> 'Visualizar preventivas',
+									'cadastrar_preventivas'					=> 'Cadastrar preventivas',
+									'editar_preventivas'					=> 'Editar preventivas',
+									'remover_preventivas'					=> 'Remover preventivas'
+								),
+								'requisitos' => array(
+									'visualizar_preventivas' 				=> 'sem_requisito',
+									'cadastrar_preventivas'					=> 'visualizar_preventivas',
+									'editar_preventivas'					=> 'visualizar_preventivas',
+									'remover_preventivas'					=> 'visualizar_preventivas'
+								)
+						),
+						// Permissões para relatórios
+						'relatorios' => array(
+								'nome' => 'Relatórios',
+								'permissoes' => array(
+									'visualizar_relatorios' 				=> 'Visualizar relatórios',
+								),
+								'requisitos' => array(
+									'visualizar_relatorios' 				=> 'sem_requisito',
+								)
+						),
 		);
 
 		return $permissoes;

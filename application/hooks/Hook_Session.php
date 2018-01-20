@@ -22,11 +22,12 @@ class Hook_Session {
 			$ci->load->library('usuario_class');
 
 			$ci->load->model('usuario_model');
+			$ci->usuario_model->setTable('usuarios');
 
 			$usuario = new Usuario_CLass();
 
 			$usuario->setID( $id_usuario );
-			$usuario = $ci->usuario_model->selecionar( 'usuarios', $usuario );
+			$usuario = $ci->usuario_model->selecionar( $usuario );
 
 
 			/**

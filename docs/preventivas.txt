@@ -1,0 +1,19 @@
+Tipo ( BTS-TX, Infra, FMT, Estrutural Torre, CCCs )
+
+Data de cadastro
+
+Sigla ( Site: inclui cidade, ddd )
+Micro Areas
+Área
+Tecnico
+Programada (mes/ano)
+executada (data)
+relatório(data)
+id_arquivo
+Supervisor
+Usuario que cadastrou
+status(pendente, aguardando relatório, relatório em aprovação, aguardando novo relatório, finalizada)
+
+
+Perguntar sobre CCCs
+

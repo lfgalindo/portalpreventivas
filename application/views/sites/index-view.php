@@ -2,13 +2,11 @@
 <?php
 
 /**
- * Tela que exibirá a listagem de usuários
+ * Tela que exibirá a listagem de sites
  *
- * @category Usuario
+ * @category Site
  * @author Luiz Felipe <lfgalindo@live.com>
  */
-
-//check_permission('visualizar_modelos', '/painel')
 
 ?>
 
@@ -16,13 +14,13 @@
 	<div class="col-md-12">
 		<div class="area">
 
-			<h1 class="title-area">Usuários</h1>
+			<h1 class="title-area">Sites</h1>
 
 			<div class="botao_add">
 				<div>
-					<?php if( check_permission('cadastrar_usuarios')): ?>
-						<a href="<?php echo base_url('/usuarios/cadastrar'); ?>" >
-							<button class="btn-green" data-toggle="tooltip" data-placement="bottom" title="Cadastrar um usuário">Novo usuário</button>
+					<?php if( check_permission('cadastrar_sites')): ?>
+						<a href="<?php echo base_url('/sites/cadastrar'); ?>" >
+							<button class="btn-green" data-toggle="tooltip" data-placement="bottom" title="Cadastrar um site">Novo site</button>
 						</a>
 					<?php endif; ?>
 				</div>
@@ -58,37 +56,37 @@
 			<table class="table listar">
 				<thead>
 					<tr>
-						<th> Nome </th>
-						<th> Matrícula </th>
-						<th> Telefone </th>
+						<th> NE ID </th>
+						<th> Tipo </th>
+						<th> Cidade </th>
 						<th> Ações </th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<?php foreach ( $usuarios as $usuario ): ?>
+					<?php foreach ( $sites as $site ): ?>
 						<tr>
-							<td><?php echo $usuario['nome']; ?></td>
-							<td><?php echo $usuario['matricula']; ?></td>
-							<td><?php echo $usuario['telefone']; ?></td>
+							<td><?php echo $site['ne_id']; ?></td>
+							<td><?php echo $site['tipo_ne']; ?></td>
+							<td><?php echo $site['cidade'] . '/' . $site['estado']; ?></td>
 							<td>
-								<a href="<?php echo base_url('/usuarios/visualizar/') . encrypt( $usuario['id'] ); ?>">
+								<a href="<?php echo base_url('/sites/visualizar/') . encrypt( $site['id'] ); ?>">
 									<button class="visualizar btn-table" data-toggle="tooltip"  data-placement="bottom" title="Ver todos os dados">
 										<i class="fa fa-eye" aria-hidden="true"></i>
 									</button>
 								</a>
 
-								<?php if( check_permission('editar_usuarios') ): ?>
-									<a href="<?php echo base_url('/usuarios/editar/') . encrypt( $usuario['id'] ); ?>">
+								<?php if( check_permission('editar_sites') ): ?>
+									<a href="<?php echo base_url('/sites/editar/') . encrypt( $site['id'] ); ?>">
 										<button class="editar btn-table" data-toggle="tooltip"  data-placement="bottom" title="Alterar dados">
 											<i class="fa fa-pencil" aria-hidden="true"></i>
 										</button>
 									</a>
 								<?php endif; ?>
 
-								<?php if( check_permission('remover_usuarios') ): ?>
-									<a href="<?php echo base_url('/usuarios/remover/') . encrypt( $usuario['id'] ); ?>">
-										<button class="excluir btn-table" data-toggle="tooltip" data-placement="bottom" title="Remover usuário">
+								<?php if( check_permission('remover_sites') ): ?>
+									<a href="<?php echo base_url('/sites/remover/') . encrypt( $site['id'] ); ?>">
+										<button class="excluir btn-table" data-toggle="tooltip" data-placement="bottom" title="Remover site">
 											<i class="fa fa-times" aria-hidden="true"></i>
 										</button>
 									</a>
@@ -117,7 +115,7 @@
 
 			swal({
 			  title: 'Atenção!',
-			  text: 'Deseja realmente remover esse usuário?',
+			  text: 'Deseja realmente remover esse site?',
 			  type: 'warning',
 			  showCancelButton: true,
 			  confirmButtonColor: '#9fd037',

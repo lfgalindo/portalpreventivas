@@ -21,6 +21,7 @@ class Login extends CI_Controller {
 		$this->load->library('usuario_class');
 
 		$this->load->model("usuario_model");
+		$this->usuario_model->setTable('usuarios');
 	}
 
 	/**
@@ -52,12 +53,12 @@ class Login extends CI_Controller {
 			$usuario->setLogin( $this->input->post("login") );
 			$usuario->setSenha( hash('sha512', $this->input->post("senha") ) );
 
-			$id_usuario = $this->usuario_model->verificar_login( "usuarios", $usuario );
+			$id_usuario = $this->usuario_model->verificar_login( $usuario );
 
 			if( $id_usuario != false ) {
 
 				$usuario->setID( $id_usuario );
-				$usuario = $this->usuario_model->selecionar('usuarios', $usuario);
+				$usuario = $this->usuario_model->selecionar( $usuario );
 
 				// Armazenamos os dados do usuário.
 				$data = array(

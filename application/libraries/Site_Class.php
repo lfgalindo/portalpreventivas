@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Classe que define os campos e seus métodos get e set para um objeto Perfil.
+ * Classe que define os campos e seus métodos get e set para um objeto Site.
  *
- * @category Perfil
+ * @category Site
  * @author Luiz Felipe <lfgalindo@live.com>
  */
 
@@ -28,12 +28,12 @@ class Site_Class {
     private $endereco;
     private $bairro;
     private $cm;
+    private $removido;
 
 	/**
-	 * Método que define os campos da tabela de perfis no banco de dados.
+	 * Método que define os campos da tabela de sites no banco de dados.
 	 * @return array
 	*/
-
 	public function schema(){
 
 		return array(
@@ -116,6 +116,10 @@ class Site_Class {
                 'type' => 'VARCHAR',
                 'null'	=> TRUE,
                 'constraint' => '255',
+              ),
+              'removido' => array(
+                'type' => 'int',
+                'null'	=> TRUE
               )
            );
 
@@ -146,6 +150,7 @@ class Site_Class {
 		    'endereco'			=> $site->getEndereco(),
 		    'bairro'			=> $site->getBairro(),
 		    'cm'				=> $site->getCm(),
+		    'removido'			=> $site->getRemovido(),
 		);
 
 	}
@@ -173,6 +178,7 @@ class Site_Class {
 		$site->setEndereco(			$array['endereco']);
 		$site->setBairro(			$array['bairro']);
 		$site->setCm(				$array['cm']);
+		$site->setRemovido(			$array['removido']);
 
 		return $site;
 
@@ -305,6 +311,14 @@ class Site_Class {
 
 	public function setCm($cm){
 		$this->cm = $cm;
+	}
+
+	public function getRemovido(){
+		return $this->removido;
+	}
+
+	public function setRemovido($removido){
+		$this->removido = $removido;
 	}
 
 	/** Fim do Sets e Gets */

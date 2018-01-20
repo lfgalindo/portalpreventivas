@@ -19,6 +19,7 @@ class Usuario extends CI_Controller {
 
 		//Models
 		$this->load->model('usuario_model');
+		$this->usuario_model->setTable('usuarios');
 
 		//Classes
 		$this->load->library('usuario_class');
@@ -39,6 +40,7 @@ class Usuario extends CI_Controller {
 		check_permission('visualizar_usuarios', 'inicio');
 
 		$fields = array( 'nome', 'cpf', 'login', 'matricula', 'telefone' );
+		$orders = array("nome" => "ASC");
 
 		$search_string = $this->input->get('search') ? $this->input->get('search') : "";
 		$dados['search_string'] = $search_string;
@@ -55,19 +57,56 @@ class Usuario extends CI_Controller {
 		$config['last_link'] 			= "Última";
 		$config['first_link'] 			= "Primeira";
 		$config['base_url'] 			= base_url('usuarios');	 
-		$config['total_rows'] 			= $this->usuario_model->contar_registros( 'usuarios', $search_string, $fields );
+		$config['total_rows'] 			= $this->usuario_model->contar_registros( $search_string, $fields );
 
 		$this->pagination->initialize( $config );
 
 		$dados["paginacao"] = $this->pagination->create_links();
 
-		$usuarios = $this->usuario_model->listar('usuarios', $maximo, $inicio, $search_string, $fields);
+		$usuarios = $this->usuario_model->listar( $maximo, $inicio, $search_string, $fields, $orders );
 
 		$dados['usuarios'] = $usuarios;
 
 		$this->template->load('template.php', 'usuarios/index-view.php', $dados);
 
 	}//Fim do método index
+
+	//Método para visualizar todos os dados de um usuário
+	public function visualizar( $id ){
+
+		check_permission('visualizar_usuarios', 'inicio');
+
+		if ( is_numeric( $id ) ){
+			$this->flashmessages->success('Ocorreu um erro!');
+			redirect("usuarios");
+		}
+
+		$id = decrypt( $id );
+
+		if ( ! is_numeric( $id ) ){
+			$this->flashmessages->success('Ocorreu um erro!');
+			redirect("usuarios");
+		}
+
+		$usuario = new Usuario_Class();
+		$usuario->setID( $id );
+
+		$usuario = $this->usuario_model->selecionar( $usuario );
+
+		$data['usuario'] = $usuario;
+
+		$permissoes_usuario = array();
+
+		if ( ! is_null(unserialize($usuario->getPermissoes())) && unserialize($usuario->getPermissoes()) != false )
+			$permissoes_usuario = unserialize( $usuario->getPermissoes() );
+
+		// Carregar variável com todas as permissões para enviar para a tela
+		$data['permissoes'] = todas_permissoes();
+		$data['permissoes_usuario_array'] = $permissoes_usuario;
+
+		$this->template->load('template.php', 'usuarios/visualizar-view.php', $data);
+
+	}
 
 	//Método para inserir um novo registro no banco de dados
 	public function cadastrar(){
@@ -91,13 +130,13 @@ class Usuario extends CI_Controller {
 		$existe_cpf = false;
 
 		if ( $this->input->post('cpf') )
-			$existe_cpf = $this->usuario_model->existe_cadastro('usuarios', 'cpf', apenas_numeros( $this->input->post('cpf') ) );
+			$existe_cpf = $this->usuario_model->existe_cadastro( 'cpf', apenas_numeros( $this->input->post('cpf') ) );
 
 		// Verificar se Login ja foi cadastrado
 		$existe_login = false;
 
 		if ( $this->input->post('login') )
-			$existe_login = $this->usuario_model->existe_cadastro('usuarios', 'login', $this->input->post('login') );
+			$existe_login = $this->usuario_model->existe_cadastro( 'login', $this->input->post('login') );
 
 		//var_dump( serialize( $this->input->post("permissoes") ) ); die();
 
@@ -141,7 +180,7 @@ class Usuario extends CI_Controller {
 			$usuario->setPermissoes(	serialize( $this->input->post("permissoes") ) );
 
 
-			$this->usuario_model->inserir( "usuarios", $usuario );
+			$this->usuario_model->inserir( $usuario );
 
 			// Excluimos o objeto após sua utilização.
 			unset( $usuario );
@@ -172,7 +211,7 @@ class Usuario extends CI_Controller {
 		$usuario = new Usuario_Class();
 		$usuario->setID( $id );
 
-		$usuario = $this->usuario_model->selecionar( 'usuarios', $usuario );
+		$usuario = $this->usuario_model->selecionar( $usuario );
 
 		$data['usuario'] = $usuario;
 
@@ -193,13 +232,13 @@ class Usuario extends CI_Controller {
 		$existe_cpf = false;
 
 		if ( $this->input->post('cpf') )
-			$existe_cpf = $this->usuario_model->existe_cadastro('usuarios', 'cpf', apenas_numeros( $this->input->post('cpf') ), $usuario->getID());
+			$existe_cpf = $this->usuario_model->existe_cadastro('cpf', apenas_numeros( $this->input->post('cpf') ), $usuario->getID());
 
 		// Verificar se Login ja foi cadastrado
 		$existe_login = false;
 
 		if ( $this->input->post('login') )
-			$existe_login = $this->usuario_model->existe_cadastro('usuarios', 'login', $this->input->post('login'), $usuario->getID());
+			$existe_login = $this->usuario_model->existe_cadastro('login', $this->input->post('login'), $usuario->getID());
 
 		//var_dump( serialize( $this->input->post("permissoes") ) ); die();
 
@@ -254,7 +293,7 @@ class Usuario extends CI_Controller {
 			if( strlen( $this->input->post('senha') ) > 0 )
 				$usuario->setSenha(			hash('sha512', $this->input->post("senha") ) );
 
-			$this->usuario_model->atualizar( "usuarios", $usuario );
+			$this->usuario_model->atualizar( $usuario );
 
 			// Excluimos o objeto após sua utilização.
 			unset( $usuario );
@@ -285,11 +324,11 @@ class Usuario extends CI_Controller {
 		$usuario = new Usuario_Class();
 		$usuario->setID( $id );
 
-		$usuario = $this->usuario_model->selecionar( 'usuarios', $usuario );
+		$usuario = $this->usuario_model->selecionar( $usuario );
 
 		$usuario->setRemovido('1');
 
-		$this->usuario_model->atualizar( "usuarios", $usuario );
+		$this->usuario_model->atualizar( $usuario );
 
 		// Excluimos o objeto após sua utilização.
 		unset( $usuario );
