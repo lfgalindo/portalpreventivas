@@ -20,11 +20,11 @@
 
 			<div class="botao_add">
 				<div>
-					<?php //if( check_permission('cadastrar_modelos')): ?>
+					<?php if( check_permission('cadastrar_usuarios')): ?>
 						<a href="<?php echo base_url('/usuarios/cadastrar'); ?>" >
 							<button class="btn-green" data-toggle="tooltip" data-placement="bottom" title="Cadastrar um usuário">Novo usuário</button>
 						</a>
-					<?php //endif; ?>
+					<?php endif; ?>
 				</div>
 
 					<div class="container-search">
@@ -61,9 +61,9 @@
 						<th> Nome </th>
 						<th> Matrícula </th>
 						<th> Telefone </th>
-						<?php //if( check_permission('editar_modelos') ): ?>
+						<?php if( check_permission('editar_usuarios') || check_permission('remover_usuarios') ): ?>
 							<th> Ações </th>
-						<?php //endif; ?>
+						<?php endif; ?>
 					</tr>
 				</thead>
 
@@ -74,15 +74,15 @@
 							<td><?php echo $usuario['matricula']; ?></td>
 							<td><?php echo $usuario['telefone']; ?></td>
 
-							<?php //if( check_permission('clonar_modelos') || check_permission('editar_modelos') || check_permission('excluir_modelos') ): ?>
+							<?php if( check_permission('editar_usuarios') || check_permission('remover_usuarios') ): ?>
 								<td>
-									<?php //if( check_permission('editar_modelos') ): ?>
+									<?php if( check_permission('editar_usuarios') ): ?>
 										<a href="<?php echo base_url('/usuarios/editar/') . encrypt( $usuario['id'] ); ?>">
 											<button class="editar btn-table" data-toggle="tooltip"  data-placement="bottom" title="Editar">
 												<i class="fa fa-pencil" aria-hidden="true"></i>
 											</button>
 										</a>
-									<?php //endif; ?>
+									<?php endif; ?>
 
 									<?php if( check_permission('remover_usuarios') ): ?>
 										<a href="<?php echo base_url('/usuarios/remover/') . encrypt( $usuario['id'] ); ?>">
@@ -92,7 +92,7 @@
 										</a>
 									<?php endif; ?>
 								</td>
-							<?php //endif; ?>
+							<?php endif; ?>
 						</tr>
 					<?php endforeach; ?>
 				</tbody>

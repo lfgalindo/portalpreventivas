@@ -50,7 +50,6 @@ class Login extends CI_Controller {
 			$usuario = new Usuario_Class();
 
 			$usuario->setLogin( $this->input->post("login") );
-			//$usuario->setSenha( $this->input->post("senha") );
 			$usuario->setSenha( hash('sha512', $this->input->post("senha") ) );
 
 			$id_usuario = $this->usuario_model->verificar_login( "usuarios", $usuario );
@@ -60,14 +59,11 @@ class Login extends CI_Controller {
 				$usuario->setID( $id_usuario );
 				$usuario = $this->usuario_model->selecionar('usuarios', $usuario);
 
-				echo "<pre>";
-
-				var_dump($this->session);
-
 				// Armazenamos os dados do usuário.
 				$data = array(
 						'auth'	 		=> true,
-						'id_usuario'	=> $id_usuario,
+						'id_usuario'	=> $usuario->getID(),
+						'login'			=> $usuario->getLogin(),
 						'permissoes' 	=> unserialize( $usuario->getPermissoes() )
 					);
 
@@ -116,7 +112,7 @@ class Login extends CI_Controller {
 	public function verificar_sessao() {
 
 		if( isset( $this->session->auth )
-			&& is_numeric( $this->session->id_pessoa )
+			&& is_numeric( $this->session->id_usuario )
 			&& $this->session->auth === true ) {
 
 			return true;

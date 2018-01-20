@@ -36,6 +36,8 @@ class Usuario extends CI_Controller {
 	 */
 	public function index() {
 
+		check_permission('visualizar_usuarios', 'inicio');
+
 		$fields = array( 'nome', 'cpf', 'login', 'matricula', 'telefone' );
 
 		$search_string = $this->input->get('search') ? $this->input->get('search') : "";
@@ -69,6 +71,8 @@ class Usuario extends CI_Controller {
 
 	//Método para inserir um novo registro no banco de dados
 	public function cadastrar(){
+
+		check_permission('cadastrar_usuarios', 'usuarios');
 
 		// Carregar variável com todas as permissões para enviar para a tela
 		$data['permissoes'] = todas_permissoes();
@@ -150,6 +154,8 @@ class Usuario extends CI_Controller {
 
 	//Método para editar um registro do banco
 	public function editar( $id ){
+
+		check_permission('editar_usuarios', 'usuarios');
 
 		if ( is_numeric( $id ) ){
 			$this->flashmessages->success('Ocorreu um erro!');
@@ -241,11 +247,12 @@ class Usuario extends CI_Controller {
 			$usuario->setNome( 			$this->input->post('nome'));
 			$usuario->setCPF(			apenas_numeros( $this->input->post('cpf') ) );
 			$usuario->setLogin(			$this->input->post('login'));
-			$usuario->setSenha(			hash('sha512', $this->input->post("senha") ) );
 			$usuario->setMatricula(		$this->input->post('matricula'));
 			$usuario->setTelefone(		$this->input->post('telefone'));
 			$usuario->setPermissoes(	serialize( $this->input->post("permissoes") ) );
 
+			if( strlen( $this->input->post('senha') ) > 0 )
+				$usuario->setSenha(			hash('sha512', $this->input->post("senha") ) );
 
 			$this->usuario_model->atualizar( "usuarios", $usuario );
 
@@ -261,6 +268,8 @@ class Usuario extends CI_Controller {
 	//Método para remover um registro do banco
 	public function remover( $id ){
 		
+		check_permission('remover_usuarios', 'usuarios');
+
 		if ( is_numeric( $id ) ){
 			$this->flashmessages->success('Ocorreu um erro!');
 			redirect("usuarios");

@@ -45,32 +45,39 @@
 
 			<div class="row" id="row_pre_menu">
 				<div class="col-md-8 col-md-offset-2" id="pre_menu">
-					<div id="logo">LOGO</div>
-					<div id="menu">USER</div>
+					<div id="logo" class="nome_site">PORTAL DE PREVENTIVAS</div>
+					<div id="menu">
+						<?php echo $this->session->login; ?>
+						<a href="<?php echo site_url('logout')?>" style="color:#fff; margin-left: 10px; font-size: 17px">
+							<i class="fa fa-sign-out" aria-hidden="true"></i>
+						</a>		
+					</div>
 				</div>
 			</div>
 
 			<div class="row" id="row_content_menu">
 				<div class="col-md-8 col-md-offset-2" id="content_menu">
 					<ul id="menu">
-						<a href="<?php echo site_url("inicio"); ?>">
+						<a href="<?php echo site_url('inicio'); ?>">
 							<li><i class="fa fa-home" aria-hidden="true"></i>Início</li>
 						</a>
-						<a href="<?php echo site_url("sites"); ?>">
+						<a href="<?php echo site_url('sites'); ?>">
 							<li><i class="fa fa-map-signs" aria-hidden="true"></i>Sites</li>
 						</a>
 
-						<a href="<?php echo site_url("preventivas"); ?>">
+						<a href="<?php echo site_url('preventivas'); ?>">
 							<li><i class="fa fa-file-text-o" aria-hidden="true"></i>Preventivas</li>
 						</a>
 
-						<a href="<?php echo site_url("relatorios"); ?>">
+						<a href="<?php echo site_url('relatorios'); ?>">
 							<li><i class="fa fa-line-chart" aria-hidden="true"></i>Relatórios</li>
 						</a>
 
-						<a href="<?php echo site_url("usuarios"); ?>">
-							<li><i class="fa fa-user" aria-hidden="true"></i>Usuários</li>
-						</a>
+						<?php if ( check_permission('visualizar_usuarios') ): ?>
+							<a href="<?php echo site_url('usuarios'); ?>">
+								<li><i class="fa fa-user" aria-hidden="true"></i>Usuários</li>
+							</a>
+						<?php endif; ?>
 					<ul>
 				</div>
 			</div>

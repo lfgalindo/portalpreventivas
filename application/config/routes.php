@@ -12,7 +12,6 @@ $route['usuarios/cadastrar'] 		= 'usuario/cadastrar';
 $route['usuarios/editar/(:any)'] 	= 'usuario/editar/$1';
 $route['usuarios/remover/(:any)'] 	= 'usuario/remover/$1';
 
-
 $route['sites'] = 'site';
 
 $route['relatorios'] = 'relatorio';

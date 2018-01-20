@@ -11,13 +11,13 @@ class Hook_Session {
 
 		$ci = &get_instance();
 
-		if( $ci->not_hookable){ 
+		if( ! isset( $ci->not_hookable ) ){ 
 
-			$id_usuario 	= $ci->session->userdata('id_usuario') ? $ci->session->userdata('id_usuario') : false;
-			$auth 	 		= $ci->session->userdata('auth')	   ? $ci->session->userdata('auth') 	  : false;
+			$id_usuario 	= $ci->session->id_usuario ? $ci->session->id_usuario : false;
+			$auth 	 		= $ci->session->auth	   ? $ci->session->auth 	  : false;
 
-			//if( ! is_numeric( $this->session->id_usuario ) || $this->session->auth == false )
-			//	redirect('logout');
+			if( ! is_numeric( $ci->session->id_usuario ) || $ci->session->id_usuario == false || $ci->session->auth == false )
+				redirect('logout');
 
 			$ci->load->library('usuario_class');
 
@@ -43,6 +43,7 @@ class Hook_Session {
 		return true;
 
 	}
+	
 }
 
 ?>

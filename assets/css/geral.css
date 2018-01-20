@@ -4,6 +4,10 @@ body{
 	background-color: #eaeff2;
     font-family: 'Raleway', sans-serif;
 }
+div.nome_site#logo{
+    letter-spacing : 3px;
+    font-weight: bold;
+}
 div#row_pre_menu{
     background-color: #3b3b48;
 }
