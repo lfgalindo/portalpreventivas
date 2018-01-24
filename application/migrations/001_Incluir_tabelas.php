@@ -13,9 +13,10 @@ class Migration_Incluir_tabelas extends CI_Migration {
 
     // Array com todas as Classes e tabelas do sistema
     private $tabelas = array(
-                        "Usuario_Class" => "usuarios",
-                        "Site_Class"    => "sites",
-                        "Inventario_Class"    => "inventarios",
+                        "Usuario_Class"     => "usuarios",
+                        "Site_Class"        => "sites",
+                        "Arquivo_Class"     => "arquivos",
+                        "Preventiva_Class"  => "preventivas",
                         );
 
 

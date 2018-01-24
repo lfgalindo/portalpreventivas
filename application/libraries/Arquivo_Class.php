@@ -3,7 +3,7 @@
 /**
  * Classe que define os campos e seus métodos get e set para um objeto Arquivo.
  *
- * @category Site
+ * @category Arquivo
  * @author Luiz Felipe <lfgalindo@live.com>
  */
 
