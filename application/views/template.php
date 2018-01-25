@@ -13,6 +13,7 @@
 	    <link href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	    <link href="<?php echo base_url(); ?>assets/sweetalert/sweetalert.min.css" rel="stylesheet">
 	    <link href="<?php echo base_url(); ?>assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	    <link href="<?php echo base_url(); ?>assets/select2/css/select2.min.css" rel="stylesheet">
 	    <link href="<?php echo base_url(); ?>assets/css/geral.css" rel="stylesheet">
 
 	    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
@@ -38,6 +39,7 @@
     	<script src="<?php echo base_url(); ?>assets/mask/jquery_mask.js"></script>
 	    <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap.min.js"></script>
 	    <script src="<?php echo base_url(); ?>assets/sweetalert/sweetalert.min.js"></script>
+	    <script src="<?php echo base_url(); ?>assets/select2/js/select2.min.js"></script>
 	</head>
 
 	<body>

@@ -142,3 +142,21 @@ if ( ! function_exists('nomes_estados') ){
 	}
 
 }
+
+if ( ! function_exists( 'tipos_preventivas' ) ){
+
+	function tipos_preventivas ( $nome_banco = null ){
+
+		$tipos = array(
+					"bts" 			=> "BTS-TX",
+					"infra" 		=> "Infra",
+					"fmt" 			=> "FMT",
+					"estrutural" 	=> "Estrutural Torre",
+					"ccc" 			=> "CCCs"
+					);
+
+		return is_null( $nome_banco ) ? $tipos : ( array_key_exists( $nome_banco, $tipos ) ? $tipos[ $nome_banco ] : null );
+
+	}
+
+}

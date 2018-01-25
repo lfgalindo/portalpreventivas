@@ -137,6 +137,10 @@ select.cadastro{
     outline-color: #9fd037;
 }
 
+select.cadastro option:hover{
+    background-color: #9fd037;
+}
+
 div.alerts{
     position: absolute;
     top: 65px;
