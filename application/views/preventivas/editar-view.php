@@ -2,9 +2,9 @@
 <?php
 
 /**
- * Tela que exibirá o formulário para edição de sites
+ * Tela que exibirá o formulário para edição de preventivas
  *
- * @category Site
+ * @category Preventiva
  * @author Luiz Felipe <lfgalindo@live.com>
  */
 
@@ -16,81 +16,33 @@
 		<div class="col-md-12">
 			<div class="area">
 
-				<h1 class="title-area">Editar site</h1>
-
-				<div class="row cadastro">
-					<div class="col-md-3">ID TIM:</div>
-
-					<div class="col-md-9">
-						<?php 
-							echo form_input( array(
-								"type" 	=> "text",
-								"value" => set_value('id_tim') ? set_value('id_tim') : $site->getIDTim(),
-								"name" 	=> "id_tim",
-								"class" => "cadastro"
-								)
-							);
-						?>
-					</div>
-				</div>
-
-				<div class="row cadastro">
-					<div class="col-md-3">NE ID:</div>
-
-					<div class="col-md-9">
-						<?php 
-							echo form_input( array(
-								"type" 	=> "text",
-								"value" => set_value('ne_id') ? set_value('ne_id') : $site->getNeID(),
-								"name" 	=> "ne_id",
-								"class" => "cadastro"
-								)
-							);
-						?>
-					</div>
-				</div>
-
-				<div class="row cadastro">
-					<div class="col-md-3">Operadora:</div>
-
-					<div class="col-md-9">
-						<?php 
-							echo form_input( array(
-								"type" 	=> "text",
-								"value" => set_value('operadora') ? set_value('operadora') : $site->getOperadora(),
-								"name" 	=> "operadora",
-								"class" => "cadastro"
-								)
-							);
-						?>
-					</div>
-				</div>
-
-				<div class="row cadastro">
-					<div class="col-md-3">Rede:</div>
-
-					<div class="col-md-9">
-						<?php 
-							echo form_input( array(
-								"type" 	=> "text",
-								"value" => set_value('rede') ? set_value('rede') : $site->getRede(),
-								"name" 	=> "rede",
-								"class" => "cadastro"
-								)
-							);
-						?>
-					</div>
-				</div>
+				<h1 class="title-area">Editar preventiva</h1>
 
 				<div class="row cadastro">
 					<div class="col-md-3">Tipo:</div>
 
 					<div class="col-md-9">
+						<?php echo form_dropdown( 'tipo', tipos_preventivas(), set_value('tipo') ? set_value('tipo') : $preventiva->getTipo(), array( 'class' => 'cadastro' ) ); ?>
+					</div>
+				</div>
+
+				<div class="row cadastro">
+					<div class="col-md-3">Site:</div>
+
+					<div class="col-md-9">
+						<?php echo form_dropdown( 'site', $selected_site, $preventiva->getIDSite(), array( 'class' => 'cadastro select_site' ) ); ?>
+					</div>
+				</div>
+
+				<div class="row cadastro">
+					<div class="col-md-3">Micro areas:</div>
+
+					<div class="col-md-9">
 						<?php 
 							echo form_input( array(
 								"type" 	=> "text",
-								"value" => set_value('tipo_ne') ? set_value('tipo_ne') : $site->getTipoNe(),
-								"name" 	=> "tipo_ne",
+								"value" => set_value('micro_areas') ? set_value('micro_areas') : $preventiva->getMicroAreas(),
+								"name" 	=> "micro_areas",
 								"class" => "cadastro"
 								)
 							);
@@ -99,14 +51,14 @@
 				</div>
 
 				<div class="row cadastro">
-					<div class="col-md-3">Fornecedor:</div>
+					<div class="col-md-3">Área:</div>
 
 					<div class="col-md-9">
 						<?php 
 							echo form_input( array(
 								"type" 	=> "text",
-								"value" => set_value('fornecedor') ? set_value('fornecedor') : $site->getFornecedor(),
-								"name" 	=> "fornecedor",
+								"value" => set_value('area') ? set_value('area') : $preventiva->getArea(),
+								"name" 	=> "area",
 								"class" => "cadastro"
 								)
 							);
@@ -115,14 +67,17 @@
 				</div>
 
 				<div class="row cadastro">
-					<div class="col-md-3">Operadora MSC BSC:</div>
+					<div class="col-md-3">Programada:</div>
 
 					<div class="col-md-9">
 						<?php 
+
+							$time = $preventiva->getProgramada() != "0000-00-00" ? $preventiva->getProgramada() : date("Y-m-d");
+
 							echo form_input( array(
-								"type" 	=> "text",
-								"value" => set_value('oper_msc_bsc') ? set_value('oper_msc_bsc') : $site->getOperMscBsc(),
-								"name" 	=> "oper_msc_bsc",
+								"type" 	=> "month",
+								"value" => set_value('programada') ? set_value('programada') : date('Y-m', strtotime( $time ) ),
+								"name" 	=> "programada",
 								"class" => "cadastro"
 								)
 							);
@@ -131,127 +86,18 @@
 				</div>
 
 				<div class="row cadastro">
-					<div class="col-md-3">Restrição de acesso:</div>
+					<div class="col-md-3">Técnico:</div>
 
 					<div class="col-md-9">
-						<?php 
-							echo form_input( array(
-								"type" 	=> "text",
-								"value" => set_value('restricao_acesso') ? set_value('restricao_acesso') : $site->getRestricaoAcesso(),
-								"name" 	=> "restricao_acesso",
-								"class" => "cadastro"
-								)
-							);
-						?>
+						<?php echo form_dropdown( 'tecnico', $usuarios, set_value('tecnico') ? set_value('tecnico') : $preventiva->getIDTecnico(), array( 'class' => 'cadastro' ) ); ?>
 					</div>
 				</div>
 
 				<div class="row cadastro">
-					<div class="col-md-3">Observações:</div>
+					<div class="col-md-3">Supervisor:</div>
 
 					<div class="col-md-9">
-						<?php 
-							echo form_input( array(
-								"type" 	=> "text",
-								"value" => set_value('observacoes') ? set_value('observacoes') : $site->getObservacoes(),
-								"name" 	=> "observacoes",
-								"class" => "cadastro"
-								)
-							);
-						?>
-					</div>
-				</div>
-
-				<div class="row cadastro">
-					<div class="col-md-3">DDD:</div>
-
-					<div class="col-md-9">
-						<?php 
-							echo form_input( array(
-								"type" 	=> "text",
-								"value" => set_value('ddd') ? set_value('ddd') : $site->getDDD(),
-								"name" 	=> "ddd",
-								"class" => "cadastro"
-								)
-							);
-						?>
-					</div>
-				</div>
-
-				<div class="row cadastro">
-					<div class="col-md-3">Endereço:</div>
-
-					<div class="col-md-9">
-						<?php 
-							echo form_input( array(
-								"type" 	=> "text",
-								"value" => set_value('endereco') ? set_value('endereco') : $site->getEndereco(),
-								"name" 	=> "endereco",
-								"class" => "cadastro"
-								)
-							);
-						?>
-					</div>
-				</div>
-
-				<div class="row cadastro">
-					<div class="col-md-3">Bairro:</div>
-
-					<div class="col-md-9">
-						<?php 
-							echo form_input( array(
-								"type" 	=> "text",
-								"value" => set_value('bairro') ? set_value('bairro') : $site->getBairro(),
-								"name" 	=> "bairro",
-								"class" => "cadastro"
-								)
-							);
-						?>
-					</div>
-				</div>
-
-				<div class="row cadastro">
-					<div class="col-md-3">Cidade:</div>
-
-					<div class="col-md-9">
-						<?php 
-							echo form_input( array(
-								"type" 	=> "text",
-								"value" => set_value('cidade') ? set_value('cidade') : $site->getCidade(),
-								"name" 	=> "cidade",
-								"class" => "cadastro"
-								)
-							);
-						?>
-					</div>
-				</div>
-
-				<div class="row cadastro">
-					<div class="col-md-3">Estado:</div>
-
-					<div class="col-md-9">
-						<?php 
-
-							$selected = set_value('estado') ? set_value('estado') : $site->getEstado();
-
-							echo form_dropdown( "estado", nomes_estados(), $selected, array('class' => 'cadastro') );
-						?>
-					</div>
-				</div>
-
-				<div class="row cadastro">
-					<div class="col-md-3">CM:</div>
-
-					<div class="col-md-9">
-						<?php 
-							echo form_input( array(
-								"type" 	=> "text",
-								"value" => set_value('cm') ? set_value('cm') : $site->getCm(),
-								"name" 	=> "cm",
-								"class" => "cadastro"
-								)
-							);
-						?>
+						<?php echo form_dropdown( 'supervisor', $usuarios, set_value('supervisor') ? set_value('supervisor') : $preventiva->getIDSupervisor(), array( 'class' => 'cadastro' ) ); ?>
 					</div>
 				</div>
 				
@@ -264,6 +110,34 @@
 
 <script type="text/javascript">
 	
+	$(".select_site").select2({
+	  ajax: {
+	    url: "/ajax/listar_sites",
+	    dataType: 'json',
+	    delay: 250,
+	    data: function (params) {
+	      return {
+	        q: params.term,
+	        page: params.page
+	      };
+	    },
+	    processResults: function (data, params) {
+		    params.page = params.page || 1;
+
+		    return {
+		        results: data.results,
+		        pagination: {
+		            more: (params.page * 10) < data.count_filtered
+		        }
+		    };
+		},
+	    cache: true
+	  },
+	  placeholder: 'Pesquise por um site...',
+	  minimumInputLength: 3
+	});
+
+
 	$(document).on("click", "#alterar", function( e ){
 
 		e.preventDefault();

@@ -160,3 +160,21 @@ if ( ! function_exists( 'tipos_preventivas' ) ){
 	}
 
 }
+
+if ( ! function_exists( 'situacoes_preventivas' ) ){
+
+	function situacoes_preventivas ( $nome_banco = null ){
+
+		$situacoes = array(
+						"1"		=> "Pendente",
+						"2" 	=> "Aguardando relatório",
+						"3" 	=> "Relatório em aprovação",
+						"4" 	=> "Aguardando novo relatório",
+						"5" 	=> "Finalizada"
+						);
+
+		return is_null( $nome_banco ) ? $situacoes : ( array_key_exists( $nome_banco, $situacoes ) ? $situacoes[ $nome_banco ] : null );
+
+	}
+
+}

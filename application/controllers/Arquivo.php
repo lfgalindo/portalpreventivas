@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Controller para sites.
+ * Controller para arquivos.
  * @category Controller
  * @author Luiz Felipe Magalhães Galindo <lfgalindo@live.com>
  */
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Site extends CI_Controller {
+class Arquivo extends CI_Controller {
 
 	/**
 	 * Método construtor.
@@ -18,32 +18,36 @@ class Site extends CI_Controller {
 		parent::__construct();	
 
 		//Models
-		$this->load->model('site_model');
-		$this->site_model->setTable('sites');
+		$this->load->model('arquivo_model');
+		$this->arquivo_model->setTable('arquivos');
 
 		//Classes
-		$this->load->library('site_class');
+		$this->load->library('arquivo_class');
 		$this->load->library('form_validation');
 
-		//Helpers
-		//$this->load->helper('paginacao_helper');
-
-		$this->template->set('title', 'Sites');
+		$this->template->set('title', 'Arquivos');
 
 	}
 
 	/**
 	 * Página inicial.
 	 */
-	public function index() {
+	public function listar( $tabela, $id_reg_tabela_encrypt ) {
 
-		check_permission('visualizar_sites', 'inicio');
+		if ( is_numeric( $id_reg_tabela_encrypt ) ){
+			$this->flashmessages->success('Ocorreu um erro!');
+			redirect("preventivas");
+		}
 
-		$fields = array( 'id_tim', 'operadora', 'rede', 'tipo_ne', 'fornecedor', 'ne_id', 'observacoes', 'cidade', 'estado', 'endereco', 'bairro', 'cm' );
-		$orders = array("ne_id" => "ASC");
+		$id_reg_tabela = decrypt( $id_reg_tabela_encrypt );
 
-		$search_string = $this->input->get('search') ? $this->input->get('search') : "";
-		$dados['search_string'] = $search_string;
+		if ( ! is_numeric( $id_reg_tabela ) ){
+			$this->flashmessages->success('Ocorreu um erro!');
+			redirect("preventivas");
+		}
+
+		if ( $tabela == "preventivas" )
+			check_permission('visualizar_relatorios_preventivas', 'preventivas');
 
 		// Montar paginação
 		$maximo = "7";
@@ -56,18 +60,19 @@ class Site extends CI_Controller {
 		$config['query_string_segment'] = 'inicio';
 		$config['last_link'] 			= "Última";
 		$config['first_link'] 			= "Primeira";
-		$config['base_url'] 			= base_url('sites');	 
-		$config['total_rows'] 			= $this->site_model->contar_registros( $search_string, $fields );
+		$config['base_url'] 			= base_url('arquivos/' . $tabela . '/' . $id_reg_tabela_encrypt );	 
+		$config['total_rows'] 			= $this->arquivo_model->contar_registros_arquivos( $tabela, $id_reg_tabela );
 
 		$this->pagination->initialize( $config );
 
 		$dados["paginacao"] = $this->pagination->create_links();
 
-		$sites = $this->site_model->listar( $maximo, $inicio, $search_string, $fields, $orders );
+		$arquivos = $this->arquivo_model->listar_arquivos( $maximo, $inicio, $tabela, $id_reg_tabela );
 
-		$dados['sites'] = $sites;
+		$dados['arquivos'] = $arquivos;
+		$dados['id_reg_tabela_encrypt'] = $id_reg_tabela_encrypt;
 
-		$this->template->load('template.php', 'sites/index-view.php', $dados);
+		$this->template->load('template.php', 'preventivas/listar-arquivos-view.php', $dados);
 
 	}//Fim do método index
 

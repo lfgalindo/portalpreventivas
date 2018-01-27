@@ -75,13 +75,31 @@ if ( ! function_exists('todas_permissoes') ){
 									'visualizar_preventivas' 				=> 'Visualizar preventivas',
 									'cadastrar_preventivas'					=> 'Cadastrar preventivas',
 									'editar_preventivas'					=> 'Editar preventivas',
-									'remover_preventivas'					=> 'Remover preventivas'
+									'remover_preventivas'					=> 'Remover preventivas',
+									'executar_preventivas'					=> 'Marcar como executadas',
+									'cancelar_exec_preventivas'				=> 'Cancelar execução'
 								),
 								'requisitos' => array(
 									'visualizar_preventivas' 				=> 'sem_requisito',
 									'cadastrar_preventivas'					=> 'visualizar_preventivas',
 									'editar_preventivas'					=> 'visualizar_preventivas',
-									'remover_preventivas'					=> 'visualizar_preventivas'
+									'remover_preventivas'					=> 'visualizar_preventivas',
+									'executar_preventivas'					=> 'visualizar_preventivas',
+									'cancelar_exec_preventivas'				=> 'visualizar_preventivas'
+								)
+						),
+						// Permissões para relatórios
+						'relatorios_preventivas' => array(
+								'nome' => 'Relatórios de preventivas',
+								'permissoes' => array(
+									'visualizar_relatorios_preventivas' 	=> 'Visualizar relatórios',
+									'enviar_relatorios_preventivas' 		=> 'Enviar relatórios',
+									'remover_relatorios_preventivas' 		=> 'Remover relatórios'
+								),
+								'requisitos' => array(
+									'visualizar_relatorios_preventivas' 	=> 'sem_requisito',
+									'enviar_relatorios_preventivas' 		=> 'visualizar_relatorios_preventivas',
+									'remover_relatorios_preventivas' 		=> 'visualizar_relatorios_preventivas'
 								)
 						),
 						// Permissões para relatórios

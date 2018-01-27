@@ -40,6 +40,35 @@ class Usuario_Model extends MY_Model {
 		return false;
 	}
 
+	public function listar_dropdown(){
+
+		$this->db->select( 'id, nome');
+
+		$this->db->group_start();
+		$this->db->where( 'removido !=', "1" );
+		$this->db->or_where( 'removido IS NULL' );
+		$this->db->group_end();
+
+
+		$this->db->order_by( 'nome' );
+		
+		$query = $this->db->get( $this->table );
+
+		$usuarios = array();
+		$result = $query->result_array();
+
+		$usuarios['0'] = "Selecione um usuário...";
+
+		foreach ( $result as $usuario ) {
+
+			$usuarios[ $usuario['id'] ] = $usuario['nome'];
+		
+		}
+
+		return $usuarios;
+
+	}
+
 } 
 
 ?>

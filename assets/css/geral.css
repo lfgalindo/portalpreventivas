@@ -198,6 +198,31 @@ i.sem_permissao{
     margin-right: 5px;
     color: #a92525;
 }
+.select2-selection.select2-selection--single{
+    border: 1px solid #dce2e7;
+    outline-color: #9fd037;
+    border-radius: 0px;
+}
+.select2-dropdown.select2-dropdown--below{
+    border: 1px solid #dce2e7;  
+}
+.select2-search__field{
+    border: 1px solid #dce2e7;
+    outline-color: #9fd037;
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected]{
+    background-color: #9fd037;
+    color: white;
+}
+
+.select2.select2-container.select2-container--default.select2-container--below{
+    width: 100%;
+}
+
+span.text_info{
+    font-style: italic;
+    color: #a5a5a5;
+}
 
 @media screen and (max-width: 992px){
 

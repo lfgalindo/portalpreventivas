@@ -22,7 +22,6 @@ class Preventiva_Class {
 	private $relatorio; 		// (data)
 	private $status;			// pendente, aguardando relatório, relatório em aprovação, aguardando novo relatório, finalizada
 	private $id_site; 			// Site: exibir cidade, ddd )
-	private $id_arquivo;
 	private $id_tecnico;
 	private $id_supervisor;
 	private $id_usuario; 		// que realizou o cadastro
@@ -46,7 +45,7 @@ class Preventiva_Class {
                 'constraint' => '50',
               ),
               'data_cadastro' => array(
-                'type' => 'DATE',
+                'type' => 'DATETIME',
                 'null' => true
               ),
               'micro_areas' => array(
@@ -74,10 +73,6 @@ class Preventiva_Class {
                 'null' => true
               ),
               'id_site' => array(
-                'type' => 'BIGINT',
-                'null' => true
-              ),
-              'id_arquivo' => array(
                 'type' => 'BIGINT',
                 'null' => true
               ),
@@ -116,7 +111,6 @@ class Preventiva_Class {
 			'relatorio' 	=> $preventiva->getRelatorio(),
 			'status' 		=> $preventiva->getStatus(),
 			'id_site' 		=> $preventiva->getIDSite(),
-			'id_arquivo' 	=> $preventiva->getIDArquivo(),
 			'id_tecnico' 	=> $preventiva->getIDTecnico(),
 			'id_supervisor' => $preventiva->getIDSupervisor(),
 			'id_usuario' 	=> $preventiva->getIDUsuario()
@@ -141,7 +135,6 @@ class Preventiva_Class {
 		$preventiva->setRelatorio( 		$array['relatorio'] );
 		$preventiva->setStatus( 		$array['status'] );
 		$preventiva->setIDSite( 		$array['id_site'] );
-		$preventiva->setIDArquivo( 		$array['id_arquivo'] );
 		$preventiva->setIDTecnico( 		$array['id_tecnico'] );
 		$preventiva->setIDSupervisor( 	$array['id_supervisor'] );
 		$preventiva->setIDUsuario( 		$array['id_usuario'] );
@@ -229,14 +222,6 @@ class Preventiva_Class {
 
 	public function setIDSite($id_site){
 		$this->id_site = $id_site;
-	}
-
-	public function getIDArquivo(){
-		return $this->id_arquivo;
-	}
-
-	public function setIDArquivo($id_arquivo){
-		$this->id_arquivo = $id_arquivo;
 	}
 
 	public function getIDTecnico(){

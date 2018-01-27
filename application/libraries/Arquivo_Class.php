@@ -22,6 +22,8 @@ class Arquivo_Class {
 	private $motivo_recusado;
 	private $data_recusado_aprovado;
 	private $id_usuario_recusado_aprovado;
+	private $tabela;
+	private $id_reg_tabela;
 	private $id_usuario;
 
 	/**
@@ -82,6 +84,15 @@ class Arquivo_Class {
 				'null' => false
 			),
 			'id_usuario_recusado_aprovado' => array(
+				'type' => 'BIGINT',
+				'null' => true
+			),
+			'tabela' => array(
+				'type' => 'VARCHAR',
+				'constraint' => 45,
+				'null' => false
+			),
+			'id_reg_tabela' => array(
 				'type' => 'BIGINT'
 			),
 			'id_usuario' => array(
@@ -111,6 +122,8 @@ class Arquivo_Class {
 			'motivo_recusado' 				=> $arquivo->getMotivoRecusado(),
 			'data_recusado_aprovado' 		=> $arquivo->getDataRecusadoAprovado(),
 			'id_usuario_recusado_aprovado' 	=> $arquivo->getIDUsuarioRecusadoAprovado(),
+			'tabela' 						=> $arquivo->getTabela(),
+			'id_reg_tabela' 				=> $arquivo->getIDRegTabela(),
 			'id_usuario' 					=> $arquivo->getIDUsuario()
 			
 		);
@@ -135,6 +148,8 @@ class Arquivo_Class {
 		$arquivo->setMotivoRecusado(			$array['motivo_recusado'] );
 		$arquivo->setDataRecusadoAprovado(		$array['data_recusado_aprovado'] );
 		$arquivo->setIDUsuarioRecusadoAprovado(	$array['id_usuario_recusado_aprovado'] );
+		$arquivo->setTabela(					$array['tabela'] );
+		$arquivo->setIDRegTabela(				$array['id_reg_tabela'] );
 		$arquivo->setIDUsuario(					$array['id_usuario'] );
 		
 		return $arquivo;
@@ -231,6 +246,24 @@ class Arquivo_Class {
 	public function setIDUsuarioAecusadoAprovado($id_usuario_recusado_aprovado){
 		$this->id_usuario_recusado_aprovado = $id_usuario_recusado_aprovado;
 	}
+
+	public function getTabela(){
+		return $this->tabela;
+	}
+
+	public function setTabela($tabela){
+		$this->tabela = $tabela;
+	}
+
+
+	public function getIDRegTabela(){
+		return $this->id_reg_tabela;
+	}
+
+	public function setIDRegTabela($id_reg_tabela){
+		$this->id_reg_tabela = $id_reg_tabela;
+	}
+
 
 	public function getIDUsuario(){
 		return $this->id_usuario;
