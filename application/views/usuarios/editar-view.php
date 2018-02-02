@@ -185,6 +185,12 @@
 <?php echo form_close(); ?>
 
 <script type="text/javascript">
+
+	$(document).ready( function(){
+
+		$('.cpf').mask('000.000.000-00', {reverse: true});
+
+	});
 	
 	$(document).on("click", "#alterar", function( e ){
 

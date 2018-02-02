@@ -116,21 +116,30 @@ class Usuario extends CI_Controller {
 		// Carregar variável com todas as permissões para enviar para a tela
 		$data['permissoes'] = todas_permissoes();
 
-		$this->form_validation->set_rules('nome', 'Nome do usúario', 'required');
-		$this->form_validation->set_rules('cpf',  'CPF do usúario',  'required');
+		$this->form_validation->set_rules('nome', 'Nome do usuário', 'required');
+		$this->form_validation->set_rules('matricula',  'Matrícula do usuário',  'required');
 		
 		if( strlen( $this->input->post('senha') ) > 0 || strlen( $this->input->post('confirmar_senha') ) > 0 ) {
 			$this->form_validation->set_rules('senha', 'Senha', 'required|matches[confirmar_senha]|min_length[8]');
 			$this->form_validation->set_rules('confirmar_senha', 'Confirmar Senha', 'required');
 		}
 
-		$valida_cpf = validaCPF( $this->input->post('cpf') );
+		// Se ser matricula ja foi cadastrada
+		$existe_matricula = $this->usuario_model->existe_cadastro( 'matricula', $this->input->post('matricula') );
 
-		// Verificar se CPF já foi cadastrado
+		// Se foi informado CPF valida-lo
+		$valida_cpf = true;
 		$existe_cpf = false;
 
-		if ( $this->input->post('cpf') )
-			$existe_cpf = $this->usuario_model->existe_cadastro( 'cpf', apenas_numeros( $this->input->post('cpf') ) );
+		if ( strlen( $this->input->post('cpf') ) > 0 ){
+
+			$valida_cpf = validaCPF( $this->input->post('cpf') );
+			
+			// Verificar se CPF já foi cadastrado
+			if ( $this->input->post('cpf') )
+				$existe_cpf = $this->usuario_model->existe_cadastro( 'cpf', apenas_numeros( $this->input->post('cpf') ) );
+
+		}
 
 		// Verificar se Login ja foi cadastrado
 		$existe_login = false;
@@ -146,7 +155,7 @@ class Usuario extends CI_Controller {
 			$data['select_permissoes'] = $this->input->post("permissoes");
 
 		// Verificar validações.
-		if( ! $this->form_validation->run() || $valida_cpf == false || $existe_cpf == true || $existe_login == true ) {
+		if( ! $this->form_validation->run() || $valida_cpf == false || $existe_cpf == true || $existe_login == true || $existe_matricula == true ) {
 
 			// Se ocorreu o submit exibir os erros
 			if( ! empty( $this->form_validation->error_array() ) ):
@@ -163,6 +172,9 @@ class Usuario extends CI_Controller {
 
 			if ( $existe_login == true )
 				$this->flashmessages->error( "O login informado já existe no sistema." );
+
+			if ( $existe_matricula == true )
+				$this->flashmessages->error( "A matrícula informada já existe no sistema." );
 
 			$this->template->load('template.php', 'usuarios/cadastrar-view.php', $data);
 
@@ -218,21 +230,30 @@ class Usuario extends CI_Controller {
 		// Carregar variável com todas as permissões para enviar para a tela
 		$data['permissoes'] = todas_permissoes();
 
-		$this->form_validation->set_rules('nome', 'Nome do usúario', 'required');
-		$this->form_validation->set_rules('cpf',  'CPF do usúario',  'required');
+		$this->form_validation->set_rules('nome', 'Nome do usuário', 'required');
+		$this->form_validation->set_rules('matricula',  'Matrícula do usuário',  'required');
 		
 		if( strlen( $this->input->post('senha') ) > 0 || strlen( $this->input->post('confirmar_senha') ) > 0 ) {
 			$this->form_validation->set_rules('senha', 'Senha', 'required|matches[confirmar_senha]|min_length[8]');
 			$this->form_validation->set_rules('confirmar_senha', 'Confirmar Senha', 'required');
 		}
 
-		$valida_cpf = validaCPF( $this->input->post('cpf') );
+		// Se ser matricula ja foi cadastrada
+		$existe_matricula = $this->usuario_model->existe_cadastro( 'matricula', $this->input->post('matricula'), $usuario->getID() );
 
-		// Verificar se CPF já foi cadastrado
+		// Se foi informado CPF valida-lo
+		$valida_cpf = true;
 		$existe_cpf = false;
 
-		if ( $this->input->post('cpf') )
-			$existe_cpf = $this->usuario_model->existe_cadastro('cpf', apenas_numeros( $this->input->post('cpf') ), $usuario->getID());
+		if ( strlen( $this->input->post('cpf') ) > 0 ){
+
+			$valida_cpf = validaCPF( $this->input->post('cpf') );
+			
+			// Verificar se CPF já foi cadastrado
+			if ( $this->input->post('cpf') )
+				$existe_cpf = $this->usuario_model->existe_cadastro( 'cpf', apenas_numeros( $this->input->post('cpf') ), $usuario->getID() );
+
+		}
 
 		// Verificar se Login ja foi cadastrado
 		$existe_login = false;

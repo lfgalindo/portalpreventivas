@@ -47,7 +47,7 @@
 			<div class="row cadastro">
 				<div class="col-md-3">CPF:</div>
 
-				<div class="col-md-9"><?php echo $usuario->getCPF(); ?></div>
+				<div class="col-md-9"><?php echo mask( $usuario->getCPF(), "###.###.###-##" ); ?></div>
 			</div>
 
 			<div class="row cadastro">

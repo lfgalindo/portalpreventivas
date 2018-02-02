@@ -178,3 +178,57 @@ if ( ! function_exists( 'situacoes_preventivas' ) ){
 	}
 
 }
+
+if ( ! function_exists( 'mask' ) ){
+
+	function mask($val, $mask, $telefone = null) {
+
+		if ( $val == "" || $val == null)
+			return "";
+
+		$val = str_replace(" ","",$val);
+		$val = str_replace("-","",$val);
+		$val = str_replace("(","",$val);
+		$val = str_replace(")","",$val);
+
+		if ( $telefone == 'telefone'){
+
+			$tam = strlen( $val );
+
+			if ( $tam == 8 ){
+				$mask = "####-####";
+			}
+			else if( $tam == 9){
+				$mask = "# ####-####";
+			}
+			else if ( $tam == 10){
+				$mask = "(##) ####-####";
+			}
+			else if ($tam == 11){
+				$mask = "(##) # ####-####";
+			}
+
+		}
+
+		$maskared = '';
+		$k = 0;
+
+		for($i = 0; $i<=strlen($mask)-1; $i++) {
+
+			if($mask[$i] == '#') {
+
+				if(isset($val[$k]))
+					$maskared .= $val[$k++];
+
+			}
+			else{
+
+				if(isset($mask[$i]))
+					$maskared .= $mask[$i];
+			}
+		}
+
+		return $maskared;
+	}
+
+}
