@@ -15,8 +15,6 @@ class Preventiva_Class {
 	private $id;
 	private $tipo; 				// BTS-TX, Infra, FMT, Estrutural Torre, CCCs
 	private $data_cadastro;
-	private $micro_areas;
-	private $area;
 	private $programada; 		// (mes/ano)
 	private $executada; 		// (data)
 	private $relatorio; 		// (data)
@@ -47,14 +45,6 @@ class Preventiva_Class {
               'data_cadastro' => array(
                 'type' => 'DATETIME',
                 'null' => true
-              ),
-              'micro_areas' => array(
-                'type' => 'VARCHAR',
-                'constraint' => '50',
-              ),
-              'area' => array(
-                'type' => 'VARCHAR',
-                'constraint' => '50',
               ),
               'programada' => array(
                 'type' => 'DATE',
@@ -104,8 +94,6 @@ class Preventiva_Class {
 			'id' 			=> $preventiva->getID(),
 			'tipo' 			=> $preventiva->getTipo(),
 			'data_cadastro' => $preventiva->getDataCadastro(),
-			'micro_areas' 	=> $preventiva->getMicroAreas(),
-			'area' 			=> $preventiva->getArea(),
 			'programada' 	=> $preventiva->getProgramada(),
 			'executada' 	=> $preventiva->getExecutada(),
 			'relatorio' 	=> $preventiva->getRelatorio(),
@@ -128,8 +116,6 @@ class Preventiva_Class {
 		$preventiva->setID( 			$array['id'] );
 		$preventiva->setTipo( 			$array['tipo'] );
 		$preventiva->setDataCadastro( 	$array['data_cadastro'] );
-		$preventiva->setMicroAreas( 	$array['micro_areas'] );
-		$preventiva->setArea( 			$array['area'] );
 		$preventiva->setProgramada( 	$array['programada'] );
 		$preventiva->setExecutada( 		$array['executada'] );
 		$preventiva->setRelatorio( 		$array['relatorio'] );
@@ -166,22 +152,6 @@ class Preventiva_Class {
 
 	public function setDataCadastro($data_cadastro){
 		$this->data_cadastro = $data_cadastro;
-	}
-
-	public function getMicroAreas(){
-		return $this->micro_areas;
-	}
-
-	public function setMicroAreas($micro_areas){
-		$this->micro_areas = $micro_areas;
-	}
-
-	public function getArea(){
-		return $this->area;
-	}
-
-	public function setArea($area){
-		$this->area = $area;
 	}
 
 	public function getProgramada(){

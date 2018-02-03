@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '191.37.38.150',
-	'username' => 'cednet_ght',
-	'password' => 'Mac1%d60',
-	'database' => 'teste',
+	'hostname' => '191.37.38.41',
+	'username' => 'raphaelg_bd',
+	'password' => 'paj45TFcli',
+	'database' => 'raphaelg_bd',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

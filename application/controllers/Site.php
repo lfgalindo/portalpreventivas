@@ -298,4 +298,41 @@ class Site extends CI_Controller {
 
 	}//Fim do método listar - Ajax
 
+	//Método para selecionar dados do site via Ajax
+	public function ajax_selecionar_site() {
+
+		// Headers.
+		header('Content-Type: application/json');
+
+		try {
+
+			if( ! $this->input->is_ajax_request() )
+				throw new Exception("A requisição não pode ser realizada dessa forma.");
+
+			if( $this->input->server('REQUEST_METHOD') != 'POST' )
+				throw new Exception("As informações devem chegar via POST.");
+
+
+			$id = $this->input->post('id');
+
+			$site = new Site_CLass();
+			$site->setID( $id );
+
+			$site = $this->site_model->selecionar( $site );
+			$site_array = $site->to_array( $site );
+
+			echo json_encode( $site_array );
+
+		} catch( Exception $e ) {
+			echo json_encode(
+				array(
+					'message'	=> $e->getMessage()
+				)
+			);
+		}
+
+		return;
+
+	}//Fim do método selecionar - Ajax
+
 }//Fim da classe Servicos

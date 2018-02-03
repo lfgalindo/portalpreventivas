@@ -37,13 +37,13 @@
 			</div>
 
 			<div class="row cadastro">
-				<div class="col-md-3">Micro areas:</div>
-				<div class="col-md-9"><?php echo $preventiva->getMicroAreas(); ?></div>
+				<div class="col-md-3">CM:</div>
+				<div class="col-md-9"><?php echo $site->getCm(); ?></div>
 			</div>
 
 			<div class="row cadastro">
-				<div class="col-md-3">Área:</div>
-				<div class="col-md-9"><?php echo $preventiva->getArea(); ?></div>
+				<div class="col-md-3">Cidade:</div>
+				<div class="col-md-9"><?php echo $site->getCidade() . "/" . $site->getEstado(); ?></div>
 			</div>
 
 			<div class="row cadastro">

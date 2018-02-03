@@ -19,6 +19,7 @@ $route['sites/editar/(:any)'] 				= 'site/editar/$1';
 $route['sites/remover/(:any)'] 				= 'site/remover/$1';
 $route['sites/visualizar/(:any)'] 			= 'site/visualizar/$1';
 $route['ajax/listar_sites'] 				= 'site/ajax_listar_sites';
+$route['ajax/selecionar_site'] 				= 'site/ajax_selecionar_site';
 
 $route['preventivas'] 						= 'preventiva';
 $route['preventivas/cadastrar'] 			= 'preventiva/cadastrar';

@@ -35,35 +35,15 @@
 				</div>
 
 				<div class="row cadastro">
-					<div class="col-md-3">Micro areas:</div>
+					<div class="col-md-3">CM:</div>
 
-					<div class="col-md-9">
-						<?php 
-							echo form_input( array(
-								"type" 	=> "text",
-								"value" => set_value('micro_areas'),
-								"name" 	=> "micro_areas",
-								"class" => "cadastro"
-								)
-							);
-						?>
-					</div>
+					<div class="col-md-9" id="site_cm">-</div>
 				</div>
 
 				<div class="row cadastro">
-					<div class="col-md-3">Área:</div>
+					<div class="col-md-3">Cidade:</div>
 
-					<div class="col-md-9">
-						<?php 
-							echo form_input( array(
-								"type" 	=> "text",
-								"value" => set_value('area'),
-								"name" 	=> "area",
-								"class" => "cadastro"
-								)
-							);
-						?>
-					</div>
+					<div class="col-md-9" id="site_cidade">-</div>
 				</div>
 
 				<div class="row cadastro">
@@ -132,6 +112,27 @@
 	  },
 	  placeholder: 'Pesquise por um site...',
 	  minimumInputLength: 3
+	});
+
+	$(document).on("change", ".select_site", function(){
+
+		var id_site = $(this).val();
+
+		$.ajax({
+			url: "/ajax/selecionar_site",
+			type: 'POST',
+			data: {
+				id: id_site
+			},
+			success: function(response) {
+
+				$("div#site_cm").html(response.cm);
+				$("div#site_cidade").html(response.cidade + "/" + response.estado );
+				
+			}
+
+		});
+
 	});
 
 	$(document).on("click", "#cadastrar", function( e ){

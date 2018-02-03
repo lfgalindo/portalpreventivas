@@ -153,8 +153,6 @@ class Preventiva extends CI_Controller {
 
 			$preventiva->setTipo(				$this->input->post('tipo') );
 			$preventiva->setDataCadastro(		date('Y-m-d H:i:s') );
-			$preventiva->setMicroAreas(			$this->input->post('micro_areas') );
-			$preventiva->setArea(				$this->input->post('area') );
 			$preventiva->setProgramada(			$this->input->post('programada') . "-01" );
 			$preventiva->setStatus(				1 ); // Pendente
 			$preventiva->setIDSite(				$this->input->post('site') );
@@ -216,6 +214,8 @@ class Preventiva extends CI_Controller {
 				endforeach;
 			endif;
 
+
+			$data['site'] = $site;
 			$data['usuarios'] = $this->usuario_model->listar_dropdown();
 
 			$this->template->load('template.php', 'preventivas/editar-view.php', $data);
@@ -224,8 +224,6 @@ class Preventiva extends CI_Controller {
 
 			// Alteramos o objeto para cadastro no banco
 			$preventiva->setTipo(				$this->input->post('tipo') );
-			$preventiva->setMicroAreas(			$this->input->post('micro_areas') );
-			$preventiva->setArea(				$this->input->post('area') );
 			$preventiva->setProgramada(			$this->input->post('programada') . "-01" );
 			$preventiva->setStatus(				1 ); // Pendente
 			$preventiva->setIDSite(				$this->input->post('site') );
