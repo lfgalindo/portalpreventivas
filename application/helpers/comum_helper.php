@@ -152,7 +152,8 @@ if ( ! function_exists( 'tipos_preventivas' ) ){
 					"infra" 		=> "Infra",
 					"fmt" 			=> "FMT",
 					"estrutural" 	=> "Estrutural Torre",
-					"ccc" 			=> "CCCs"
+					"ccc" 			=> "CCCs",
+					"zeladoria"		=> "Zeladoria"
 					);
 
 		return is_null( $nome_banco ) ? $tipos : ( array_key_exists( $nome_banco, $tipos ) ? $tipos[ $nome_banco ] : null );

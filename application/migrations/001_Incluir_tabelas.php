@@ -34,7 +34,7 @@ class Migration_Incluir_tabelas extends CI_Migration {
 
     public function up() {
 
-        $this->down();
+        //$this->down();
 
         $attributes = array('ENGINE' => 'InnoDB');
 

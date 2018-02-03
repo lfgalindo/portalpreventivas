@@ -92,7 +92,7 @@
 				<tbody>
 					<?php foreach ( $preventivas as $preventiva ): ?>
 						<tr>
-							<td><?php echo $preventiva['id_site']; ?></td>
+							<td><?php echo $preventiva['ne_id']; ?></td>
 							<td>
 								<?php 
 									setlocale(LC_TIME, 'pt_BR.utf-8', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese.utf-8');

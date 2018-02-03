@@ -94,11 +94,15 @@ if ( ! function_exists('todas_permissoes') ){
 								'permissoes' => array(
 									'visualizar_relatorios_preventivas' 	=> 'Visualizar relatórios',
 									'enviar_relatorios_preventivas' 		=> 'Enviar relatórios',
+									'aprovar_relatorios_preventivas' 		=> 'Aprovar relatórios',
+									'recusar_relatorios_preventivas' 		=> 'Recusar relatórios',
 									'remover_relatorios_preventivas' 		=> 'Remover relatórios'
 								),
 								'requisitos' => array(
 									'visualizar_relatorios_preventivas' 	=> 'sem_requisito',
 									'enviar_relatorios_preventivas' 		=> 'visualizar_relatorios_preventivas',
+									'aprovar_relatorios_preventivas' 		=> 'visualizar_relatorios_preventivas',
+									'recusar_relatorios_preventivas' 		=> 'visualizar_relatorios_preventivas',
 									'remover_relatorios_preventivas' 		=> 'visualizar_relatorios_preventivas'
 								)
 						),

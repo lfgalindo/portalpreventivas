@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 /**
  * Controller para preventivas.
@@ -44,7 +44,7 @@ class Preventiva extends CI_Controller {
 
 		check_permission('visualizar_preventivas', 'inicio');
 
-		$fields = array( 'tipo' );
+		$fields = array( 'tipo', 'ne_id', 'supervisores.nome', 'tecnicos.nome' );
 		$orders = array("programada" => "ASC");
 
 		$search_string = $this->input->get('search') ? $this->input->get('search') : "";

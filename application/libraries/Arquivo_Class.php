@@ -81,7 +81,7 @@ class Arquivo_Class {
 			),
 			'data_recusado_aprovado' => array(
 				'type' => 'DATETIME',
-				'null' => false
+				'null' => true
 			),
 			'id_usuario_recusado_aprovado' => array(
 				'type' => 'BIGINT',
@@ -243,7 +243,7 @@ class Arquivo_Class {
 		return $this->id_usuario_recusado_aprovado;
 	}
 
-	public function setIDUsuarioAecusadoAprovado($id_usuario_recusado_aprovado){
+	public function setIDUsuarioRecusadoAprovado($id_usuario_recusado_aprovado){
 		$this->id_usuario_recusado_aprovado = $id_usuario_recusado_aprovado;
 	}
 

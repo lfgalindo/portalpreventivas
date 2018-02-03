@@ -18,7 +18,7 @@
 
 			<div class="botao_add">
 				<div>
-					<?php if( check_permission('editar_preventivas')): ?>
+					<?php if( check_permission('editar_preventivas') && $preventiva->getStatus() == "1"): ?>
 						<a href="<?php echo base_url('/preventivas/editar/') . encrypt( $preventiva->getID() ); ?>" >
 							<button class="btn-green" data-toggle="tooltip" data-placement="bottom" title="Editar essa preventiva">Editar dados</button>
 						</a>

@@ -8,11 +8,12 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Migrate extends CI_Controller
-{
+class Migrate extends CI_Controller{
 
-    public function index()
-    {
+	public $not_hookable = TRUE;
+
+    public function index(){
+    	
         $this->load->library('migration');
 
         if ($this->migration->current() === FALSE){

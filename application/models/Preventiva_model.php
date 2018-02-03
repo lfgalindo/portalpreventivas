@@ -27,7 +27,7 @@ class Preventiva_Model extends MY_Model {
 	 */
 	public function listar( $maximo, $inicio, $search = "", $fields = null, $orders = null ) {
 
-		$this->db->select();
+		$this->db->select( 'preventivas.*, sites.ne_id');
 
 		if ( $search != "" || $fields != null ){
 
@@ -45,6 +45,10 @@ class Preventiva_Model extends MY_Model {
 			$this->db->group_end();
 
 		}
+
+		$this->db->join('sites', 'preventivas.id_site = sites.id', 'left');
+		$this->db->join('usuarios AS supervisores', 'preventivas.id_supervisor = supervisores.id', 'left');
+		$this->db->join('usuarios AS tecnicos', 'preventivas.id_tecnico = tecnicos.id', 'left');
 
 		if ( ! is_null( $orders ) ){
 
@@ -84,6 +88,10 @@ class Preventiva_Model extends MY_Model {
 			$this->db->group_end();
 
 		}
+
+		$this->db->join('sites', 'preventivas.id_site = sites.id', 'left');
+		$this->db->join('usuarios AS supervisores', 'preventivas.id_supervisor = supervisores.id', 'left');
+		$this->db->join('usuarios AS tecnicos', 'preventivas.id_tecnico = tecnicos.id', 'left');
 
 		$this->db->from( $this->table );
 
