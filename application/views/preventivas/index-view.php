@@ -40,50 +40,64 @@
 	<div class="col-md-12">
 		<div class="area">
 
-			<h1 class="title-area">Preventivas</h1>
+			<?php echo form_open( "", array('method' => 'GET' ) ); ?>
 
-			<div class="botao_add">
-				<div>
-					<?php if( check_permission('cadastrar_preventivas')): ?>
-						<a href="<?php echo base_url('/preventivas/cadastrar'); ?>" >
-							<button class="btn-green" data-toggle="tooltip" data-placement="bottom" title="Cadastrar uma preventiva">Nova preventiva</button>
-						</a>
-					<?php endif; ?>
+				<div class="title-filter">
+
+				<h1 class="title-area">Preventivas</h1>
+
+				<div class="filtro-data">
+					<label>
+						Programadas para: 
+						<input type="month" value="<?php echo date('Y-m')?>">
+					</label>
 				</div>
 
-					<div class="container-search">
-						<?php 
+				</div>
 
-							echo form_open( "", array('method' => 'GET' ) );
-
-							echo form_input( array(
-												'name' => 'search',
-												'id' => 'search',
-												'class' => 'cadastro',
-												'placeholder' => 'Digite aqui para buscar...',
-												'value' => $search_string
-												)
-											);
-
-							echo form_input( array(
-												'type' => 'submit',
-												'class' => 'btn-green',
-												'style' => 'margin-left: 5px;',
-												'value' => 'Buscar'
-												)
-											);
-
-							echo form_close(); 
-						?>
+				<div class="botao_add">
+					<div>
+						<?php if( check_permission('cadastrar_preventivas')): ?>
+							<a href="<?php echo base_url('/preventivas/cadastrar'); ?>" >
+								<button class="btn-green" data-toggle="tooltip" data-placement="bottom" title="Cadastrar uma preventiva">Nova preventiva</button>
+							</a>
+						<?php endif; ?>
 					</div>
 
-			</div>
+						<div class="container-search">
+							<?php 
+
+								
+
+								echo form_input( array(
+													'name' => 'search',
+													'id' => 'search',
+													'class' => 'cadastro',
+													'placeholder' => 'Digite aqui para buscar...',
+													'value' => $search_string
+													)
+												);
+
+								echo form_input( array(
+													'type' => 'submit',
+													'class' => 'btn-green',
+													'style' => 'margin-left: 5px;',
+													'value' => 'Buscar'
+													)
+												);
+							?>
+						</div>
+
+				</div>
+
+			<?php echo form_close(); ?>
 
 			<table class="table listar">
 				<thead>
 					<tr>
 						<th> Site </th>
-						<th> Programada </th>
+						<th> CM </th>
+						<th> Supervisor </th>
 						<th> Situação </th>
 						<th> Ações </th>
 					</tr>
@@ -93,13 +107,8 @@
 					<?php foreach ( $preventivas as $preventiva ): ?>
 						<tr>
 							<td><?php echo $preventiva['ne_id']; ?></td>
-							<td>
-								<?php 
-									setlocale(LC_TIME, 'pt_BR.utf-8', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese.utf-8');
-
-									echo $preventiva['programada'] != "0000-00-00" ? strftime('%B/%Y', strtotime( $preventiva['programada']) ) : ""; 
-								?>
-							</td>
+							<td><?php echo $preventiva['cm']; ?></td>
+							<td><?php echo $preventiva['supervisor']; ?></td>
 							<td><?php echo situacoes_preventivas( $preventiva['status'] ); ?></td>
 							<td>
 								<a href="<?php echo base_url('/preventivas/visualizar/') . encrypt( $preventiva['id'] ); ?>">

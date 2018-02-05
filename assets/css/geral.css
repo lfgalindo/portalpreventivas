@@ -92,6 +92,30 @@ h1.title-area{
     padding-bottom: 4px;
 }
 
+div.title-filter{
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 0px 16px 0px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #cec;
+}
+
+div.title-filter h1.title-area{
+    border-bottom: none;
+    margin: 0px;
+    padding-bottom: 4px;
+}
+
+div.filtro-data label{
+    font-weight: normal;
+}
+
+div.title-filter input{
+    padding: 4px;
+    border: 1px solid #dce2e7;
+    outline-color: #9fd037;
+}
+
 h6.title-area{
     font-size: 14px;
     margin: 0px 0px 16px 0px;
