@@ -76,16 +76,16 @@
 								<li><i class="fa fa-file-text-o" aria-hidden="true"></i>Preventivas</li>
 							</a>
 						<?php endif; ?>
-						
-						<?php if ( check_permission('visualizar_relatorios') ): ?>
-							<a href="<?php echo site_url('relatorios'); ?>">
-								<li><i class="fa fa-line-chart" aria-hidden="true"></i>Relatórios</li>
-							</a>
-						<?php endif; ?>
 
 						<?php if ( check_permission('visualizar_usuarios') ): ?>
 							<a href="<?php echo site_url('usuarios'); ?>">
 								<li><i class="fa fa-user" aria-hidden="true"></i>Usuários</li>
+							</a>
+						<?php endif; ?>
+						
+						<?php if ( check_permission('visualizar_configuracoes') ): ?>
+							<a href="<?php echo site_url('configuracoes'); ?>">
+								<li><i class="fa fa-gear" aria-hidden="true"></i>Configurações</li>
 							</a>
 						<?php endif; ?>
 					<ul>

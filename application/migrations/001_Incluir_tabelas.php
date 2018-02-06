@@ -13,10 +13,11 @@ class Migration_Incluir_tabelas extends CI_Migration {
 
     // Array com todas as Classes e tabelas do sistema
     private $tabelas = array(
-                        "Usuario_Class"     => "usuarios",
-                        "Site_Class"        => "sites",
-                        "Arquivo_Class"     => "arquivos",
-                        "Preventiva_Class"  => "preventivas",
+                        "Usuario_class"         => "usuarios",
+                        "Site_class"            => "sites",
+                        "Arquivo_class"         => "arquivos",
+                        "Preventiva_class"      => "preventivas",
+                        "Configuracao_class"    => "configuracoes",
                         );
 
 
@@ -34,7 +35,7 @@ class Migration_Incluir_tabelas extends CI_Migration {
 
     public function up() {
 
-        //$this->down();
+        $this->down();
 
         $attributes = array('ENGINE' => 'InnoDB');
 

@@ -85,7 +85,7 @@
 
 							array_unshift( $tipos, "Todos os tipos");
 
-							echo form_dropdown('search_tipo', $tipos, $search_tipo, array( "class" => "cadastro"));
+							echo form_dropdown('search_tipo', $tipos, (String) $search_tipo, array( "class" => "cadastro"));
 						
 						?>
 					</div>

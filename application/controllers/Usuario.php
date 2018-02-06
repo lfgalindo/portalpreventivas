@@ -18,6 +18,9 @@ class Usuario extends CI_Controller {
 		parent::__construct();	
 
 		//Models
+		$this->load->model('configuracao_model');
+		$this->configuracao_model->setTable('configuracoes');
+		
 		$this->load->model('usuario_model');
 		$this->usuario_model->setTable('usuarios');
 
@@ -46,7 +49,7 @@ class Usuario extends CI_Controller {
 		$dados['search_string'] = $search_string;
 
 		// Montar paginação
-		$maximo = "7";
+		$maximo = $this->configuracao_model->selecionar_valor('qtd_pagina');
 		$inicio = $this->input->get('inicio') ? $this->input->get('inicio') : 0;
 
 		$config['enable_query_strings'] = true;

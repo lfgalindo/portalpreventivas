@@ -18,6 +18,9 @@ class Arquivo extends CI_Controller {
 		parent::__construct();	
 
 		//Models
+		$this->load->model('configuracao_model');
+		$this->configuracao_model->setTable('configuracoes');
+
 		$this->load->model('arquivo_model');
 		$this->arquivo_model->setTable('arquivos');
 
@@ -54,7 +57,7 @@ class Arquivo extends CI_Controller {
 			check_permission('visualizar_relatorios_preventivas', 'preventivas');
 
 		// Montar paginação
-		$maximo = "7";
+		$maximo = $this->configuracao_model->selecionar_valor('qtd_pagina');
 		$inicio = $this->input->get('inicio') ? $this->input->get('inicio') : 0;
 
 		$config['enable_query_strings'] = true;

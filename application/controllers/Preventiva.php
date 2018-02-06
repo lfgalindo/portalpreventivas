@@ -18,6 +18,9 @@ class Preventiva extends CI_Controller {
 		parent::__construct();	
 
 		//Models
+		$this->load->model('configuracao_model');
+		$this->configuracao_model->setTable('configuracoes');
+
 		$this->load->model('site_model');
 		$this->site_model->setTable('sites');
 
@@ -57,8 +60,15 @@ class Preventiva extends CI_Controller {
 		$dados['search_situacao'] 	= $search_situacao;
 		$dados['search_mes'] 		= $search_mes;
 
+		$mes_ano = explode( "-", $search_mes );
+		$mes 	 = $mes_ano[1];
+		$ano 	 = $mes_ano[0];
+
+		$data_inicio	= date('Y-m-d', strtotime( $ano . "-" . $mes . "-" . "01" ) );
+		$data_fim 		= date('Y-m-t', strtotime( $ano . "-" . $mes . "-" . "01" ) );
+
 		// Montar paginação
-		$maximo = "7";
+		$maximo = $this->configuracao_model->selecionar_valor('qtd_pagina');
 		$inicio = $this->input->get('inicio') ? $this->input->get('inicio') : 0;
 
 		$config['enable_query_strings'] = true;
@@ -69,13 +79,13 @@ class Preventiva extends CI_Controller {
 		$config['last_link'] 			= "Última";
 		$config['first_link'] 			= "Primeira";
 		$config['base_url'] 			= base_url('preventivas');	 
-		$config['total_rows'] 			= $this->preventiva_model->contar_registros_preventivas( $search_string, $search_tipo, $search_situacao, $search_mes, $fields );
+		$config['total_rows'] 			= $this->preventiva_model->contar_registros_preventivas( $search_string, $search_tipo, $search_situacao, $data_inicio, $data_fim, $fields );
 
 		$this->pagination->initialize( $config );
 
 		$dados["paginacao"] = $this->pagination->create_links();
 
-		$preventivas = $this->preventiva_model->listar_preventivas( $maximo, $inicio, $search_string, $search_tipo, $search_situacao, $search_mes, $fields, $orders );
+		$preventivas = $this->preventiva_model->listar_preventivas( $maximo, $inicio, $search_string, $search_tipo, $search_situacao, $data_inicio, $data_fim, $fields, $orders );
 
 		$dados['preventivas'] = $preventivas;
 

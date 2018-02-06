@@ -106,14 +106,16 @@ if ( ! function_exists('todas_permissoes') ){
 									'remover_relatorios_preventivas' 		=> 'visualizar_relatorios_preventivas'
 								)
 						),
-						// Permissões para relatórios
-						'relatorios' => array(
-								'nome' => 'Relatórios',
+						// Permissões para configuracoes
+						'configuracoes' => array(
+								'nome' => 'Configurações',
 								'permissoes' => array(
-									'visualizar_relatorios' 				=> 'Visualizar relatórios',
+									'visualizar_configuracoes' 				=> 'Visualizar configurações',
+									'alterar_configuracoes' 				=> 'Alterar configurações',
 								),
 								'requisitos' => array(
-									'visualizar_relatorios' 				=> 'sem_requisito',
+									'visualizar_configuracoes' 				=> 'sem_requisito',
+									'alterar_configuracoes' 				=> 'visualizar_configuracoes',
 								)
 						),
 		);
