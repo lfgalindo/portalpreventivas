@@ -52,22 +52,16 @@
 
 			</div>
 
-			<?php echo form_open( "", array('method' => 'GET', 'class'=>'container-fluid' ) ); ?>
+			<?php echo form_open( "", array('method' => 'GET', 'class'=>'container-fluid filtros' ) ); ?>
 
 				<div class="row">
 
-					<div class="col-md-4" style="padding-left: 0">
-						
-					</div>
-
 					<div class="col-md-1">
-						<?php echo form_label("Filtros: ", "search"); ?>
+						<?php echo form_label("Buscar: ", "search"); ?>
 					</div>
 
 					<div class="col-md-7">
 						<?php 
-
-							
 
 							echo form_input( array(
 												'name' => 'search',
@@ -80,43 +74,57 @@
 						?>
 					</div>
 
+					<div class="col-md-1 right">
+						<?php echo form_label( "Tipo: ", "search_tipo"); ?>
+					</div>
+
+					<div class="col-md-3">
+						<?php 
+
+							$tipos = tipos_preventivas();
+
+							array_unshift( $tipos, "Todos os tipos");
+
+							echo form_dropdown('search_tipo', $tipos, null, array( "class" => "cadastro"));
+						
+						?>
+					</div>
+
 				</div>
 
-				<div class="row filtros">
+				<div class="row">
 
 					<?php
 
-						echo '<div class="col-md-3" style="padding-left:0">';
-
-						echo form_label( "Tipo: ", "search_tipo");
-
-						$tipos = tipos_preventivas();
-
-						echo form_dropdown('search_tipo', $tipos, null, array( "class" => "cadastro", "style" => "width:initial"));
-
-						echo '</div>';
-
-						echo '<div class="col-md-5">';
+						echo '<div class="col-md-1" >';
 
 						echo form_label( "Situação: ", "search_situacao");
 
+						echo '</div>';
+
+						echo '<div class="col-md-4">';
+
 						$situacoes = situacoes_preventivas();
 
-						echo form_dropdown('search_situacao', $situacoes, null, array( "class" => "cadastro", "style" => "width:initial"));
+						array_unshift( $situacoes, "Todas as situações");
+
+						echo form_dropdown('search_situacao', $situacoes, null, array( "class" => "cadastro" ));
 
 						echo '</div>';
-						
-						echo '<div class="col-md-4" style="padding-rigth:0">';
+
+						echo '<div class="col-md-1 right">';
 
 						echo form_label( "Mês: ", "search_mes");
 
-						echo form_input( array("type" => "month", "name" => "search_mes", "class" => "cadastro", "style" => "width:initial", "value" => date('Y-m') ) );
+						echo '</div>';
+
+						echo '<div class="col-md-4">';
+
+						echo form_input( array("type" => "month", "name" => "search_mes", "class" => "cadastro", "value" => date('Y-m') ) );
 
 						echo '</div>';
 
-						echo '<div class="row">';
-
-						echo '<div class="col-md-12">';
+						echo '<div class="col-md-2 right">';
 
 							echo form_input( array(
 												'type' => 'submit',
@@ -126,7 +134,6 @@
 												)
 											);
 
-						echo '</div>';
 
 						echo '</div>';
 					?>

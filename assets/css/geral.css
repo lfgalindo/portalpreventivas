@@ -100,6 +100,15 @@ div.title-filter{
     border-bottom: 1px solid #cec;
 }
 
+.filtros .row div{
+    padding: 4px 0px;
+}
+
+.filtros .row div.right{
+    text-align: right;
+    padding-right: 10px;
+}
+
 div.title-filter h1.title-area{
     border-bottom: none;
     margin: 0px;
@@ -252,6 +261,11 @@ span.text_info{
 
     h6.permissao{
         margin-top: 10px; 
+    }
+
+    .filtros .row div.right{
+        text-align: left;
+        
     }
 
 }
