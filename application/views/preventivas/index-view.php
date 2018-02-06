@@ -85,7 +85,7 @@
 
 							array_unshift( $tipos, "Todos os tipos");
 
-							echo form_dropdown('search_tipo', $tipos, null, array( "class" => "cadastro"));
+							echo form_dropdown('search_tipo', $tipos, $search_tipo, array( "class" => "cadastro"));
 						
 						?>
 					</div>
@@ -108,7 +108,7 @@
 
 						array_unshift( $situacoes, "Todas as situações");
 
-						echo form_dropdown('search_situacao', $situacoes, null, array( "class" => "cadastro" ));
+						echo form_dropdown('search_situacao', $situacoes, $search_situacao, array( "class" => "cadastro" ));
 
 						echo '</div>';
 
@@ -120,7 +120,7 @@
 
 						echo '<div class="col-md-4">';
 
-						echo form_input( array("type" => "month", "name" => "search_mes", "class" => "cadastro", "value" => date('Y-m') ) );
+						echo form_input( array("type" => "month", "name" => "search_mes", "class" => "cadastro", "value" => $search_mes ) );
 
 						echo '</div>';
 

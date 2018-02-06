@@ -25,7 +25,7 @@ class Preventiva_Model extends MY_Model {
 	 * @return array
 	 * @Override
 	 */
-	public function listar( $maximo, $inicio, $search = "", $fields = null, $orders = null ) {
+	public function listar_preventivas( $maximo, $inicio, $search = "", $search_tipo, $search_situacao, $search_mes, $fields = null, $orders = null ) {
 
 		$this->db->select( 'preventivas.*, sites.ne_id, sites.cm, supervisores.nome AS supervisor');
 
@@ -50,6 +50,12 @@ class Preventiva_Model extends MY_Model {
 		$this->db->join('usuarios AS supervisores', 'preventivas.id_supervisor = supervisores.id', 'left');
 		$this->db->join('usuarios AS tecnicos', 'preventivas.id_tecnico = tecnicos.id', 'left');
 
+		if ( $search_tipo != "0" )
+			$this->db->where( 'tipo', $search_tipo );
+
+		if ( $search_situacao != "0" )
+			$this->db->where( 'status', $search_situacao );
+
 		if ( ! is_null( $orders ) ){
 
 			foreach ($orders as $order => $asc_desc ) {
@@ -70,7 +76,7 @@ class Preventiva_Model extends MY_Model {
 	 * @return int
 	 * @Override
 	 */
-	public function contar_registros( $search = "", $fields = null ) {
+	public function contar_registros_preventivas( $search = "", $search_tipo, $search_situacao, $search_mes, $fields = null ) {
 
 		if ( $search != "" || $fields != null ){
 
@@ -92,6 +98,13 @@ class Preventiva_Model extends MY_Model {
 		$this->db->join('sites', 'preventivas.id_site = sites.id', 'left');
 		$this->db->join('usuarios AS supervisores', 'preventivas.id_supervisor = supervisores.id', 'left');
 		$this->db->join('usuarios AS tecnicos', 'preventivas.id_tecnico = tecnicos.id', 'left');
+
+
+		if ( $search_tipo != "0" )
+			$this->db->where( 'tipo', $search_tipo );
+
+		if ( $search_situacao != "0" )
+			$this->db->where( 'status', $search_situacao );
 
 		$this->db->from( $this->table );
 

@@ -47,8 +47,15 @@ class Preventiva extends CI_Controller {
 		$fields = array( 'tipo', 'ne_id', 'supervisores.nome', 'tecnicos.nome' );
 		$orders = array("programada" => "ASC");
 
-		$search_string = $this->input->get('search') ? $this->input->get('search') : "";
-		$dados['search_string'] = $search_string;
+		$search_string 			= $this->input->get('search') 			? $this->input->get('search') 			: "";
+		$search_tipo 			= $this->input->get('search_tipo') 		? $this->input->get('search_tipo') 		: 0;
+		$search_situacao 		= $this->input->get('search_situacao') 	? $this->input->get('search_situacao') 	: 0;
+		$search_mes 			= $this->input->get('search_mes') 		? $this->input->get('search_mes') 		: date('Y-m');
+
+		$dados['search_string'] 	= $search_string;
+		$dados['search_tipo'] 		= $search_tipo;
+		$dados['search_situacao'] 	= $search_situacao;
+		$dados['search_mes'] 		= $search_mes;
 
 		// Montar paginação
 		$maximo = "7";
@@ -62,13 +69,13 @@ class Preventiva extends CI_Controller {
 		$config['last_link'] 			= "Última";
 		$config['first_link'] 			= "Primeira";
 		$config['base_url'] 			= base_url('preventivas');	 
-		$config['total_rows'] 			= $this->preventiva_model->contar_registros( $search_string, $fields );
+		$config['total_rows'] 			= $this->preventiva_model->contar_registros_preventivas( $search_string, $search_tipo, $search_situacao, $search_mes, $fields );
 
 		$this->pagination->initialize( $config );
 
 		$dados["paginacao"] = $this->pagination->create_links();
 
-		$preventivas = $this->preventiva_model->listar( $maximo, $inicio, $search_string, $fields, $orders );
+		$preventivas = $this->preventiva_model->listar_preventivas( $maximo, $inicio, $search_string, $search_tipo, $search_situacao, $search_mes, $fields, $orders );
 
 		$dados['preventivas'] = $preventivas;
 
