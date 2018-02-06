@@ -40,54 +40,96 @@
 	<div class="col-md-12">
 		<div class="area">
 
-			<?php echo form_open( "", array('method' => 'GET' ) ); ?>
-
-				<div class="title-filter">
-
+			<div class="title-filter">
+				
 				<h1 class="title-area">Preventivas</h1>
+				
+				<?php if( check_permission('cadastrar_preventivas')): ?>
+					<a href="<?php echo base_url('/preventivas/cadastrar'); ?>" >
+						<button class="btn-green" data-toggle="tooltip" data-placement="bottom" title="Cadastrar uma preventiva">Nova preventiva</button>
+					</a>
+				<?php endif; ?>
 
-				<div class="filtro-data">
-					<label>
-						Programadas para: 
-						<input type="month" value="<?php echo date('Y-m')?>">
-					</label>
-				</div>
+			</div>
 
-				</div>
+			<?php echo form_open( "", array('method' => 'GET', 'class'=>'container-fluid' ) ); ?>
 
-				<div class="botao_add">
-					<div>
-						<?php if( check_permission('cadastrar_preventivas')): ?>
-							<a href="<?php echo base_url('/preventivas/cadastrar'); ?>" >
-								<button class="btn-green" data-toggle="tooltip" data-placement="bottom" title="Cadastrar uma preventiva">Nova preventiva</button>
-							</a>
-						<?php endif; ?>
+				<div class="row">
+
+					<div class="col-md-4" style="padding-left: 0">
+						
 					</div>
 
-						<div class="container-search">
-							<?php 
+					<div class="col-md-1">
+						<?php echo form_label("Filtros: ", "search"); ?>
+					</div>
 
-								
+					<div class="col-md-7">
+						<?php 
 
-								echo form_input( array(
-													'name' => 'search',
-													'id' => 'search',
-													'class' => 'cadastro',
-													'placeholder' => 'Digite aqui para buscar...',
-													'value' => $search_string
-													)
-												);
+							
 
-								echo form_input( array(
-													'type' => 'submit',
-													'class' => 'btn-green',
-													'style' => 'margin-left: 5px;',
-													'value' => 'Buscar'
-													)
-												);
-							?>
-						</div>
+							echo form_input( array(
+												'name' => 'search',
+												'id' => 'search',
+												'class' => 'cadastro',
+												'placeholder' => 'Digite aqui para buscar...',
+												'value' => $search_string
+												)
+											);
+						?>
+					</div>
 
+				</div>
+
+				<div class="row filtros">
+
+					<?php
+
+						echo '<div class="col-md-3" style="padding-left:0">';
+
+						echo form_label( "Tipo: ", "search_tipo");
+
+						$tipos = tipos_preventivas();
+
+						echo form_dropdown('search_tipo', $tipos, null, array( "class" => "cadastro", "style" => "width:initial"));
+
+						echo '</div>';
+
+						echo '<div class="col-md-5">';
+
+						echo form_label( "Situação: ", "search_situacao");
+
+						$situacoes = situacoes_preventivas();
+
+						echo form_dropdown('search_situacao', $situacoes, null, array( "class" => "cadastro", "style" => "width:initial"));
+
+						echo '</div>';
+						
+						echo '<div class="col-md-4" style="padding-rigth:0">';
+
+						echo form_label( "Mês: ", "search_mes");
+
+						echo form_input( array("type" => "month", "name" => "search_mes", "class" => "cadastro", "style" => "width:initial", "value" => date('Y-m') ) );
+
+						echo '</div>';
+
+						echo '<div class="row">';
+
+						echo '<div class="col-md-12">';
+
+							echo form_input( array(
+												'type' => 'submit',
+												'class' => 'btn-green',
+												'style' => 'margin-left: 5px;',
+												'value' => 'Buscar'
+												)
+											);
+
+						echo '</div>';
+
+						echo '</div>';
+					?>
 				</div>
 
 			<?php echo form_close(); ?>

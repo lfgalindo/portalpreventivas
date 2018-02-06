@@ -95,7 +95,7 @@ h1.title-area{
 div.title-filter{
     display: flex;
     justify-content: space-between;
-    margin: 0px 0px 16px 0px;
+    margin: 0px 0px 20px 0px;
     padding-bottom: 4px;
     border-bottom: 1px solid #cec;
 }
