@@ -153,7 +153,7 @@ class Arquivo extends CI_Controller {
 		}
 
 		$config['upload_path']          = './uploads/';	
-		$config['allowed_types']        = 'bmp|jpeg|jpg|png|gif|pdf|doc|docx|rtf|txt|xls|xlsx|ppt|pptx';
+		$config['allowed_types']        = 'bmp|jpeg|jpg|png|gif|pdf|doc|docx|rtf|txt|xls|xlsx|ppt|pptx|zip|rar';
 		$config['max_size']             = 10000000000; 
 		$config['encrypt_name'] 		= TRUE;
 
