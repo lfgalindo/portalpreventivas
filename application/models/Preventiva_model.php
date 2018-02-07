@@ -120,30 +120,36 @@ class Preventiva_Model extends MY_Model {
 
 	public function listar_supervisores_graficos( $data_inicio, $data_fim ) {
 
-		$this->db->select( 'supervisores.nome AS supervisor');
+		$this->db->select( 'id_supervisor, supervisores.nome AS supervisor');
 
 		$this->db->join('usuarios AS supervisores', 'preventivas.id_supervisor = supervisores.id', 'left');
 
-		if( 1 == 0){
-	       	$this->db->where('programada >= ', $data_inicio);
-	        $this->db->where('programada <= ', $data_fim);
-        }
+       	$this->db->where('programada >= ', $data_inicio);
+        $this->db->where('programada <= ', $data_fim);
 				
 		$this->db->group_by( 'supervisor' );
 
-		
 		$query = $this->db->get( $this->table );
 
-		$supervisores = array();
-
-		foreach ( $query->result_array() as $supervisor) {
-
-			array_push($supervisores, $supervisor);
-
-		}
-
-		return $supervisores;
+		return $query->result_array();
 		
+	}
+
+	public function qtd_preventivas_por_supervisor( $id_supervisor, $data_inicio, $data_fim ){
+
+		$this->db->select( 'COUNT(id) AS qtd, status');
+
+		$this->db->where('id_supervisor', $id_supervisor);
+
+       	$this->db->where('programada >= ', $data_inicio);
+        $this->db->where('programada <= ', $data_fim);
+
+        $this->db->group_by('status');
+
+		$query = $this->db->get( $this->table );
+
+		return $query->result_array();
+
 	}
 
 } 

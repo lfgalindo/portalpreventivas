@@ -26,7 +26,7 @@
 
 						echo '<div class="col-md-3">';
 
-						echo form_input( array("type" => "month", "name" => "search_mes", "class" => "cadastro", "value" => '$search_mes' ) );
+						echo form_input( array("type" => "month", "name" => "search_mes", "class" => "cadastro", "value" => $search_mes ) );
 
 						echo '</div>';
 
@@ -64,6 +64,8 @@
 
 <script type="text/javascript">
 
+	var supervisores = JSON.parse('<?php echo json_encode( $supervisores ); ?>');
+
 	Highcharts.chart('supervisor-performance', {
 	    chart: {
 	        type: 'column'
@@ -75,20 +77,7 @@
 	        text: 'Fevereiro 2018'
 	    },
 	    xAxis: {
-	        categories: [
-	            'Jan',
-	            'Feb',
-	            'Mar',
-	            'Apr',
-	            'May',
-	            'Jun',
-	            'Jul',
-	            'Aug',
-	            'Sep',
-	            'Oct',
-	            'Nov',
-	            'Dec'
-	        ],
+	        categories: supervisores,
 	        crosshair: true
 	    },
 	    yAxis: {

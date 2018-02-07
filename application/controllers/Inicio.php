@@ -30,15 +30,37 @@ class Inicio extends CI_Controller {
 	public function index() {
 
 
-		$supervisores = $this->preventiva_model->listar_supervisores_graficos("1","2");
+		$search_mes = $this->input->get('search_mes') ? $this->input->get('search_mes')	: date('Y-m');
 
-		
+		$dados['search_mes'] 		= $search_mes;
+
+		$mes_ano = explode( "-", $search_mes );
+		$mes 	 = $mes_ano[1];
+		$ano 	 = $mes_ano[0];
+
+		$data_inicio	= date('Y-m-d', strtotime( $ano . "-" . $mes . "-" . "01" ) );
+		$data_fim 		= date('Y-m-t', strtotime( $ano . "-" . $mes . "-" . "01" ) );
+
+		$supervisores = $this->preventiva_model->listar_supervisores_graficos( $data_inicio, $data_fim );
+
+		$data['supervisores'] = $supervisores;
+
+		$situacao = array();
+
 		echo "<pre>";
 
-		var_dump($supervisores);die();
+		// Buscar quantidade de preventivas de cada situação
+		foreach ( $supervisores as $supervisor ) {
+			
+			$qtd = $this->preventiva_model->qtd_preventivas_por_supervisor( $supervisor['id_supervisor'], $data_inicio, $data_fim );
 
-		
-		$this->template->load('template.php', 'index-view.php');
+			var_dump($qtd);
+
+		}
+
+		var_dump($supervisores); die();
+
+		$this->template->load('template.php', 'index-view.php', $data);
 
 
 	}
