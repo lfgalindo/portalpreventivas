@@ -118,6 +118,34 @@ class Preventiva_Model extends MY_Model {
 
 	}
 
+	public function listar_supervisores_graficos( $data_inicio, $data_fim ) {
+
+		$this->db->select( 'supervisores.nome AS supervisor');
+
+		$this->db->join('usuarios AS supervisores', 'preventivas.id_supervisor = supervisores.id', 'left');
+
+		if( 1 == 0){
+	       	$this->db->where('programada >= ', $data_inicio);
+	        $this->db->where('programada <= ', $data_fim);
+        }
+				
+		$this->db->group_by( 'supervisor' );
+
+		
+		$query = $this->db->get( $this->table );
+
+		$supervisores = array();
+
+		foreach ( $query->result_array() as $supervisor) {
+
+			array_push($supervisores, $supervisor);
+
+		}
+
+		return $supervisores;
+		
+	}
+
 } 
 
 ?>

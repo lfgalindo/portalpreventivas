@@ -20,13 +20,22 @@ class Inicio extends CI_Controller {
 		}
 
 		// Algumas models que iremos utilizar.
-		$this->load->model('usuario_model');
+		$this->load->model('preventiva_model');
+		$this->preventiva_model->setTable('preventivas');
 
 		$this->template->set('title', 'Início');
 
 	}
 
 	public function index() {
+
+
+		$supervisores = $this->preventiva_model->listar_supervisores_graficos("1","2");
+
+		
+		echo "<pre>";
+
+		var_dump($supervisores);die();
 
 		
 		$this->template->load('template.php', 'index-view.php');
