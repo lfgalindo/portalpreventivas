@@ -43,24 +43,57 @@ class Inicio extends CI_Controller {
 
 		$supervisores = $this->preventiva_model->listar_supervisores_graficos( $data_inicio, $data_fim );
 
-		$data['supervisores'] = $supervisores;
-
 		$situacao = array();
 
-		echo "<pre>";
+		$situacoes_preventivas = situacoes_preventivas();
 
 		// Buscar quantidade de preventivas de cada situação
-		foreach ( $supervisores as $supervisor ) {
+		foreach ( $supervisores as $key => $supervisor ) {
 			
-			$qtd = $this->preventiva_model->qtd_preventivas_por_supervisor( $supervisor['id_supervisor'], $data_inicio, $data_fim );
+			$all_qtd = $this->preventiva_model->qtd_preventivas_por_supervisor( $supervisor['id_supervisor'], $data_inicio, $data_fim );
 
-			var_dump($qtd);
+			foreach ( $all_qtd as $qtd) {
+				
+				 $supervisores[ $key ][ $qtd['status'] ] = $qtd['qtd'];
+
+			}
+
+			foreach ( $situacoes_preventivas as $cod => $situacao ) {
+				
+				if ( ! isset( $supervisores[ $key ][ $cod ] ) )
+					$supervisores[ $key ][ $cod ] = 0;
+
+			}
+
 
 		}
 
-		var_dump($supervisores); die();
+		$qtd_por_situacao = array();
+		$nomes_supervisores = array();
 
-		$this->template->load('template.php', 'index-view.php', $data);
+		foreach ( $situacoes_preventivas as $cod => $situacao ) {
+
+			$array = array();
+
+			$array['name'] = $situacao;
+			$array['data'] = array();
+
+				
+			foreach ( $supervisores as $key => $supervisor ){
+
+				array_push( $nomes_supervisores, $supervisor['supervisor']);
+				array_push( $array['data'] , (int) $supervisor[$cod]);
+
+			}
+
+			array_push( $qtd_por_situacao, $array );
+
+		}
+
+		$dados['nomes_supervisores'] = $nomes_supervisores;
+		$dados['qtd_por_situacao'] = $qtd_por_situacao;
+
+		$this->template->load('template.php', 'index-view.php', $dados);
 
 
 	}

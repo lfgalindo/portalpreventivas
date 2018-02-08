@@ -59,13 +59,13 @@ if ( ! function_exists('nome_mes')){
 		$nome = "";
 
 		switch ( $mes ) {
-			case 0:
+			case 1:
 				$nome = "Janeiro";
 				break;
-			case 1:
+			case 2:
 				$nome = "Fevereiro";
 				break;
-			case 2:
+			case 3:
 				$nome = "Março";
 				break;
 			case 4:
