@@ -49,7 +49,6 @@ class Usuario_Model extends MY_Model {
 		$this->db->or_where( 'removido IS NULL' );
 		$this->db->group_end();
 
-
 		$this->db->order_by( 'nome' );
 		
 		$query = $this->db->get( $this->table );

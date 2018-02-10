@@ -44,7 +44,6 @@ class Inicio extends CI_Controller {
 		$supervisores = $this->preventiva_model->listar_supervisores_graficos( $data_inicio, $data_fim );
 
 		$situacao = array();
-
 		$situacoes_preventivas = situacoes_preventivas();
 
 		// Buscar quantidade de preventivas de cada situação
@@ -94,7 +93,6 @@ class Inicio extends CI_Controller {
 		$dados['qtd_por_situacao'] = $qtd_por_situacao;
 
 		$this->template->load('template.php', 'index-view.php', $dados);
-
 
 	}
 

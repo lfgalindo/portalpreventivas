@@ -108,8 +108,11 @@
 				}
 
 			?>
-		</div>
 
+			<div class="row footer">
+				<h6>Desenvolvido por: Luiz Felipe - (14) 9 9850-7755</h6>
+			</div>
+		</div>
 	</body>
 </html>
 

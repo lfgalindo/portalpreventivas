@@ -152,6 +152,30 @@ class Preventiva_Model extends MY_Model {
 
 	}
 
+
+
+	/**
+	 * Seleciona um registro selecionando varios campos para testar importação.
+	 * @return object
+	 */
+	public function existe_import( $objeto ) {
+
+		$this->db->where( 'tipo', 			$objeto->getTipo() );
+		$this->db->where( 'programada', 	$objeto->getProgramada() );
+		$this->db->where( 'id_site',	 	$objeto->getIDSite() );
+		$this->db->where( 'id_supervisor', 	$objeto->getIDSupervisor() );
+
+		$query = $this->db->get( $this->table );
+
+		if( $query->num_rows() >= 1 ) {
+			
+			return true;
+		}
+
+		return false;
+
+	}
+
 } 
 
 ?>

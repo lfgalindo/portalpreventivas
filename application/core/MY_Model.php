@@ -194,11 +194,21 @@ class MY_Model extends CI_Model {
 	 * Seleciona um registro por algum campo que exista na tabela.
 	 * @return object
 	 */
-	public function selecionar_por_campo( $objeto, $nome_campo ) {
+	public function selecionar_por_campo( $objeto, $nome_campo, $get ) {
 
 		$this->db->select();
 		$this->db->from( $this->table );
-		$this->db->where( $nome_campo, $objeto->getID() );
+		$this->db->where( $nome_campo, $objeto->$get() );
+
+		if ( property_exists( $objeto, 'removido' ) ){
+
+			$this->db->group_start();
+				$this->db->where( 'removido !=', "1" );
+				$this->db->or_where( 'removido IS NULL' );
+			$this->db->group_end();
+
+		}
+
 		$query = $this->db->get();
 
 		/** Array com os resultados. */

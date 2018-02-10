@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 
+html, body {height:100%;}
+
+#wrapper {
+    min-height:100%;
+    position:relative;
+    padding-bottom: 80px;
+}
+
 body{
 	background-color: #eaeff2;
     font-family: 'Raleway', sans-serif;
@@ -255,6 +263,19 @@ i.sem_permissao{
 span.text_info{
     font-style: italic;
     color: #a5a5a5;
+}
+
+div.footer{
+    font-style: italic;
+    background-color: #525262;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    position:absolute;
+    bottom:0;
+    width: 100%;
 }
 
 @media screen and (max-width: 992px){
