@@ -190,6 +190,24 @@ class MY_Model extends CI_Model {
 
 	}
 
+	/**
+	 * Seleciona um registro por algum campo que exista na tabela.
+	 * @return object
+	 */
+	public function selecionar_por_campo( $objeto, $nome_campo ) {
+
+		$this->db->select();
+		$this->db->from( $this->table );
+		$this->db->where( $nome_campo, $objeto->getID() );
+		$query = $this->db->get();
+
+		/** Array com os resultados. */
+		$array = $query->row_array();
+		
+		return $objeto->to_object( $array, $objeto );;		
+
+	}
+
 } 
 
 ?>
