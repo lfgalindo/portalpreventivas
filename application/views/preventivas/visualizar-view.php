@@ -27,7 +27,7 @@
 			</div>
 
 			<div class="row cadastro" style="margin-top: 20px;">
-				<div class="col-md-3">Tipo:</div>
+				<div class="col-md-3">Segmento:</div>
 				<div class="col-md-9"><?php echo tipos_preventivas($preventiva->getTipo()); ?></div>
 			</div>
 
@@ -69,7 +69,7 @@
 			</div>
 
 			<div class="row cadastro">
-				<div class="col-md-3">Situação:</div>
+				<div class="col-md-3">Status:</div>
 				<div class="col-md-9"><b><?php echo situacoes_preventivas( $preventiva->getStatus() ); ?></b></div>
 			</div>
 

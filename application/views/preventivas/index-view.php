@@ -75,7 +75,7 @@
 					</div>
 
 					<div class="col-md-1 right">
-						<?php echo form_label( "Tipo: ", "search_tipo"); ?>
+						<?php echo form_label( "Segmento: ", "search_tipo"); ?>
 					</div>
 
 					<div class="col-md-3">
@@ -83,7 +83,7 @@
 
 							$tipos = tipos_preventivas();
 
-							array_unshift( $tipos, "Todos os tipos");
+							array_unshift( $tipos, "Todos os segmentos");
 
 							echo form_dropdown('search_tipo', $tipos, (String) $search_tipo, array( "class" => "cadastro"));
 						
@@ -98,7 +98,7 @@
 
 						echo '<div class="col-md-1" >';
 
-						echo form_label( "Situação: ", "search_situacao");
+						echo form_label( "Status: ", "search_situacao");
 
 						echo '</div>';
 
@@ -106,7 +106,7 @@
 
 						$situacoes = situacoes_preventivas();
 
-						array_unshift( $situacoes, "Todas as situações");
+						array_unshift( $situacoes, "Todos os status");
 
 						echo form_dropdown('search_situacao', $situacoes, $search_situacao, array( "class" => "cadastro" ));
 
@@ -147,7 +147,8 @@
 						<th> Site </th>
 						<th> CM </th>
 						<th> Supervisor </th>
-						<th> Situação </th>
+						<th> Segmento </th>
+						<th> Status </th>
 						<th> Ações </th>
 					</tr>
 				</thead>
@@ -158,6 +159,7 @@
 							<td><?php echo $preventiva['ne_id']; ?></td>
 							<td><?php echo $preventiva['cm']; ?></td>
 							<td><?php echo $preventiva['supervisor']; ?></td>
+							<td><?php echo tipos_preventivas( $preventiva['tipo'] ); ?></td>
 							<td><?php echo situacoes_preventivas( $preventiva['status'] ); ?></td>
 							<td>
 								<a href="<?php echo base_url('/preventivas/visualizar/') . encrypt( $preventiva['id'] ); ?>">

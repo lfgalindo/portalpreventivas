@@ -19,7 +19,7 @@
 				<h1 class="title-area">Nova preventiva</h1>
 
 				<div class="row cadastro">
-					<div class="col-md-3">Tipo:</div>
+					<div class="col-md-3">Segmento:</div>
 
 					<div class="col-md-9">
 						<?php echo form_dropdown( 'tipo', tipos_preventivas(), set_value('tipo'), array( 'class' => 'cadastro' ) ); ?>
