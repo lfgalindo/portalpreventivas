@@ -127,8 +127,11 @@ class Usuario extends CI_Controller {
 			$this->form_validation->set_rules('confirmar_senha', 'Confirmar Senha', 'required');
 		}
 
+		// Criamos objeto para cadastro
+		$usuario = new Usuario_Class();
+
 		// Se ser matricula ja foi cadastrada
-		$existe_matricula = $this->usuario_model->existe_cadastro( 'matricula', $this->input->post('matricula') );
+		$existe_matricula = $this->usuario_model->existe_cadastro( 'matricula', $this->input->post('matricula'), null, $usuario );
 
 		// Se foi informado CPF valida-lo
 		$valida_cpf = true;
@@ -140,7 +143,7 @@ class Usuario extends CI_Controller {
 			
 			// Verificar se CPF já foi cadastrado
 			if ( $this->input->post('cpf') )
-				$existe_cpf = $this->usuario_model->existe_cadastro( 'cpf', apenas_numeros( $this->input->post('cpf') ) );
+				$existe_cpf = $this->usuario_model->existe_cadastro( 'cpf', apenas_numeros( $this->input->post('cpf') ), null, $usuario );
 
 		}
 
@@ -148,7 +151,7 @@ class Usuario extends CI_Controller {
 		$existe_login = false;
 
 		if ( $this->input->post('login') )
-			$existe_login = $this->usuario_model->existe_cadastro( 'login', $this->input->post('login') );
+			$existe_login = $this->usuario_model->existe_cadastro( 'login', $this->input->post('login'), null, $usuario );
 
 		//var_dump( serialize( $this->input->post("permissoes") ) ); die();
 
@@ -182,9 +185,6 @@ class Usuario extends CI_Controller {
 			$this->template->load('template.php', 'usuarios/cadastrar-view.php', $data);
 
 		} else {
-
-			// Criamos objeto para cadastro
-			$usuario = new Usuario_Class();
 
 			$usuario->setNome( 			$this->input->post('nome'));
 			$usuario->setCPF(			apenas_numeros( $this->input->post('cpf') ) );
@@ -242,7 +242,7 @@ class Usuario extends CI_Controller {
 		}
 
 		// Se ser matricula ja foi cadastrada
-		$existe_matricula = $this->usuario_model->existe_cadastro( 'matricula', $this->input->post('matricula'), $usuario->getID() );
+		$existe_matricula = $this->usuario_model->existe_cadastro( 'matricula', $this->input->post('matricula'), $usuario->getID(), $usuario );
 
 		// Se foi informado CPF valida-lo
 		$valida_cpf = true;
@@ -254,7 +254,7 @@ class Usuario extends CI_Controller {
 			
 			// Verificar se CPF já foi cadastrado
 			if ( $this->input->post('cpf') )
-				$existe_cpf = $this->usuario_model->existe_cadastro( 'cpf', apenas_numeros( $this->input->post('cpf') ), $usuario->getID() );
+				$existe_cpf = $this->usuario_model->existe_cadastro( 'cpf', apenas_numeros( $this->input->post('cpf') ), $usuario->getID(), $usuario );
 
 		}
 
@@ -262,7 +262,7 @@ class Usuario extends CI_Controller {
 		$existe_login = false;
 
 		if ( $this->input->post('login') )
-			$existe_login = $this->usuario_model->existe_cadastro('login', $this->input->post('login'), $usuario->getID());
+			$existe_login = $this->usuario_model->existe_cadastro('login', $this->input->post('login'), $usuario->getID(), $usuario );
 
 		//var_dump( serialize( $this->input->post("permissoes") ) ); die();
 

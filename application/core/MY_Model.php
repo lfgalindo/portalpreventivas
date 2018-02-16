@@ -172,12 +172,25 @@ class MY_Model extends CI_Model {
 	 * Retorna se existe um registro de um determinado valor de um campo.
 	 * @return int
 	 */
-	public function existe_cadastro( $nome_campo, $valor_campo, $id_registro = null ){
+	public function existe_cadastro( $nome_campo, $valor_campo, $id_registro = null, $objeto = null ){
 		
 		$this->db->where( $nome_campo, $valor_campo );
 
 		if ( $id_registro != null )
 			$this->db->where( 'id !=', $id_registro );
+
+		if ( ! is_null( $objeto ) ){
+
+			if ( property_exists( $objeto, 'removido' ) ){
+
+				$this->db->group_start();
+					$this->db->where( 'removido !=', "1" );
+					$this->db->or_where( 'removido IS NULL' );
+				$this->db->group_end();
+
+			}
+
+		}
 
 		$query = $this->db->get( $this->table );
 
