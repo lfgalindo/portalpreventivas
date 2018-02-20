@@ -65,6 +65,7 @@ class Login extends CI_Controller {
 						'auth'	 		=> true,
 						'id_usuario'	=> $usuario->getID(),
 						'login'			=> $usuario->getLogin(),
+						'usuario'		=> $usuario->getNome(),
 						'permissoes' 	=> unserialize( $usuario->getPermissoes() )
 					);
 

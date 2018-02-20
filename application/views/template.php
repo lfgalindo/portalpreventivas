@@ -47,10 +47,21 @@
 		<div class="container-fluid" id="wrapper">
 
 			<div class="row" id="row_pre_menu">
-				<div class="col-md-8 col-md-offset-2" id="pre_menu">
+				<div class="col-md-10 col-md-offset-1" id="pre_menu">
 					<div id="logo" class="nome_site">PORTAL DE PREVENTIVAS</div>
 					<div id="menu">
-						<?php echo $this->session->login; ?>
+						<?php 
+
+							$nome = explode(' ', $this->session->usuario );
+
+							$last = count($nome) - 1;
+
+							echo $nome[0]; 
+
+							if ( $nome[0] != $nome[$last] )
+								echo ' ' . $nome[$last]; 
+
+							?>
 						<a href="<?php echo site_url('logout')?>" style="color:#fff; margin-left: 10px; font-size: 17px">
 							<i class="fa fa-sign-out" aria-hidden="true"></i>
 						</a>		
@@ -59,7 +70,7 @@
 			</div>
 
 			<div class="row" id="row_content_menu">
-				<div class="col-md-8 col-md-offset-2" id="content_menu">
+				<div class="col-md-10 col-md-offset-1" id="content_menu">
 					<ul id="menu">
 						<a href="<?php echo site_url('inicio'); ?>">
 							<li><i class="fa fa-home" aria-hidden="true"></i>Início</li>
@@ -93,7 +104,7 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-8 col-md-offset-2" id="content_page">
+				<div class="col-md-10 col-md-offset-1" id="content_page">
 					<?php echo $contents; ?>
 				</div>
 			</div>

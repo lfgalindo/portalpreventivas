@@ -15,7 +15,7 @@ class Arquivo extends CI_Controller {
 	 */
 	public function __construct() {
 		
-		parent::__construct();	
+		parent::__construct();
 
 		//Models
 		$this->load->model('configuracao_model');
@@ -87,7 +87,7 @@ class Arquivo extends CI_Controller {
 
 		$this->template->load('template.php', 'preventivas/listar-arquivos-view.php', $dados);
 
-	}//Fim do método index
+	}//Fim do método index	
 
 	//Método para visualizar todos os dados de um relatorio
 	public function visualizar( $id_preventiva, $id ){

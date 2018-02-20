@@ -149,10 +149,13 @@ if ( ! function_exists( 'tipos_preventivas' ) ){
 
 		$tipos = array(
 					"bts" 			=> "BTS-TX",
-					"infra" 		=> "Infra",
-					"fmt" 			=> "FMT",
-					"estrutural" 	=> "Estrutural Torre",
 					"ccc" 			=> "CCCs",
+					"corp"			=> "CORP",
+					"infra" 		=> "Infra",
+					"estrutural" 	=> "Estrutural Torre",
+					"etd"			=> "ETD",
+					"fmt" 			=> "FMT",
+					"msan"			=> "MSAN",
 					"zeladoria"		=> "Zeladoria"
 					);
 

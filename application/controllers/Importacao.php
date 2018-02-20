@@ -45,7 +45,7 @@ class Importacao extends CI_Controller {
 		$nao_tem_site = array();
 		$incluir = array();
 
-		$arquivo = fopen ('./uploads/import-zeladoria-abr.csv', 'r');
+		$arquivo = fopen ('./uploads/zeladoria_marco.csv', 'r');
 
 		while( ! feof( $arquivo ) ){
 			
@@ -124,7 +124,7 @@ class Importacao extends CI_Controller {
 
 
 		$tipo_preventiva = 'zeladoria';
-		$data_programada = '2018-04-01';
+		$data_programada = '2018-03-01';
 		$qtd_nao_importadas = count( $nao_tem_supervisor ) + count( $nao_tem_site ) + count( $nao_tem_nenhum );
 		$qtd_importadas =  count( $incluir );
 
@@ -260,6 +260,7 @@ class Importacao extends CI_Controller {
 			$preventiva_obj->setProgramada( 	$data_programada );
 			$preventiva_obj->setStatus( 		'1' );
 			$preventiva_obj->setIDSite( 		$preventiva['id_site'] );
+			$preventiva_obj->setIDTecnico( 		$preventiva['id_supervisor'] );
 			$preventiva_obj->setIDSupervisor( 	$preventiva['id_supervisor'] );
 			$preventiva_obj->setIDUsuario( 		'1' );
 
