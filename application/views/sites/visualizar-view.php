@@ -52,6 +52,16 @@
 			</div>
 
 			<div class="row cadastro">
+				<div class="col-md-3">Tipo TOP:</div>
+				<div class="col-md-9"><?php echo $site->getTipoTop(); ?></div>
+			</div>
+
+			<div class="row cadastro">
+				<div class="col-md-3">End ID:</div>
+				<div class="col-md-9"><?php echo $site->getEndId(); ?></div>
+			</div>
+
+			<div class="row cadastro">
 				<div class="col-md-3">Fornecedor:</div>
 				<div class="col-md-9"><?php echo $site->getFornecedor(); ?></div>
 			</div>

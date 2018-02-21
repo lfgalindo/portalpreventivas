@@ -20,6 +20,8 @@ class Site_Class {
 	private $fornecedor;
 	private $oper_msc_bsc;
     private $ne_id;
+    private $tipo_top;
+    private $end_id;
 	private $restricao_acesso;
     private $observacoes;
     private $estado;
@@ -73,6 +75,16 @@ class Site_Class {
                 'constraint' => '255',
               ),
               'ne_id' => array(
+                'type' => 'VARCHAR',
+                'null'	=> TRUE,
+                'constraint' => '255',
+              ),
+              'tipo_top' => array(
+                'type' => 'VARCHAR',
+                'null'	=> TRUE,
+                'constraint' => '255',
+              ),
+              'end_id' => array(
                 'type' => 'VARCHAR',
                 'null'	=> TRUE,
                 'constraint' => '255',
@@ -142,6 +154,8 @@ class Site_Class {
 			'fornecedor'		=> $site->getFornecedor(),
 			'oper_msc_bsc'		=> $site->getOperMscBsc(),
     		'ne_id'				=> $site->getNeId(),
+    		'tipo_top'			=> $site->getTipoTop(),
+    		'end_id'			=> $site->getEndId(),
 			'restricao_acesso'	=> $site->getRestricaoAcesso(),
 		    'observacoes'		=> $site->getObservacoes(),
 			'estado'			=> $site->getEstado(),
@@ -170,6 +184,8 @@ class Site_Class {
 		$site->setFornecedor(		$array['fornecedor']);
 		$site->setOperMscBsc(		$array['oper_msc_bsc']);
     	$site->setNeId(				$array['ne_id']);
+    	$site->setTipoTop(			$array['tipo_top']);
+    	$site->setEndId(			$array['end_id']);
 		$site->setRestricaoAcesso(	$array['restricao_acesso']);
 		$site->setObservacoes(		$array['observacoes']);
 		$site->setEstado(			$array['estado']);
@@ -247,6 +263,22 @@ class Site_Class {
 
 	public function setNeId($ne_id){
 		$this->ne_id = $ne_id;
+	}
+
+	public function getTipoTop(){
+		return $this->tipo_top;
+	}
+
+	public function setTipoTop($tipo_top){
+		$this->tipo_top = $tipo_top;
+	}
+
+	public function getEndId(){
+		return $this->end_id;
+	}
+
+	public function setEndId($end_id){
+		$this->end_id = $end_id;
 	}
 
 	public function getRestricaoAcesso(){

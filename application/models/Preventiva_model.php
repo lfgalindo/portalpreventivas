@@ -27,7 +27,7 @@ class Preventiva_Model extends MY_Model {
 	 */
 	public function listar_preventivas( $maximo, $inicio, $search = "", $search_tipo, $search_situacao, $data_inicio, $data_fim, $fields = null, $orders = null ) {
 
-		$this->db->select( 'preventivas.*, sites.ne_id, sites.cm, supervisores.nome AS supervisor');
+		$this->db->select( 'preventivas.*, sites.ne_id, sites.tipo_top, sites.end_id, supervisores.nome AS supervisor');
 
 		if ( $search != "" || $fields != null ){
 

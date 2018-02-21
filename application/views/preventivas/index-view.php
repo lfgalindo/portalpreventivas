@@ -145,7 +145,8 @@
 				<thead>
 					<tr>
 						<th> Site </th>
-						<th> CM </th>
+						<th> Tipo TOP </th>
+						<th> End ID </th>
 						<th> Supervisor </th>
 						<th> Segmento </th>
 						<th> Status </th>
@@ -157,7 +158,8 @@
 					<?php foreach ( $preventivas as $preventiva ): ?>
 						<tr>
 							<td><?php echo $preventiva['ne_id']; ?></td>
-							<td><?php echo $preventiva['cm']; ?></td>
+							<td><?php echo $preventiva['tipo_top']; ?></td>
+							<td><?php echo $preventiva['end_id']; ?></td>
 							<td><?php echo $preventiva['supervisor']; ?></td>
 							<td><?php echo tipos_preventivas( $preventiva['tipo'] ); ?></td>
 							<td><?php echo situacoes_preventivas( $preventiva['status'] ); ?></td>

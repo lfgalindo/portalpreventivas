@@ -40,12 +40,12 @@ class Importacao extends CI_Controller {
 
 	public function index() {
 
-		$nao_tem_nenhum = array();
+		$nao_tem_tecnico = array();
 		$nao_tem_supervisor = array();
 		$nao_tem_site = array();
 		$incluir = array();
 
-		$arquivo = fopen ('./uploads/zeladoria_marco.csv', 'r');
+		$arquivo = fopen ('./uploads/estrutural_marco.csv', 'r');
 
 		while( ! feof( $arquivo ) ){
 			
@@ -56,7 +56,8 @@ class Importacao extends CI_Controller {
 			if ( ! empty( $linha ) ){
 
 				$existe_site = false;
-				$existe_usuario = false;
+				$existe_supervisor = false;
+				$existe_tecnico = false;
 				
 				if ( $this->site_model->existe_cadastro( 'ne_id', $dados[0] ) ){
 
@@ -71,45 +72,60 @@ class Importacao extends CI_Controller {
 
 				if ( $this->usuario_model->existe_cadastro( 'nome', trim($dados[1]) ) ){
 	
-					$usuario = new Usuario_Class();
-					$usuario->setNome( trim($dados[1]) );
+					$supervisor = new Usuario_Class();
+					$supervisor->setNome( trim($dados[1]) );
 
-					$usuario = $this->usuario_model->selecionar_por_campo( $usuario, 'nome', 'getNome' );
+					$supervisor = $this->usuario_model->selecionar_por_campo( $supervisor, 'nome', 'getNome' );
 				
-					$existe_usuario = true;
+					$existe_supervisor = true;
 
 				}
 
-				if ( $existe_site && $existe_usuario ){
+				if ( $this->usuario_model->existe_cadastro( 'nome', trim($dados[2]) ) ){
+	
+					$tecnico = new Usuario_Class();
+					$tecnico->setNome( trim($dados[2]) );
+
+					$tecnico = $this->usuario_model->selecionar_por_campo( $tecnico, 'nome', 'getNome' );
+				
+					$existe_tecnico = true;
+
+				}
+
+				if ( $existe_site && $existe_supervisor && $existe_tecnico ){
 					array_push( $incluir, array(
-											"id_site" => $site->getID(),
-											"site" 	  => $site->getNeId(),
-											"id_supervisor" => $usuario->getID(),
-											"supervisor" => $usuario->getNome(),
+											"id_site" 		=> $site->getID(),
+											"site" 	  		=> $site->getNeId(),
+											"id_supervisor" => $supervisor->getID(),
+											"supervisor" 	=> $supervisor->getNome(),
+											"id_tecnico" 	=> $tecnico->getID(),
+											"tecnico" 		=> $tecnico->getNome(),
 											)
 										);
 				}
 
-				if ( $existe_site && ! $existe_usuario ){
-					array_push( $nao_tem_supervisor, array(
-														"site" 		=> $site->getNeId(),
-														"supervisor" => $dados[1] ,
-														)
-													);
-				}
 
-				if ( ! $existe_site && $existe_usuario ){
+				if ( ! $existe_site ){
 					array_push( $nao_tem_site, array(
-													"site" => $dados[0],
-													"supervisor" => $usuario->getNome() ,
+													"site" 			=> $dados[0],
+													"supervisor" 	=> $dados[1],
+													"tecnico" 		=> $dados[2]
 													)
 												);
 				}
-
-				if ( ! $existe_site && ! $existe_usuario ){
-					array_push( $nao_tem_nenhum, array(
-													"site" => $dados[0],
-													"supervisor" => $dados[1],
+				else if ( ! $existe_supervisor ){
+					array_push( $nao_tem_supervisor, array(
+														"site" 			=> $dados[0],
+														"supervisor" 	=> $dados[1],
+														"tecnico" 		=> $dados[2]
+														)
+													);
+				}
+				else if ( ! $existe_tecnico ){
+					array_push( $nao_tem_tecnico, array(
+													"site" 			=> $dados[0],
+													"supervisor"	=> $dados[1],
+													"tecnico" 		=> $dados[2]
 													)
 												);
 				}
@@ -123,9 +139,9 @@ class Importacao extends CI_Controller {
 		echo '<link href="' . base_url() . 'assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">';
 
 
-		$tipo_preventiva = 'zeladoria';
+		$tipo_preventiva = 'estrutural';
 		$data_programada = '2018-03-01';
-		$qtd_nao_importadas = count( $nao_tem_supervisor ) + count( $nao_tem_site ) + count( $nao_tem_nenhum );
+		$qtd_nao_importadas = count( $nao_tem_supervisor ) + count( $nao_tem_site ) + count( $nao_tem_tecnico );
 		$qtd_importadas =  count( $incluir );
 
 
@@ -168,11 +184,12 @@ class Importacao extends CI_Controller {
 
 			echo '<table class="table table-striped">';
 			echo '<tr>';
-			echo '<th colspan="2" style="text-align:center"> Preventivas não importadas - Motivo: Não possui supervisor cadastrado </td>';
+			echo '<th colspan="3" style="text-align:center"> Preventivas não importadas - Motivo: Não possui supervisor cadastrado </td>';
 			
 			echo '<tr>';
 			echo '<th>Site</td>';
 			echo '<th>Supervisor</td>';
+			echo '<th>Técnico</td>';
 			echo '</tr>';
 
 			foreach ($nao_tem_supervisor as $preventiva) {
@@ -180,6 +197,7 @@ class Importacao extends CI_Controller {
 				echo '<tr>';
 				echo '<td>' . $preventiva['site'] . '</td>';
 				echo '<td>' . $preventiva['supervisor'] . '</td>';
+				echo '<td>' . $preventiva['tecnico'] . '</td>';
 				echo '</tr>';
 
 			}
@@ -194,11 +212,12 @@ class Importacao extends CI_Controller {
 
 			echo '<table class="table table-striped">';
 			echo '<tr>';
-			echo '<th colspan="2" style="text-align:center"> Preventivas não importadas - Motivo: Não possui site cadastrado </td>';
+			echo '<th colspan="3" style="text-align:center"> Preventivas não importadas - Motivo: Não possui site cadastrado </td>';
 			
 			echo '<tr>';
 			echo '<th>Site</td>';
 			echo '<th>Supervisor</td>';
+			echo '<th>Técnico</td>';
 			echo '</tr>';
 
 			foreach ($nao_tem_site as $preventiva) {
@@ -206,6 +225,7 @@ class Importacao extends CI_Controller {
 				echo '<tr>';
 				echo '<td>' . $preventiva['site'] . '</td>';
 				echo '<td>' . $preventiva['supervisor'] . '</td>';
+				echo '<td>' . $preventiva['tecnico'] . '</td>';
 				echo '</tr>';
 
 			}
@@ -216,22 +236,24 @@ class Importacao extends CI_Controller {
 
 		}
 
-		if ( count($nao_tem_nenhum) > 0 ){
+		if ( count($nao_tem_tecnico) > 0 ){
 
 			echo '<table class="table table-striped">';
 			echo '<tr>';
-			echo '<th colspan="2" style="text-align:center"> Preventivas não importadas - Motivo: Não possui site e supervisor cadastrados </td>';
+			echo '<th colspan="3" style="text-align:center"> Preventivas não importadas - Motivo: Não possui técnico cadastrado </td>';
 			
 			echo '<tr>';
 			echo '<th>Site</td>';
 			echo '<th>Supervisor</td>';
+			echo '<th>Técnico</td>';
 			echo '</tr>';
 
-			foreach ($nao_tem_nenhum as $preventiva) {
+			foreach ($nao_tem_tecnico as $preventiva) {
 
 				echo '<tr>';
 				echo '<td>' . $preventiva['site'] . '</td>';
 				echo '<td>' . $preventiva['supervisor'] . '</td>';
+				echo '<td>' . $preventiva['tecnico'] . '</td>';
 				echo '</tr>';
 
 			}
@@ -244,11 +266,12 @@ class Importacao extends CI_Controller {
 
 		echo '<table class="table table-striped">';
 		echo '<tr>';
-		echo '<th colspan="2" style="text-align:center"> Preventivas importadas </td>';
+		echo '<th colspan="3" style="text-align:center"> Preventivas importadas </td>';
 		
 		echo '<tr>';
 		echo '<th>Site</td>';
 		echo '<th>Supervisor</td>';
+		echo '<th>Técnico</td>';
 		echo '</tr>';
 
 		foreach ($incluir as $preventiva) {
@@ -260,7 +283,7 @@ class Importacao extends CI_Controller {
 			$preventiva_obj->setProgramada( 	$data_programada );
 			$preventiva_obj->setStatus( 		'1' );
 			$preventiva_obj->setIDSite( 		$preventiva['id_site'] );
-			$preventiva_obj->setIDTecnico( 		$preventiva['id_supervisor'] );
+			$preventiva_obj->setIDTecnico( 		$preventiva['id_tecnico'] );
 			$preventiva_obj->setIDSupervisor( 	$preventiva['id_supervisor'] );
 			$preventiva_obj->setIDUsuario( 		'1' );
 
@@ -270,11 +293,51 @@ class Importacao extends CI_Controller {
 			echo '<tr>';
 			echo '<td>' . $preventiva['site'] . '</td>';
 			echo '<td>' . $preventiva['supervisor'] . '</td>';
+			echo '<td>' . $preventiva['tecnico'] . '</td>';
 			echo '</tr>';
 
 		}
 
 		echo '</table>';
+	}
+
+	public function tipo_top_end_id() {
+
+		$arquivo = fopen ('./uploads/tipo_top-end_id.csv', 'r');
+
+		$cont = 0;
+
+		while( ! feof( $arquivo ) && $cont < 10 ){
+			
+			//$cont++;
+
+			$linha = fgets($arquivo, 1024);
+			
+			$dados = explode(';', $linha);
+			
+			if ( ! empty( $linha ) ){
+				
+				if ( $this->site_model->existe_cadastro( 'ne_id', $dados[0] ) ){
+
+					$site = new Site_Class();
+					$site->setNeId( $dados[0] );
+
+					$site = $this->site_model->selecionar_por_campo( $site, 'ne_id', 'getNeId' );
+
+					$tipo_top = trim($dados[2]) == 'TOP' ? 'TOP' : 'NÃO TOP';
+
+					$site->setTipoTop( 	$tipo_top );
+					$site->setEndId( 	$dados[1] );
+
+					$this->site_model->atualizar( $site );
+
+				}
+
+			}
+
+		}
+
+		fclose($arquivo);
 	}
 
 }

@@ -133,6 +133,8 @@ class Site extends CI_Controller {
 			$site->setFornecedor(		$this->input->post('fornecedor') );
 			$site->setOperMscBsc(		$this->input->post('oper_msc_bsc') );
 	    	$site->setNeId(				$this->input->post('ne_id') );
+	    	$site->setTipoTop(			$this->input->post('tipo_top') );
+	    	$site->setEndId(			$this->input->post('end_id') );
 			$site->setRestricaoAcesso(	$this->input->post('restricao_acesso') );
 			$site->setObservacoes(		$this->input->post('observacoes') );
 			$site->setEstado(			$this->input->post('estado') );
@@ -203,6 +205,8 @@ class Site extends CI_Controller {
 			$site->setFornecedor(		$this->input->post('fornecedor') );
 			$site->setOperMscBsc(		$this->input->post('oper_msc_bsc') );
 	    	$site->setNeId(				$this->input->post('ne_id') );
+	    	$site->setTipoTop(			$this->input->post('tipo_top') );
+	    	$site->setEndId(			$this->input->post('end_id') );
 			$site->setRestricaoAcesso(	$this->input->post('restricao_acesso') );
 			$site->setObservacoes(		$this->input->post('observacoes') );
 			$site->setEstado(			$this->input->post('estado') );

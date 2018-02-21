@@ -99,6 +99,39 @@
 				</div>
 
 				<div class="row cadastro">
+					<div class="col-md-3">Tipo TOP:</div>
+
+					<div class="col-md-9">
+						<?php 
+							echo form_input( array(
+								"type" 	=> "text",
+								"value" => set_value('tipo_top') ? set_value('tipo_top') : $site->getTipoTop(),
+								"name" 	=> "tipo_top",
+								"class" => "cadastro"
+								)
+							);
+						?>
+					</div>
+				</div>
+
+				<div class="row cadastro">
+					<div class="col-md-3">End ID:</div>
+
+					<div class="col-md-9">
+						<?php 
+							echo form_input( array(
+								"type" 	=> "text",
+								"value" => set_value('end_id') ? set_value('end_id') : $site->getEndId(),
+								"name" 	=> "end_id",
+								"class" => "cadastro"
+								)
+							);
+						?>
+					</div>
+				</div>
+
+
+				<div class="row cadastro">
 					<div class="col-md-3">Fornecedor:</div>
 
 					<div class="col-md-9">

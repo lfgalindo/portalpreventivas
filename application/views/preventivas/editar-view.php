@@ -35,9 +35,15 @@
 				</div>
 
 				<div class="row cadastro">
-					<div class="col-md-3">CM:</div>
+					<div class="col-md-3">Tipo TOP:</div>
 
-					<div class="col-md-9" id="site_cm"><?php echo $site->getCm(); ?></div>
+					<div class="col-md-9" id="site_tipo_top"><?php echo $site->getTipoTop(); ?></div>
+				</div>
+
+				<div class="row cadastro">
+					<div class="col-md-3">End ID:</div>
+
+					<div class="col-md-9" id="site_end_id"><?php echo $site->getEndId(); ?></div>
 				</div>
 
 				<div class="row cadastro">
@@ -129,7 +135,8 @@
 			},
 			success: function(response) {
 
-				$("div#site_cm").html(response.cm);
+				$("div#site_tipo_top").html(response.tipo_top);
+				$("div#site_end_id").html(response.end_id);
 				$("div#site_cidade").html(response.cidade + "/" + response.estado );
 				
 			}
