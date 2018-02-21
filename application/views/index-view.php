@@ -51,20 +51,34 @@
 
 
 				<div class="row">
-
 					<div class="col-md-12">
 						<div id="status-preventiva" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 					</div>
-
 				</div>
 
 				<div class="row">
-
 					<div class="col-md-12">
 						<div id="supervisor-performance" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 					</div>
-
 				</div>
+
+				<?php 
+					
+					foreach ( tipos_preventivas() as $tipo => $nome ){
+
+						if ( count( $nomes_supervisores_tipo[$tipo] ) > 0 ){
+
+							echo '<div class="row">';
+							echo '<div class="col-md-12">';
+							echo '<div id="supervisor-' . $tipo . '" style="min-width: 310px; height: 400px; margin: 0 auto"></div>';
+							echo '</div>';
+							echo '</div>';
+							
+						}
+
+					}
+
+				?>
 
 			<?php echo form_close(); ?>
 
@@ -88,6 +102,20 @@
 	var supervisores = JSON.parse('<?php echo json_encode( $nomes_supervisores ); ?>');
 	var qtd_por_situacao = JSON.parse('<?php echo json_encode( $qtd_por_situacao ); ?>');
 	var qtd_geral = JSON.parse('<?php echo json_encode( $qtd_geral ); ?>');
+
+	<?php 
+					
+		foreach ( tipos_preventivas() as $tipo => $nome ){
+
+			echo "var supervisores_" . $tipo . " = JSON.parse('" . json_encode( $nomes_supervisores_tipo[$tipo] ) . "');";
+			echo "var qtd_por_situacao_" . $tipo . " = JSON.parse('" . json_encode( $qtd_por_situacao_tipo[$tipo] ) . "');";
+
+			echo "console.log( supervisores_" . $tipo . " );";
+
+		}
+
+	?>
+
 
 	Highcharts.chart('status-preventiva', {
 	    chart: {
@@ -130,9 +158,6 @@
 	    series: qtd_geral
 	});
 
-	console.log( qtd_por_situacao );
-
-
 	Highcharts.chart('supervisor-performance', {
 	    chart: {
 	        type: 'column'
@@ -173,6 +198,63 @@
 	    },
 	    series: qtd_por_situacao
 	});
+
+	<?php 
+					
+		foreach ( tipos_preventivas() as $tipo => $nome ){
+
+			if ( count( $nomes_supervisores_tipo[$tipo] ) > 0 ){
+
+			?>
+
+			Highcharts.chart(<?php echo "'supervisor-" . $tipo . "'"; ?>, {
+			    chart: {
+			        type: 'column'
+			    },
+			    title: {
+			        text: <?php echo "'Preventivas " . $nome . "'"; ?>
+			    },
+			    subtitle: {
+			        text: mes_ano
+			    },
+			    xAxis: {
+			        categories: <?php echo "supervisores_" . $tipo . ""; ?>,
+			        crosshair: true
+			    },
+			    yAxis: {
+			        min: 0,
+			        title: {
+			            text: ''
+			        }
+			    },
+			    tooltip: {
+			        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+			        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+			            '<td style="padding:0"><b>{point.y}</b></td></tr>',
+			        footerFormat: '</table>',
+			        shared: true,
+			        useHTML: true
+			    },
+			    plotOptions: {
+			        column: {
+			            pointPadding: 0.1,
+			            borderWidth: 0,
+			            dataLabels: {
+			                enabled: true,
+			                format: '{point.y}'
+			            }
+			        }
+			    },
+			    series: <?php echo "qtd_por_situacao_" . $tipo . ""; ?>
+			});
+
+			<?php
+
+			}
+
+		}
+
+	?>
 
 </script>
 

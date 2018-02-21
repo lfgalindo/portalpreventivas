@@ -17,6 +17,8 @@ class Arquivo extends CI_Controller {
 		
 		parent::__construct();
 
+		$this->load->helper('download');
+
 		//Models
 		$this->load->model('configuracao_model');
 		$this->configuracao_model->setTable('configuracoes');
@@ -200,6 +202,36 @@ class Arquivo extends CI_Controller {
 		}
 
 		redirect('arquivos/preventivas/' . $id_encrypt);
+
+	}
+
+	//Método para baixar todos um relatorio enviado
+	public function baixar( $id_preventiva, $id ){
+
+		check_permission('visualizar_relatorios_preventivas', 'arquivos/preventivas/' . $id_preventiva);
+
+		if ( is_numeric( $id ) ){
+			$this->flashmessages->success('Ocorreu um erro!');
+			redirect('arquivos/preventivas/' . $id_preventiva);
+		}
+
+		$id = decrypt( $id );
+
+		if ( ! is_numeric( $id ) ){
+			$this->flashmessages->success('Ocorreu um erro!');
+			redirect('arquivos/preventivas/' . $id_preventiva);
+		}
+
+		$arquivo = new Arquivo_Class();
+		$arquivo->setID( $id );
+
+		$arquivo = $this->arquivo_model->selecionar( $arquivo );
+
+		$file = file_get_contents( './uploads/' . $arquivo->getRaw() . $arquivo->getFormato() );
+
+		force_download( $arquivo->getNome(), $file, null );
+
+		redirect('arquivos/preventivas/' . $id_preventiva);
 
 	}
 

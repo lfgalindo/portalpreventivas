@@ -31,6 +31,7 @@ $route['preventivas/executar/(:any)'] 		= 'preventiva/executar/$1';
 $route['arquivos/(:any)/(:any)']			= 'arquivo/listar/$1/$2';
 $route['arquivos/visualizar/(:any)/(:any)'] = 'arquivo/visualizar/$1/$2';
 $route['arquivos/enviar/(:any)/(:any)'] 	= 'arquivo/enviar/$1/$2';
+$route['arquivos/baixar/(:any)/(:any)'] 	= 'arquivo/baixar/$1/$2';
 $route['arquivos/aprovar/(:any)/(:any)'] 	= 'arquivo/aprovar/$1/$2';
 $route['arquivos/recusar/(:any)/(:any)'] 	= 'arquivo/recusar/$1/$2';
 $route['arquivos/remover/(:any)/(:any)'] 	= 'arquivo/remover/$1/$2';

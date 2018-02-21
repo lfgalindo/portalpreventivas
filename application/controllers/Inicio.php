@@ -43,7 +43,6 @@ class Inicio extends CI_Controller {
 
 		$supervisores = $this->preventiva_model->listar_supervisores_graficos( $data_inicio, $data_fim );
 
-		$situacao = array();
 		$situacoes_preventivas = situacoes_preventivas();
 
 		// Buscar quantidade de preventivas de cada situação
@@ -141,6 +140,85 @@ class Inicio extends CI_Controller {
 		$dados['nomes_supervisores'] = $nomes_supervisores;
 		$dados['qtd_por_situacao'] = $qtd_por_situacao;
 		$dados['qtd_geral'] = $qtd_geral;
+
+		/**
+		 *
+		 * Gráficos de preventivas por tipos
+		 *
+		 */
+
+		foreach ( tipos_preventivas() as $tipo => $nome ){
+
+			$supervisores_tipo[$tipo] = $this->preventiva_model->listar_supervisores_graficos( $data_inicio, $data_fim, $tipo );
+
+			// Buscar quantidade de preventivas de cada situação
+			foreach ( $supervisores_tipo[$tipo] as $key => $supervisor ) {
+				
+				$all_qtd = $this->preventiva_model->qtd_preventivas_por_supervisor( $supervisor['id_supervisor'], $data_inicio, $data_fim, $tipo );
+
+				$supervisores_tipo[$tipo][ $key ][ 'programadas' ] = 0;
+
+				foreach ( $all_qtd as $qtd) {
+					
+					$supervisores_tipo[$tipo][ $key ][ $qtd['status'] ] = $qtd['qtd'];
+					$supervisores_tipo[$tipo][ $key ][ 'programadas' ] = $supervisores_tipo[$tipo][ $key ][ 'programadas' ] + $qtd['qtd'];
+
+				}
+
+				foreach ( $situacoes_preventivas as $cod => $situacao ) {
+					
+					if ( ! isset( $supervisores_tipo[$tipo][ $key ][ $cod ] ) )
+						$supervisores_tipo[$tipo][ $key ][ $cod ] = 0;
+
+				}
+
+
+			}
+			
+			// Montar array para indentificar ao HighCharts os supervisores que aparecerão
+			$nomes_supervisores_tipo[$tipo] = array();
+
+			foreach ( $supervisores_tipo[$tipo] as $key => $supervisor )
+				array_push( $nomes_supervisores_tipo[$tipo], $supervisor['supervisor']);
+
+
+			// Montar array para os dados serem exibidos
+			$qtd_por_situacao_tipo[$tipo] = array();
+			
+			// Preventivas programadas
+			$array = array();
+			$array['name'] = 'Programadas';
+			$array['data'] = array();
+
+			foreach ( $supervisores_tipo[$tipo] as $key => $supervisor )
+				array_push( $array['data'] , (int) $supervisor['programadas']);
+
+			array_push( $qtd_por_situacao_tipo[$tipo], $array);
+
+			//Preventivas executadas
+			$array = array();
+			$array['name'] = 'Executadas';
+			$array['data'] = array();
+
+			foreach ( $supervisores_tipo[$tipo] as $key => $supervisor )
+				array_push( $array['data'] , (int) $supervisor[2] + $supervisor[3] + $supervisor[4]);
+
+			array_push( $qtd_por_situacao_tipo[$tipo], $array);
+
+			//Preventivas com relatórios Entregues
+			$array = array();
+			$array['name'] = 'Relatórios Entregues (Aprovados)';
+			$array['data'] = array();
+
+			foreach ( $supervisores_tipo[$tipo] as $key => $supervisor )
+				array_push( $array['data'] , (int) $supervisor[5]);
+
+			array_push( $qtd_por_situacao_tipo[$tipo], $array);
+
+			$dados['nomes_supervisores_tipo'] = $nomes_supervisores_tipo;
+			$dados['qtd_por_situacao_tipo'] = $qtd_por_situacao_tipo;
+
+		}
 
 		$this->template->load('template.php', 'index-view.php', $dados);
 

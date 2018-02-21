@@ -116,7 +116,7 @@
 									</button>
 								</a>
 
-								<a href="<?php echo base_url( '/uploads/' . $arquivo['raw'] . $arquivo['formato'] ); ?>">
+								<a href="<?php echo base_url( '/arquivos/baixar/' . $id_reg_tabela_encrypt . '/') . encrypt( $arquivo['id'] ); ?>">
 									<button class="download btn-table" data-toggle="tooltip"  data-placement="bottom" title="Baixar relatório">
 										<i class="fa fa-download" aria-hidden="true"></i>
 									</button>
