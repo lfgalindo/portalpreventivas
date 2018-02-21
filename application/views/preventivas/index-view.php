@@ -139,7 +139,15 @@
 					?>
 				</div>
 
-			<?php echo form_close(); ?>
+			<?php 
+
+				echo form_close(); 
+
+				$string_get = '?';
+				foreach ( $this->input->get() as $key => $value )
+					$string_get .= $string_get != '?' ? '&' . $key . '=' . $value : $key . '=' . $value;
+
+			?>
 
 			<table class="table listar">
 				<thead>
@@ -187,7 +195,7 @@
 								<?php endif; ?>
 
 								<?php if( check_permission('remover_preventivas') && $preventiva['status'] == "1" ): ?>
-									<a href="<?php echo base_url('/preventivas/remover/') . encrypt( $preventiva['id'] ); ?>">
+									<a href="<?php echo base_url('/preventivas/remover/') . encrypt( $preventiva['id'] ) . $string_get; ?>">
 										<button class="excluir btn-table" data-toggle="tooltip" data-placement="bottom" title="Remover preventiva">
 											<i class="fa fa-times" aria-hidden="true"></i>
 										</button>
@@ -195,7 +203,7 @@
 								<?php endif; ?>
 
 								<?php if( check_permission('executar_preventivas') && $preventiva['status'] == "1" ): ?>
-									<a href="<?php echo base_url('/preventivas/executar/') . encrypt( $preventiva['id'] ); ?>">
+									<a href="<?php echo base_url('/preventivas/executar/') . encrypt( $preventiva['id'] ) . $string_get; ?>">
 										<button class="executar btn-table" data-toggle="tooltip"  data-placement="bottom" title="Marcar como executada">
 											<i class="fa fa-check" aria-hidden="true"></i>
 										</button>
@@ -203,7 +211,7 @@
 								<?php endif; ?>
 
 								<?php if( check_permission('cancelar_exec_preventivas') && $preventiva['status'] == "2" ): ?>
-									<a href="<?php echo base_url('/preventivas/executar/') . encrypt( $preventiva['id'] ); ?>">
+									<a href="<?php echo base_url('/preventivas/executar/') . encrypt( $preventiva['id'] ) . $string_get; ?>">
 										<button class="cancelar_exec btn-table" data-toggle="tooltip"  data-placement="bottom" title="Cancelar execução">
 											<i class="fa fa-ban" aria-hidden="true"></i>
 										</button>

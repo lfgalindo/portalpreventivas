@@ -51,9 +51,12 @@ class Inicio extends CI_Controller {
 			
 			$all_qtd = $this->preventiva_model->qtd_preventivas_por_supervisor( $supervisor['id_supervisor'], $data_inicio, $data_fim );
 
+			$supervisores[ $key ][ 'programadas' ] = 0;
+
 			foreach ( $all_qtd as $qtd) {
 				
-				 $supervisores[ $key ][ $qtd['status'] ] = $qtd['qtd'];
+				$supervisores[ $key ][ $qtd['status'] ] = $qtd['qtd'];
+				$supervisores[ $key ][ 'programadas' ] = $supervisores[ $key ][ 'programadas' ] + $qtd['qtd'];
 
 			}
 
@@ -66,31 +69,78 @@ class Inicio extends CI_Controller {
 
 
 		}
-
-		$qtd_por_situacao = array();
+		
+		// Montar array para indentificar ao HighCharts os supervisores que aparecerão
 		$nomes_supervisores = array();
 
-		foreach ( $situacoes_preventivas as $cod => $situacao ) {
+		foreach ( $supervisores as $key => $supervisor )
+			array_push( $nomes_supervisores, $supervisor['supervisor']);
 
-			$array = array();
 
-			$array['name'] = $situacao;
-			$array['data'] = array();
+		// Montar array para os dados serem exibidos
+		$qtd_por_situacao = array();
+		$qtd_geral = array();
+		
+		// Preventivas programadas
+		$array = array();
+		$array['name'] = 'Programadas';
+		$array['data'] = array();
 
-				
-			foreach ( $supervisores as $key => $supervisor ){
+		$geral = array();
+		$geral['name'] = 'Programadas';
+		$geral['data'] = array();
+		$soma_geral = 0;
 
-				array_push( $nomes_supervisores, $supervisor['supervisor']);
-				array_push( $array['data'] , (int) $supervisor[$cod]);
-
-			}
-
-			array_push( $qtd_por_situacao, $array );
-
+		foreach ( $supervisores as $key => $supervisor ){
+			array_push( $array['data'] , (int) $supervisor['programadas']);
+			$soma_geral = $soma_geral + $supervisor['programadas'];
 		}
+		
+		array_push( $geral['data'] , (int) $soma_geral);
+		array_push( $qtd_geral, $geral);
+		array_push( $qtd_por_situacao, $array);
+
+		//Preventivas executadas
+		$array = array();
+		$array['name'] = 'Executadas';
+		$array['data'] = array();
+
+		$geral = array();
+		$geral['name'] = 'Executadas';
+		$geral['data'] = array();
+		$soma_geral = 0;
+
+		foreach ( $supervisores as $key => $supervisor ){
+			array_push( $array['data'] , (int) $supervisor[2] + $supervisor[3] + $supervisor[4]);
+			$soma_geral = $soma_geral + $supervisor[2] + $supervisor[3] + $supervisor[4];
+		}
+
+		array_push( $geral['data'] , (int) $soma_geral);
+		array_push( $qtd_geral, $geral);
+		array_push( $qtd_por_situacao, $array);
+
+		//Preventivas com relatórios Entregues
+		$array = array();
+		$array['name'] = 'Relatórios Entregues (Aprovados)';
+		$array['data'] = array();
+
+		$geral = array();
+		$geral['name'] = 'Relatórios Entregues (Aprovados)';
+		$geral['data'] = array();
+		$soma_geral = 0;
+
+		foreach ( $supervisores as $key => $supervisor ){
+			array_push( $array['data'] , (int) $supervisor[5]);
+			$soma_geral = $soma_geral + $supervisor[5];
+		}
+
+		array_push( $geral['data'] , (int) $soma_geral);
+		array_push( $qtd_geral, $geral);
+		array_push( $qtd_por_situacao, $array);
 
 		$dados['nomes_supervisores'] = $nomes_supervisores;
 		$dados['qtd_por_situacao'] = $qtd_por_situacao;
+		$dados['qtd_geral'] = $qtd_geral;
 
 		$this->template->load('template.php', 'index-view.php', $dados);
 

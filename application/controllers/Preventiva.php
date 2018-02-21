@@ -272,7 +272,11 @@ class Preventiva extends CI_Controller {
 			$this->flashmessages->success('Ocorreu um erro!');
 			redirect("preventivas");
 		}
-		
+			
+		$string_get = '?';
+		foreach ( $this->input->get() as $key => $value )
+			$string_get .= $string_get != '?' ? '&' . $key . '=' . $value : $key . '=' . $value;
+
 		$preventiva = new Preventiva_Class();
 		$preventiva->setID( $id );
 		$preventiva = $this->preventiva_model->selecionar( $preventiva );		
@@ -295,7 +299,7 @@ class Preventiva extends CI_Controller {
 					endforeach;
 				endif;
 
-				redirect("preventivas");
+				redirect("preventivas" . $string_get);
 
 			} 
 			else {
@@ -318,7 +322,7 @@ class Preventiva extends CI_Controller {
 		else{
 			
 			$this->flashmessages->success('Essa preventiva não pode ter sua execução alterada!');
-			redirect("preventivas");
+			redirect("preventivas" . $string_get);
 
 		}
 
@@ -328,7 +332,7 @@ class Preventiva extends CI_Controller {
 		unset( $preventiva );
 
 		$this->flashmessages->success('Preventiva atualizada com sucesso!');
-		redirect("preventivas");
+		redirect("preventivas" . $string_get);
 	
 	}//Fim do método executar
 
@@ -349,6 +353,10 @@ class Preventiva extends CI_Controller {
 			redirect("preventivas");
 		}
 
+		$string_get = '?';
+		foreach ( $this->input->get() as $key => $value )
+			$string_get .= $string_get != '?' ? '&' . $key . '=' . $value : $key . '=' . $value;
+
 		$preventiva = new Preventiva_Class();
 		$preventiva->setID( $id );
 
@@ -360,7 +368,7 @@ class Preventiva extends CI_Controller {
 		unset( $preventiva );
 
 		$this->flashmessages->success('Preventiva removida com sucesso!');
-		redirect("preventivas");
+		redirect("preventivas" . $string_get);
 
 
 	}//Fim do método remover
