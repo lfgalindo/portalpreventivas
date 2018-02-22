@@ -149,8 +149,19 @@ class Preventiva extends CI_Controller {
 		$this->form_validation->set_rules('tipo', 'Tipo', 'required');
 		$this->form_validation->set_rules('site', 'Site', 'required|greater_than[0]|integer');
 
+		$erros = array();
+
+		if ( $this->input->post('tecnico') == "0" )
+			array_push( $erros, 'É necessário escolher um técnico para cadastrar uma preventiva!' );
+
+		if ( $this->input->post('supervisor') == "0" )
+			array_push( $erros, 'É necessário escolher um supervisor para cadastrar uma preventiva!' );
+
+		if ( $this->preventiva_model->existe_preventiva( $this->input->post('tipo'), $this->input->post('programada') . "-01", $this->input->post('site') ) )
+			array_push( $erros, 'Essa preventiva já foi cadastrada!' );
+
 		// Verificar validações.
-		if( ! $this->form_validation->run() ) {
+		if( ! $this->form_validation->run() || ! empty( $erros ) ) {
 
 			// Se ocorreu o submit exibir os erros
 			if( ! empty( $this->form_validation->error_array() ) ):
@@ -158,6 +169,10 @@ class Preventiva extends CI_Controller {
 					$this->flashmessages->error( $errors );
 				endforeach;
 			endif;
+
+			foreach( $erros as $erro ):
+				$this->flashmessages->error( $erro );
+			endforeach;
 
 			$data['usuarios'] = $this->usuario_model->listar_dropdown();
 
@@ -221,8 +236,19 @@ class Preventiva extends CI_Controller {
 		$this->form_validation->set_rules('tipo', 'Tipo', 'required');
 		$this->form_validation->set_rules('site', 'Site', 'required|greater_than[0]|integer');
 
+		$erros = array();
+
+		if ( $this->input->post('tecnico') == "0" )
+			array_push( $erros, 'É necessário escolher um técnico para cadastrar uma preventiva!' );
+
+		if ( $this->input->post('supervisor') == "0" )
+			array_push( $erros, 'É necessário escolher um supervisor para cadastrar uma preventiva!' );
+
+		if ( $this->preventiva_model->existe_preventiva( $this->input->post('tipo'), $this->input->post('programada') . "-01", $this->input->post('site'), $preventiva->getID() ) )
+			array_push( $erros, 'Essa preventiva já foi cadastrada!' );
+
 		// Verificar validações.
-		if( ! $this->form_validation->run() ) {
+		if( ! $this->form_validation->run() || ! empty( $erros ) ) {
 
 			// Se ocorreu o submit exibir os erros
 			if( ! empty( $this->form_validation->error_array() ) ):
@@ -231,6 +257,9 @@ class Preventiva extends CI_Controller {
 				endforeach;
 			endif;
 
+			foreach( $erros as $erro ):
+				$this->flashmessages->error( $erro );
+			endforeach;
 
 			$data['site'] = $site;
 			$data['usuarios'] = $this->usuario_model->listar_dropdown();

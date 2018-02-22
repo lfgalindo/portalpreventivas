@@ -158,6 +158,73 @@ class Preventiva_Model extends MY_Model {
 
 	}
 
+	public function listar_tecnicos_graficos( $supervisor, $data_inicio, $data_fim, $tipo = null ) {
+
+		$this->db->select( 'id_tecnico, tecnicos.nome AS tecnico');
+
+		$this->db->join('usuarios AS tecnicos', 'preventivas.id_tecnico = tecnicos.id', 'left');
+
+        $this->db->where('id_supervisor', $supervisor);
+
+       	$this->db->where('programada >= ', $data_inicio);
+        $this->db->where('programada <= ', $data_fim);
+
+        if ( ! is_null( $tipo ) )
+        	$this->db->where( 'tipo', $tipo );
+				
+		$this->db->group_by( 'tecnico' );
+
+		$query = $this->db->get( $this->table );
+
+		return $query->result_array();
+		
+	}
+
+	public function qtd_preventivas_por_tecnico( $id_supervisor, $id_tecnico, $data_inicio, $data_fim, $tipo = null ){
+
+		$this->db->select( 'COUNT(id) AS qtd, status');
+
+		$this->db->where('id_supervisor', $id_supervisor);
+		$this->db->where('id_tecnico', $id_tecnico);
+
+       	$this->db->where('programada >= ', $data_inicio);
+        $this->db->where('programada <= ', $data_fim);
+
+        if ( ! is_null( $tipo ) )
+        	$this->db->where( 'tipo', $tipo );
+
+        $this->db->group_by('status');
+
+		$query = $this->db->get( $this->table );
+
+		return $query->result_array();
+
+	}
+
+
+	/**
+	 * Seleciona um registro selecionando varios campos para ver se ja exite a preventiva
+	 * @return object
+	 */
+	public function existe_preventiva( $tipo, $data_programada, $id_site, $id_preventiva = null ) {
+
+		$this->db->where( 'tipo', 			$tipo );
+		$this->db->where( 'programada', 	$data_programada );
+		$this->db->where( 'id_site',	 	$id_site );
+
+		if ( ! is_null( $id_preventiva ) )
+			$this->db->where( 'id !=', $id_preventiva );
+
+		$query = $this->db->get( $this->table );
+
+		if( $query->num_rows() >= 1 ) {
+			
+			return true;
+		}
+
+		return false;
+
+	}
 
 
 	/**
