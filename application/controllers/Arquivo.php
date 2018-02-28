@@ -357,6 +357,70 @@ class Arquivo extends CI_Controller {
 
 	}//Fim do método recusar
 
+	//Método para cancelar a aprovação/recusa de  um relatório enviado
+	public function cancelar_aprov_rec( $id_preventiva, $id ){
+
+		check_permission('cancelar_aprov_rec_relatorios_preventivas', 'arquivos/preventivas/' . $id_preventiva);
+
+		if ( is_numeric( $id_preventiva ) ){
+			$this->flashmessages->success('Ocorreu um erro!');
+			redirect('arquivos/preventivas/');
+		}
+
+		$id_preventiva = decrypt( $id_preventiva );
+
+		if ( ! is_numeric( $id_preventiva ) ){
+			$this->flashmessages->success('Ocorreu um erro!');
+			redirect('arquivos/preventivas/');
+		}
+
+		if ( is_numeric( $id ) ){
+			$this->flashmessages->success('Ocorreu um erro!');
+			redirect('arquivos/preventivas/' . $id_preventiva);
+		}
+
+		$id = decrypt( $id );
+
+		if ( ! is_numeric( $id ) ){
+			$this->flashmessages->success('Ocorreu um erro!');
+			redirect('arquivos/preventivas/' . $id_preventiva);
+		}
+
+		$arquivo = new Arquivo_Class();
+		$arquivo->setID( $id );
+		$arquivo = $this->arquivo_model->selecionar( $arquivo );
+
+		$preventiva = new Preventiva_Class();
+		$preventiva->setID( $id_preventiva );
+		$preventiva = $this->preventiva_model->selecionar( $preventiva );
+
+		// Para cancelar a aprovação ou recusa de um relatório é necessário que ele seja o último enviado
+		if ( $this->arquivo_model->contar_registros_arquivos( 'preventivas', $preventiva->getID(), $arquivo->getDataEnvio() ) ){
+			$this->flashmessages->success('Para cancelar a aprovação ou recusa de um relatório é necessário que ele seja o último enviado!');
+			redirect('arquivos/preventivas/' . encrypt($id_preventiva) );
+		}
+
+		$arquivo->setAprovado( 0 );
+		$arquivo->setRecusado( 0 );
+		$arquivo->setMotivoRecusado( null );
+		$arquivo->setDataRecusadoAprovado( null );
+		$arquivo->setIDUsuarioRecusadoAprovado( null );
+
+		$this->arquivo_model->atualizar( $arquivo );
+
+		$preventiva->setStatus( 3 );
+
+		$this->preventiva_model->atualizar( $preventiva );
+
+		// Excluimos o objeto após sua utilização.
+		unset( $preventiva );
+		unset( $arquivo );
+
+		$this->flashmessages->success('Relatório atualizado com sucesso!');
+		redirect('arquivos/preventivas/' . encrypt($id_preventiva) );	
+
+	}//Fim do método cancelar
+
 	//Método para remover um upload feito e seu registro no banco
 	public function remover( $id_preventiva, $id_arquivo ){
 		
@@ -384,6 +448,17 @@ class Arquivo extends CI_Controller {
         unlink($file);
 
 		$this->arquivo_model->remover( $arquivo );
+
+		// Agora setamos o status correto na preventiva
+		$preventiva = new Preventiva_Class();
+		$preventiva->setID( decrypt( $id_preventiva ) );
+		$preventiva = $this->preventiva_model->selecionar( $preventiva ); 
+
+		$qtd_arquivos = $this->arquivo_model->contar_registros_arquivos( 'preventivas', $preventiva->getID() );
+
+		$preventiva->setStatus( $qtd_arquivos > 0 ? '4' : '2' );
+
+		$this->preventiva_model->atualizar( $preventiva ); 
 
 		// Excluimos o objeto após sua utilização.
 		unset( $arquivo );

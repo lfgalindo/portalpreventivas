@@ -271,7 +271,6 @@ class Preventiva extends CI_Controller {
 			// Alteramos o objeto para cadastro no banco
 			$preventiva->setTipo(				$this->input->post('tipo') );
 			$preventiva->setProgramada(			$this->input->post('programada') . "-01" );
-			$preventiva->setStatus(				1 ); // Pendente
 			$preventiva->setIDSite(				$this->input->post('site') );
 			$preventiva->setIDTecnico(			$this->input->post('tecnico') == 0 ? null : $this->input->post('tecnico'));
 			$preventiva->setIDSupervisor(		$this->input->post('supervisor') == 0 ? null : $this->input->post('supervisor') );

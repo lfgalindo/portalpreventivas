@@ -120,21 +120,46 @@ class Inicio extends CI_Controller {
 			$soma_geral = 0;
 
 			foreach ( $supervisores as $key => $supervisor ){
-				array_push( $array['data'] , (int) $supervisor[2] + $supervisor[3] + $supervisor[4]);
-				$soma_geral = $soma_geral + $supervisor[2] + $supervisor[3] + $supervisor[4];
+				array_push( $array['data'] , (int) $supervisor[2] + $supervisor[3] + $supervisor[4] + $supervisor[5]);
+				$soma_geral = $soma_geral + $supervisor[2] + $supervisor[3] + $supervisor[4] + $supervisor[5];
 			}
 
 			array_push( $geral['data'] , (int) $soma_geral);
 			array_push( $qtd_geral, $geral);
 			array_push( $qtd_por_situacao, $array);
 
-			//Preventivas com relatórios Entregues
+			//Preventivas com relatórios em aprovação
 			$array = array();
-			$array['name'] = 'Relatórios Entregues (Aprovados)';
+			$array['name'] = 'Relatórios Enviados (Aguardando aprovação)';
 			$array['data'] = array();
 
 			$geral = array();
-			$geral['name'] = 'Relatórios Entregues (Aprovados)';
+			$geral['name'] = 'Relatórios Enviados (Aguardando aprovação)';
+			$geral['data'] = array();
+			$soma_geral = 0;
+
+			foreach ( $supervisores as $key => $supervisor ){
+				array_push( $array['data'] , (int) $supervisor[3]);
+				$soma_geral = $soma_geral + $supervisor[3];
+			}
+
+			array_push( $geral['data'] , (int) $soma_geral);
+			array_push( $qtd_geral, $geral);
+			array_push( $qtd_por_situacao, $array);
+
+			$dados['nomes_supervisores'] = $nomes_supervisores;
+			$dados['qtd_por_situacao'] = $qtd_por_situacao;
+			$dados['qtd_geral'] = $qtd_geral;
+
+
+
+			//Preventivas com relatórios enviados e aprovados
+			$array = array();
+			$array['name'] = 'Relatórios Aprovados (Finalizadas)';
+			$array['data'] = array();
+
+			$geral = array();
+			$geral['name'] = 'Relatórios Aprovados (Finalizadas)';
 			$geral['data'] = array();
 			$soma_geral = 0;
 
@@ -211,13 +236,23 @@ class Inicio extends CI_Controller {
 				$array['data'] = array();
 
 				foreach ( $supervisores_tipo[$tipo] as $key => $supervisor )
-					array_push( $array['data'] , (int) $supervisor[2] + $supervisor[3] + $supervisor[4]);
+					array_push( $array['data'] , (int) $supervisor[2] + $supervisor[3] + $supervisor[4] + $supervisor[5]);
 
 				array_push( $qtd_por_situacao_tipo[$tipo], $array);
 
-				//Preventivas com relatórios Entregues
+				//Preventivas com relatórios enviados
 				$array = array();
-				$array['name'] = 'Relatórios Entregues (Aprovados)';
+				$array['name'] = 'Relatórios Enviados (Aguardando aprovação)';
+				$array['data'] = array();
+
+				foreach ( $supervisores_tipo[$tipo] as $key => $supervisor )
+					array_push( $array['data'] , (int) $supervisor[3]);
+
+				array_push( $qtd_por_situacao_tipo[$tipo], $array);
+
+				//Preventivas com relatórios enviados e aprovados
+				$array = array();
+				$array['name'] = 'Relatórios Aprovados (Finalizadas)';
 				$array['data'] = array();
 
 				foreach ( $supervisores_tipo[$tipo] as $key => $supervisor )
@@ -289,7 +324,7 @@ class Inicio extends CI_Controller {
 				$array['data'] = array();
 
 				foreach ( $tecnicos_tipo[$tipo] as $key => $tecnico )
-					array_push( $array['data'] , (int) $tecnico[2] + $tecnico[3] + $tecnico[4]);
+					array_push( $array['data'] , (int) $tecnico[2] + $tecnico[3] + $tecnico[4] + $tecnico[5]);
 
 				array_push( $qtd_por_situacao_tipo[$tipo], $array);
 

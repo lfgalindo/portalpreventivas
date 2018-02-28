@@ -43,10 +43,13 @@ class Arquivo_Model extends MY_Model {
 	 * Conta os registros existentes no banco.
 	 * @return int
 	 */
-	public function contar_registros_arquivos( $tabela, $id_reg_tabela ) {
+	public function contar_registros_arquivos( $tabela, $id_reg_tabela, $data_minima = null ) {
 
 		$this->db->where( 'tabela', $tabela );
 		$this->db->where( 'id_reg_tabela', $id_reg_tabela );
+
+		if ( ! is_null( $data_minima ) )
+			$this->db->where( 'data_envio >', $data_minima );
 
 		$this->db->from( $this->table );
 

@@ -75,6 +75,7 @@ if ( ! function_exists('todas_permissoes') ){
 									'visualizar_preventivas' 				=> 'Visualizar preventivas',
 									'cadastrar_preventivas'					=> 'Cadastrar preventivas',
 									'editar_preventivas'					=> 'Editar preventivas',
+									'editar_preventivas_admin'				=> 'Editar preventivas em qualquer situação',
 									'remover_preventivas'					=> 'Remover preventivas',
 									'executar_preventivas'					=> 'Marcar como executadas',
 									'cancelar_exec_preventivas'				=> 'Cancelar execução'
@@ -83,6 +84,7 @@ if ( ! function_exists('todas_permissoes') ){
 									'visualizar_preventivas' 				=> 'sem_requisito',
 									'cadastrar_preventivas'					=> 'visualizar_preventivas',
 									'editar_preventivas'					=> 'visualizar_preventivas',
+									'editar_preventivas_admin'				=> 'editar_preventivas',
 									'remover_preventivas'					=> 'visualizar_preventivas',
 									'executar_preventivas'					=> 'visualizar_preventivas',
 									'cancelar_exec_preventivas'				=> 'visualizar_preventivas'
@@ -92,18 +94,20 @@ if ( ! function_exists('todas_permissoes') ){
 						'relatorios_preventivas' => array(
 								'nome' => 'Relatórios de preventivas',
 								'permissoes' => array(
-									'visualizar_relatorios_preventivas' 	=> 'Visualizar relatórios',
-									'enviar_relatorios_preventivas' 		=> 'Enviar relatórios',
-									'aprovar_relatorios_preventivas' 		=> 'Aprovar relatórios',
-									'recusar_relatorios_preventivas' 		=> 'Recusar relatórios',
-									'remover_relatorios_preventivas' 		=> 'Remover relatórios'
+									'visualizar_relatorios_preventivas' 			=> 'Visualizar relatórios',
+									'enviar_relatorios_preventivas' 				=> 'Enviar relatórios',
+									'aprovar_relatorios_preventivas' 				=> 'Aprovar relatórios',
+									'recusar_relatorios_preventivas' 				=> 'Recusar relatórios',
+									'cancelar_aprov_rec_relatorios_preventivas' 	=> 'Cancelar aprovação / recusa de relatórios',
+									'remover_relatorios_preventivas' 				=> 'Remover relatórios'
 								),
 								'requisitos' => array(
-									'visualizar_relatorios_preventivas' 	=> 'sem_requisito',
-									'enviar_relatorios_preventivas' 		=> 'visualizar_relatorios_preventivas',
-									'aprovar_relatorios_preventivas' 		=> 'visualizar_relatorios_preventivas',
-									'recusar_relatorios_preventivas' 		=> 'visualizar_relatorios_preventivas',
-									'remover_relatorios_preventivas' 		=> 'visualizar_relatorios_preventivas'
+									'visualizar_relatorios_preventivas' 			=> 'sem_requisito',
+									'enviar_relatorios_preventivas' 				=> 'visualizar_relatorios_preventivas',
+									'aprovar_relatorios_preventivas' 				=> 'visualizar_relatorios_preventivas',
+									'recusar_relatorios_preventivas' 				=> 'visualizar_relatorios_preventivas',
+									'cancelar_aprov_rec_relatorios_preventivas' 	=> 'visualizar_relatorios_preventivas',
+									'remover_relatorios_preventivas' 				=> 'visualizar_relatorios_preventivas'
 								)
 						),
 						// Permissões para configuracoes

@@ -89,7 +89,12 @@
 				</thead>
 
 				<tbody>
-					<?php foreach ( $arquivos as $arquivo ): ?>
+					<?php 
+
+						$cont = 0;
+
+						foreach ( $arquivos as $arquivo ): ?>
+
 						<tr>
 							<td><?php echo $arquivo['nome']; ?></td>
 							<td><?php echo date('d/m/Y', strtotime( $arquivo['data_envio'] ) ); ?>
@@ -138,13 +143,25 @@
 									</a>
 								<?php endif; ?>
 
-								<?php //if( check_permission('remover_relatorios_preventivas') && $arquivo['aprovado'] != "1" && $arquivo['recusado'] != "1" ): ?>
-									<!--a href="<?php //echo base_url('/arquivos/remover/' . $id_reg_tabela_encrypt . '/') . encrypt( $arquivo['id'] ); ?>">
+								<?php if( check_permission('remover_relatorios_preventivas') && $arquivo['aprovado'] != "1" && $arquivo['recusado'] != "1" ): ?>
+									<a href="<?php echo base_url('/arquivos/remover/' . $id_reg_tabela_encrypt . '/') . encrypt( $arquivo['id'] ); ?>">
 										<button class="excluir btn-table" data-toggle="tooltip" data-placement="bottom" title="Remover arquivo">
 											<i class="fa fa-times" aria-hidden="true"></i>
 										</button>
-									</a-->
-								<?php //endif; ?>
+									</a>
+								<?php endif; ?>
+
+								<?php 
+
+									$cont++;
+
+									if( ( check_permission('cancelar_aprov_rec_relatorios_preventivas') && $cont == '1' ) && ( $arquivo['aprovado'] == "1" || $arquivo['recusado'] == "1" ) ): ?>
+									<a href="<?php echo base_url('/arquivos/cancelar_aprov_rec/' . $id_reg_tabela_encrypt . '/') . encrypt( $arquivo['id'] ); ?>">
+										<button class="cancelar btn-table" data-toggle="tooltip" data-placement="bottom" title="Cancelar aprovação / recusa">
+											<i class="fa fa-retweet" aria-hidden="true"></i>
+										</button>
+									</a>
+								<?php endif; ?>
 							</td>
 						</tr>
 					<?php endforeach; ?>

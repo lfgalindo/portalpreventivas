@@ -178,7 +178,7 @@
 									</button>
 								</a>
 
-								<?php if( check_permission('editar_preventivas') && $preventiva['status'] == "1" ): ?>
+								<?php if( check_permission('editar_preventivas_admin') || ( check_permission('editar_preventivas') && $preventiva['status'] == "1" ) ): ?>
 									<a href="<?php echo base_url('/preventivas/editar/') . encrypt( $preventiva['id'] ); ?>">
 										<button class="editar btn-table" data-toggle="tooltip"  data-placement="bottom" title="Alterar dados">
 											<i class="fa fa-pencil" aria-hidden="true"></i>
