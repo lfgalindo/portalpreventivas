@@ -328,9 +328,19 @@ class Inicio extends CI_Controller {
 
 				array_push( $qtd_por_situacao_tipo[$tipo], $array);
 
-				//Preventivas com relatórios Entregues
+				//Preventivas com relatórios enviados
 				$array = array();
-				$array['name'] = 'Relatórios Entregues (Aprovados)';
+				$array['name'] = 'Relatórios Enviados (Aguardando aprovação)';
+				$array['data'] = array();
+
+				foreach ( $tecnicos_tipo[$tipo] as $key => $tecnico )
+					array_push( $array['data'] , (int) $tecnico[3]);
+
+				array_push( $qtd_por_situacao_tipo[$tipo], $array);
+
+				//Preventivas com relatórios enviados e aprovados
+				$array = array();
+				$array['name'] = 'Relatórios Aprovados (Finalizadas)';
 				$array['data'] = array();
 
 				foreach ( $tecnicos_tipo[$tipo] as $key => $tecnico )

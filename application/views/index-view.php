@@ -184,7 +184,8 @@
 		            }
 		        }
 		    },
-		    series: qtd_geral
+		    series: qtd_geral,
+		    colors: ['#7cb5ec', '#434348', '#f7a35c', '#90ed7d']
 		});
 
 		Highcharts.chart('supervisor-performance', {
@@ -225,7 +226,8 @@
 		            }
 		        }
 		    },
-		    series: qtd_por_situacao
+		    series: qtd_por_situacao,
+		    colors: ['#7cb5ec', '#434348', '#f7a35c', '#90ed7d']
 		});
 
 		<?php 
@@ -274,7 +276,8 @@
 				            }
 				        }
 				    },
-				    series: <?php echo "qtd_por_situacao_" . $tipo . ""; ?>
+				    series: <?php echo "qtd_por_situacao_" . $tipo . ""; ?>,
+		    		colors: ['#7cb5ec', '#434348', '#f7a35c', '#90ed7d']
 				});
 
 				<?php
@@ -334,7 +337,8 @@
 				            }
 				        }
 				    },
-				    series: <?php echo "qtd_por_situacao_" . $tipo . ""; ?>
+				    series: <?php echo "qtd_por_situacao_" . $tipo . ""; ?>,
+		    		colors: ['#7cb5ec', '#434348', '#f7a35c', '#90ed7d']
 				});
 
 				<?php
