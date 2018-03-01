@@ -24,6 +24,12 @@ class Site_Class {
     private $end_id;
 	private $restricao_acesso;
     private $observacoes;
+    private $co_site;
+    private $co_site_empresa;
+    private $co_site_umts;
+    private $tipo_bts;
+    private $latitude;
+    private $longitude;
     private $estado;
     private $cidade;
     private $ddd;
@@ -99,6 +105,36 @@ class Site_Class {
                 'null'	=> TRUE,
                 'constraint' => '255',
               ),
+              'co_site' => array(
+                'type' => 'VARCHAR',
+                'null'	=> TRUE,
+                'constraint' => '255',
+              ),
+              'co_site_empresa' => array(
+                'type' => 'VARCHAR',
+                'null'	=> TRUE,
+                'constraint' => '255',
+              ),
+              'co_site_umts' => array(
+                'type' => 'VARCHAR',
+                'null'	=> TRUE,
+                'constraint' => '255',
+              ),
+              'tipo_bts' => array(
+                'type' => 'VARCHAR',
+                'null'	=> TRUE,
+                'constraint' => '255',
+              ),
+              'latitude' => array(
+                'type' => 'VARCHAR',
+                'null'	=> TRUE,
+                'constraint' => '255',
+              ),
+              'longitude' => array(
+                'type' => 'VARCHAR',
+                'null'	=> TRUE,
+                'constraint' => '255',
+              ),
               'estado' => array(
                 'type' => 'VARCHAR',
                 'null'	=> TRUE,
@@ -158,6 +194,12 @@ class Site_Class {
     		'end_id'			=> $site->getEndId(),
 			'restricao_acesso'	=> $site->getRestricaoAcesso(),
 		    'observacoes'		=> $site->getObservacoes(),
+		    'co_site'			=> $site->getCoSite(),
+		    'co_site_empresa'	=> $site->getCoSiteEmpresa(),
+		    'co_site_umts'		=> $site->getCoSiteUmts(),
+		    'tipo_bts'			=> $site->getTipoBts(),
+		    'latitude'			=> $site->getLatitude(),
+		    'longitude'			=> $site->getLongitude(),
 			'estado'			=> $site->getEstado(),
 		    'cidade'			=> $site->getCidade(),
 		    'ddd'				=> $site->getDDD(),
@@ -188,6 +230,12 @@ class Site_Class {
     	$site->setEndId(			$array['end_id']);
 		$site->setRestricaoAcesso(	$array['restricao_acesso']);
 		$site->setObservacoes(		$array['observacoes']);
+		$site->setCoSite( 			$array['co_site']);
+		$site->setCoSiteEmpresa( 	$array['co_site_empresa']);
+		$site->setCoSiteUmts( 		$array['co_site_umts']);
+		$site->setTipoBts(			$array['tipo_bts']);
+		$site->setLatitude(			$array['latitude']);
+		$site->setLongitude( 		$array['longitude']);
 		$site->setEstado(			$array['estado']);
 		$site->setCidade(			$array['cidade']);
 		$site->setDDD(				$array['ddd']);
@@ -295,6 +343,54 @@ class Site_Class {
 
 	public function setObservacoes($observacoes){
 		$this->observacoes = $observacoes;
+	}
+
+	public function getCoSite(){
+		return $this->co_site;
+	}
+
+	public function setCoSite($co_site){
+		$this->co_site = $co_site;
+	}
+
+	public function getCoSiteEmpresa(){
+		return $this->co_site_empresa;
+	}
+
+	public function setCoSiteEmpresa($co_site_empresa){
+		$this->co_site_empresa = $co_site_empresa;
+	}
+
+	public function getCoSiteUmts(){
+		return $this->co_site_umts;
+	}
+
+	public function setCoSiteUmts($co_site_umts){
+		$this->co_site_umts = $co_site_umts;
+	}
+
+	public function getTipoBts(){
+		return $this->tipo_bts;
+	}
+
+	public function setTipoBts($tipo_bts){
+		$this->tipo_bts = $tipo_bts;
+	}
+
+	public function getLatitude(){
+		return $this->latitude;
+	}
+
+	public function setLatitude($latitude){
+		$this->latitude = $latitude;
+	}
+
+	public function getLongitude(){
+		return $this->longitude;
+	}
+
+	public function setLongitude($longitude){
+		$this->longitude = $longitude;
 	}
 
 	public function getEstado(){

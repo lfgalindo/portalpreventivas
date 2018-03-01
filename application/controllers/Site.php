@@ -42,7 +42,7 @@ class Site extends CI_Controller {
 
 		check_permission('visualizar_sites', 'inicio');
 
-		$fields = array( 'id_tim', 'operadora', 'rede', 'tipo_ne', 'fornecedor', 'ne_id', 'observacoes', 'cidade', 'estado', 'endereco', 'bairro', 'cm' );
+		$fields = array( 'id_tim', 'operadora', 'rede', 'tipo_ne', 'fornecedor', 'ne_id', 'end_id', 'observacoes', 'co_site', 'co_site_empresa', 'co_site_umts', 'tipo_bts', 'cidade', 'estado', 'endereco', 'bairro', 'cm' );
 		$orders = array("ne_id" => "ASC");
 
 		$search_string = $this->input->get('search') ? $this->input->get('search') : "";
@@ -137,14 +137,18 @@ class Site extends CI_Controller {
 	    	$site->setEndId(			$this->input->post('end_id') );
 			$site->setRestricaoAcesso(	$this->input->post('restricao_acesso') );
 			$site->setObservacoes(		$this->input->post('observacoes') );
+			$site->setCoSite(			$this->input->post('co_site') );
+			$site->setCoSiteEmpresa(	$this->input->post('co_site_empresa') );
+			$site->setCoSiteUmts(		$this->input->post('co_site_umts') );
+			$site->setTipoBts(			$this->input->post('tipo_bts') );
+			$site->setLatitude(			$this->input->post('latitude') );
+			$site->setLongitude(		$this->input->post('longitude') );
 			$site->setEstado(			$this->input->post('estado') );
 			$site->setCidade(			$this->input->post('cidade') );
 			$site->setDDD(				$this->input->post('ddd') );
 			$site->setEndereco(			$this->input->post('endereco') );
 			$site->setBairro(			$this->input->post('bairro') );
 			$site->setCm(				$this->input->post('cm') );
-			$site->setRemovido(			$this->input->post('removido') );
-
 
 			$this->site_model->inserir( $site );
 
@@ -209,6 +213,12 @@ class Site extends CI_Controller {
 	    	$site->setEndId(			$this->input->post('end_id') );
 			$site->setRestricaoAcesso(	$this->input->post('restricao_acesso') );
 			$site->setObservacoes(		$this->input->post('observacoes') );
+			$site->setCoSite(			$this->input->post('co_site') );
+			$site->setCoSiteEmpresa(	$this->input->post('co_site_empresa') );
+			$site->setCoSiteUmts(		$this->input->post('co_site_umts') );
+			$site->setTipoBts(			$this->input->post('tipo_bts') );
+			$site->setLatitude(			$this->input->post('latitude') );
+			$site->setLongitude(		$this->input->post('longitude') );
 			$site->setEstado(			$this->input->post('estado') );
 			$site->setCidade(			$this->input->post('cidade') );
 			$site->setDDD(				$this->input->post('ddd') );

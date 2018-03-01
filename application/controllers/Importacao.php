@@ -340,4 +340,74 @@ class Importacao extends CI_Controller {
 		fclose($arquivo);
 	}
 
+	public function novos_campos_e_sites() {
+
+		$arquivo = fopen ('./uploads/novos_campos_e_sites.csv', 'r');
+
+		$cont = 0;
+
+		while( ! feof( $arquivo ) && $cont < 25 ){
+			
+			//$cont++;
+
+			$linha = fgets($arquivo, 1024);
+			
+			$dados = explode(';', $linha);
+			
+			if ( ! empty( $linha ) ){
+
+				$site = new Site_Class();
+				
+				if ( $this->site_model->existe_cadastro( 'ne_id', $dados[5] ) ){
+
+					$site->setNeId( utf8_encode($dados[5]) );
+
+					$site = $this->site_model->selecionar_por_campo( $site, 'ne_id', 'getNeId' );
+
+					$site->setCoSite( 			utf8_encode($dados[6]));
+					$site->setCoSiteEmpresa( 	utf8_encode($dados[9]));
+					$site->setCoSiteUmts( 		utf8_encode($dados[10]));
+					$site->setTipoBts(			utf8_encode($dados[13]));
+					$site->setLatitude(			utf8_encode($dados[20]));
+					$site->setLongitude( 		utf8_encode($dados[21]));
+
+					$this->site_model->atualizar( $site );
+
+				}
+				else{
+
+					$site->setIDTim(			utf8_encode($dados[0]));
+					$site->setOperadora(		utf8_encode($dados[1]));
+					$site->setRede(				utf8_encode($dados[2]));
+					$site->setTipoNe(			utf8_encode($dados[3]));
+					$site->setFornecedor(		utf8_encode($dados[4]));
+			    	$site->setNeId(				utf8_encode($dados[5]));
+			    	$site->setTipoTop(			utf8_encode($dados[8]));
+			    	$site->setEndId(			utf8_encode($dados[7]));
+					$site->setRestricaoAcesso(	utf8_encode($dados[11]));
+					$site->setObservacoes(		utf8_encode($dados[12]));
+					$site->setCoSite( 			utf8_encode($dados[6]));
+					$site->setCoSiteEmpresa( 	utf8_encode($dados[9]));
+					$site->setCoSiteUmts( 		utf8_encode($dados[10]));
+					$site->setTipoBts(			utf8_encode($dados[13]));
+					$site->setLatitude(			utf8_encode($dados[20]));
+					$site->setLongitude( 		utf8_encode($dados[21]));
+					$site->setEstado(			utf8_encode($dados[14]));
+					$site->setCidade(			utf8_encode($dados[15]));
+					$site->setDDD(				utf8_encode($dados[16]));
+					$site->setEndereco(			utf8_encode($dados[17]));
+					$site->setBairro(			utf8_encode($dados[18]));
+					$site->setCm(				utf8_encode($dados[19]));
+
+					$this->site_model->inserir( $site );
+
+				}
+
+			}
+
+		}
+
+		fclose($arquivo);
+	}
+
 }

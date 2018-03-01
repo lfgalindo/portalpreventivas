@@ -57,6 +57,7 @@
 				<thead>
 					<tr>
 						<th> NE ID </th>
+						<th> END ID </th>
 						<th> Tipo </th>
 						<th> Cidade </th>
 						<th> Ações </th>
@@ -67,6 +68,7 @@
 					<?php foreach ( $sites as $site ): ?>
 						<tr>
 							<td><?php echo $site['ne_id']; ?></td>
+							<td><?php echo $site['end_id']; ?></td>
 							<td><?php echo $site['tipo_ne']; ?></td>
 							<td><?php echo $site['cidade'] . '/' . $site['estado']; ?></td>
 							<td>

@@ -51,6 +51,22 @@
 				</div>
 
 				<div class="row cadastro">
+					<div class="col-md-3">Co-Site:</div>
+
+					<div class="col-md-9">
+						<?php 
+							echo form_input( array(
+								"type" 	=> "text",
+								"value" => set_value('co_site'),
+								"name" 	=> "co_site",
+								"class" => "cadastro"
+								)
+							);
+						?>
+					</div>
+				</div>
+
+				<div class="row cadastro">
 					<div class="col-md-3">Operadora:</div>
 
 					<div class="col-md-9">
@@ -107,6 +123,38 @@
 								"type" 	=> "text",
 								"value" => set_value('tipo_top'),
 								"name" 	=> "tipo_top",
+								"class" => "cadastro"
+								)
+							);
+						?>
+					</div>
+				</div>
+
+				<div class="row cadastro">
+					<div class="col-md-3">Co-Site Empresa:</div>
+
+					<div class="col-md-9">
+						<?php 
+							echo form_input( array(
+								"type" 	=> "text",
+								"value" => set_value('co_site_empresa'),
+								"name" 	=> "co_site_empresa",
+								"class" => "cadastro"
+								)
+							);
+						?>
+					</div>
+				</div>
+
+				<div class="row cadastro">
+					<div class="col-md-3">Co-Site UMTS:</div>
+
+					<div class="col-md-9">
+						<?php 
+							echo form_input( array(
+								"type" 	=> "text",
+								"value" => set_value('co_site_umts'),
+								"name" 	=> "co_site_umts",
 								"class" => "cadastro"
 								)
 							);
@@ -211,6 +259,22 @@
 				</div>
 
 				<div class="row cadastro">
+					<div class="col-md-3">Tipo BTS:</div>
+
+					<div class="col-md-9">
+						<?php 
+							echo form_input( array(
+								"type" 	=> "text",
+								"value" => set_value('tipo_bts'),
+								"name" 	=> "tipo_bts",
+								"class" => "cadastro"
+								)
+							);
+						?>
+					</div>
+				</div>
+
+				<div class="row cadastro">
 					<div class="col-md-3">DDD:</div>
 
 					<div class="col-md-9">
@@ -293,6 +357,38 @@
 								"type" 	=> "text",
 								"value" => set_value('cm'),
 								"name" 	=> "cm",
+								"class" => "cadastro"
+								)
+							);
+						?>
+					</div>
+				</div>
+
+				<div class="row cadastro">
+					<div class="col-md-3">Latitude:</div>
+
+					<div class="col-md-9">
+						<?php 
+							echo form_input( array(
+								"type" 	=> "text",
+								"value" => set_value('latitude'),
+								"name" 	=> "latitude",
+								"class" => "cadastro"
+								)
+							);
+						?>
+					</div>
+				</div>
+
+				<div class="row cadastro">
+					<div class="col-md-3">Longitude:</div>
+
+					<div class="col-md-9">
+						<?php 
+							echo form_input( array(
+								"type" 	=> "text",
+								"value" => set_value('longitude'),
+								"name" 	=> "longitude",
 								"class" => "cadastro"
 								)
 							);

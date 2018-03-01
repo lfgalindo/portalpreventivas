@@ -51,6 +51,22 @@
 				</div>
 
 				<div class="row cadastro">
+					<div class="col-md-3">Co-Site:</div>
+
+					<div class="col-md-9">
+						<?php 
+							echo form_input( array(
+								"type" 	=> "text",
+								"value" => set_value('co_site') ? set_value('co_site') : $site->getCoSite(),
+								"name" 	=> "co_site",
+								"class" => "cadastro"
+								)
+							);
+						?>
+					</div>
+				</div>
+
+				<div class="row cadastro">
 					<div class="col-md-3">Operadora:</div>
 
 					<div class="col-md-9">
@@ -107,6 +123,38 @@
 								"type" 	=> "text",
 								"value" => set_value('tipo_top') ? set_value('tipo_top') : $site->getTipoTop(),
 								"name" 	=> "tipo_top",
+								"class" => "cadastro"
+								)
+							);
+						?>
+					</div>
+				</div>
+
+				<div class="row cadastro">
+					<div class="col-md-3">Co-Site Empresa:</div>
+
+					<div class="col-md-9">
+						<?php 
+							echo form_input( array(
+								"type" 	=> "text",
+								"value" => set_value('co_site_empresa') ? set_value('co_site_empresa') : $site->getCoSiteEmpresa(),
+								"name" 	=> "co_site_empresa",
+								"class" => "cadastro"
+								)
+							);
+						?>
+					</div>
+				</div>
+
+				<div class="row cadastro">
+					<div class="col-md-3">Co-Site UMTS:</div>
+
+					<div class="col-md-9">
+						<?php 
+							echo form_input( array(
+								"type" 	=> "text",
+								"value" => set_value('co_site_umts') ? set_value('co_site_umts') : $site->getCoSiteUmts(),
+								"name" 	=> "co_site_umts",
 								"class" => "cadastro"
 								)
 							);
@@ -188,6 +236,22 @@
 								"type" 	=> "text",
 								"value" => set_value('observacoes') ? set_value('observacoes') : $site->getObservacoes(),
 								"name" 	=> "observacoes",
+								"class" => "cadastro"
+								)
+							);
+						?>
+					</div>
+				</div>
+
+				<div class="row cadastro">
+					<div class="col-md-3">Tipo BTS:</div>
+
+					<div class="col-md-9">
+						<?php 
+							echo form_input( array(
+								"type" 	=> "text",
+								"value" => set_value('tipo_bts') ? set_value('tipo_bts') : $site->getTipoBts(),
+								"name" 	=> "tipo_bts",
 								"class" => "cadastro"
 								)
 							);
@@ -281,6 +345,38 @@
 								"type" 	=> "text",
 								"value" => set_value('cm') ? set_value('cm') : $site->getCm(),
 								"name" 	=> "cm",
+								"class" => "cadastro"
+								)
+							);
+						?>
+					</div>
+				</div>
+
+				<div class="row cadastro">
+					<div class="col-md-3">Latitude:</div>
+
+					<div class="col-md-9">
+						<?php 
+							echo form_input( array(
+								"type" 	=> "text",
+								"value" => set_value('latitude') ? set_value('latitude') : $site->getLatitude(),
+								"name" 	=> "latitude",
+								"class" => "cadastro"
+								)
+							);
+						?>
+					</div>
+				</div>
+
+				<div class="row cadastro">
+					<div class="col-md-3">Longitude:</div>
+
+					<div class="col-md-9">
+						<?php 
+							echo form_input( array(
+								"type" 	=> "text",
+								"value" => set_value('longitude') ? set_value('longitude') : $site->getLongitude(),
+								"name" 	=> "longitude",
 								"class" => "cadastro"
 								)
 							);

@@ -37,6 +37,11 @@
 			</div>
 
 			<div class="row cadastro">
+				<div class="col-md-3">Co-Site</div>
+				<div class="col-md-9"><?php echo $site->getCoSite(); ?></div>
+			</div>
+
+			<div class="row cadastro">
 				<div class="col-md-3">Operadora:</div>
 				<div class="col-md-9"><?php echo $site->getOperadora(); ?></div>
 			</div>
@@ -54,6 +59,16 @@
 			<div class="row cadastro">
 				<div class="col-md-3">Tipo TOP:</div>
 				<div class="col-md-9"><?php echo $site->getTipoTop(); ?></div>
+			</div>
+
+			<div class="row cadastro">
+				<div class="col-md-3">Co-Site Empresa</div>
+				<div class="col-md-9"><?php echo $site->getCoSiteEmpresa(); ?></div>
+			</div>
+
+			<div class="row cadastro">
+				<div class="col-md-3">Co-Site UMTS</div>
+				<div class="col-md-9"><?php echo $site->getCoSiteUmts(); ?></div>
 			</div>
 
 			<div class="row cadastro">
@@ -82,6 +97,11 @@
 			</div>
 
 			<div class="row cadastro">
+				<div class="col-md-3">Tipo BTS</div>
+				<div class="col-md-9"><?php echo $site->getTipoBts(); ?></div>
+			</div>
+
+			<div class="row cadastro">
 				<div class="col-md-3">DDD:</div>
 				<div class="col-md-9"><?php echo $site->getDDD(); ?></div>
 			</div>
@@ -101,7 +121,15 @@
 				<div class="col-md-9"><?php echo $site->getCm(); ?></div>
 			</div>
 
+			<div class="row cadastro">
+				<div class="col-md-3">Latitude</div>
+				<div class="col-md-9"><?php echo $site->getLatitude(); ?></div>
+			</div>
 
+			<div class="row cadastro">
+				<div class="col-md-3">Longitude</div>
+				<div class="col-md-9"><?php echo $site->getLongitude(); ?></div>
+			</div>
 		</div>
 	</div>
 </div>
