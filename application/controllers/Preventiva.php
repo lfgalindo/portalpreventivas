@@ -50,14 +50,16 @@ class Preventiva extends CI_Controller {
 		$fields = array( 'tipo', 'ne_id', 'supervisores.nome', 'tecnicos.nome' );
 		$orders = array("programada" => "ASC");
 
-		$search_string 			= $this->input->get('search') 			? $this->input->get('search') 			: "";
+		$search_string 			= $this->input->get('search') 			? $this->input->get('search') 			: '';
 		$search_tipo 			= $this->input->get('search_tipo') 		? $this->input->get('search_tipo') 		: 0;
 		$search_situacao 		= $this->input->get('search_situacao') 	? $this->input->get('search_situacao') 	: 0;
+		$search_cm 				= $this->input->get('search_cm') 		? $this->input->get('search_cm') 		: 0;
 		$search_mes 			= $this->input->get('search_mes') 		? $this->input->get('search_mes') 		: date('Y-m');
 
 		$dados['search_string'] 	= $search_string;
 		$dados['search_tipo'] 		= $search_tipo;
 		$dados['search_situacao'] 	= $search_situacao;
+		$dados['search_cm'] 		= $search_cm;
 		$dados['search_mes'] 		= $search_mes;
 
 		$mes_ano = explode( "-", $search_mes );
@@ -66,6 +68,9 @@ class Preventiva extends CI_Controller {
 
 		$data_inicio	= date('Y-m-d', strtotime( $ano . "-" . $mes . "-" . "01" ) );
 		$data_fim 		= date('Y-m-t', strtotime( $ano . "-" . $mes . "-" . "01" ) );
+
+		$cms = $this->site_model->listar_dropdown_cm();
+		$dados['cms'] = $cms;
 
 		// Montar paginação
 		$maximo = $this->configuracao_model->selecionar_valor('qtd_pagina');
@@ -79,13 +84,13 @@ class Preventiva extends CI_Controller {
 		$config['last_link'] 			= "Última";
 		$config['first_link'] 			= "Primeira";
 		$config['base_url'] 			= base_url('preventivas');	 
-		$config['total_rows'] 			= $this->preventiva_model->contar_registros_preventivas( $search_string, $search_tipo, $search_situacao, $data_inicio, $data_fim, $fields );
+		$config['total_rows'] 			= $this->preventiva_model->contar_registros_preventivas( $search_string, $search_tipo, $search_situacao, $search_cm, $data_inicio, $data_fim, $fields );
 
 		$this->pagination->initialize( $config );
 
 		$dados["paginacao"] = $this->pagination->create_links();
 
-		$preventivas = $this->preventiva_model->listar_preventivas( $maximo, $inicio, $search_string, $search_tipo, $search_situacao, $data_inicio, $data_fim, $fields, $orders );
+		$preventivas = $this->preventiva_model->listar_preventivas( $maximo, $inicio, $search_string, $search_tipo, $search_situacao, $search_cm, $data_inicio, $data_fim, $fields, $orders );
 
 		$dados['preventivas'] = $preventivas;
 

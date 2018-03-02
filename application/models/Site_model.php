@@ -73,6 +73,35 @@ class Site_Model extends MY_Model {
 		
 	}
 
+	public function listar_dropdown_cm() {
+
+		$this->db->select('cm');
+			
+		$this->db->group_start();
+		$this->db->where( 'removido !=', "1" );
+		$this->db->or_where( 'removido IS NULL' );
+		$this->db->group_end();
+
+		$this->db->group_by('cm');
+		$this->db->order_by('cm', 'ASC');
+
+		$query = $this->db->get( $this->table );
+		
+		$cms = array();
+		$result = $query->result_array();
+
+		$cms[0] = 'Todos os CMs';
+
+		foreach ( $result as $cm )
+			if ( $cm['cm'] != '' )
+				$cms[$cm['cm']] = $cm['cm'];
+
+		$cms[0] = 'Todos os CMs';
+
+		return $cms;
+		
+	}
+
 } 
 
 ?>

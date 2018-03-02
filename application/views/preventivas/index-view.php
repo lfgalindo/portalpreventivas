@@ -102,7 +102,7 @@
 
 						echo '</div>';
 
-						echo '<div class="col-md-4">';
+						echo '<div class="col-md-3">';
 
 						$situacoes = situacoes_preventivas();
 
@@ -112,13 +112,25 @@
 
 						echo '</div>';
 
+						echo '<div class="col-md-1 right" >';
+
+						echo form_label( "CM: ", "search_cm");
+
+						echo '</div>';
+
+						echo '<div class="col-md-2">';
+
+						echo form_dropdown('search_cm', $cms, (String) $search_cm, array( "class" => "cadastro" ));
+
+						echo '</div>';
+
 						echo '<div class="col-md-1 right">';
 
 						echo form_label( "Mês: ", "search_mes");
 
 						echo '</div>';
 
-						echo '<div class="col-md-4">';
+						echo '<div class="col-md-2">';
 
 						echo form_input( array("type" => "month", "name" => "search_mes", "class" => "cadastro", "value" => $search_mes ) );
 
