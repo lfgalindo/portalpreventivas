@@ -19,7 +19,7 @@ class Configuracao extends CI_Controller {
 
 		//Models
 		$this->load->model('configuracao_model');
-		$this->site_model->setTable('configuracoes');
+		$this->configuracao_model->setTable('configuracoes');
 
 		//Classes
 		$this->load->library('configuracao_class');
@@ -39,7 +39,9 @@ class Configuracao extends CI_Controller {
 
 		check_permission('visualizar_configuracoes', 'inicio');
 
-		$configuracoes = $this->configuracao_model->listar();
+		$config = new Configuracao_Class();
+
+		$configuracoes = $this->configuracao_model->listar( 100, 0, "", null, null, $config);
 
 		$dados['configuracoes'] = $configuracoes;
 
@@ -47,31 +49,16 @@ class Configuracao extends CI_Controller {
 
 	}//Fim do método index
 
-	//Método para editar um registro do banco
-	public function editar( $id ){
+	//Método para editar as configuracoes do sistema
+	public function editar(){
 
-		check_permission('editar_sites', 'sites');
+		check_permission('alterar_configuracoes', 'configuracoes');
 
-		if ( is_numeric( $id ) ){
-			$this->flashmessages->success('Ocorreu um erro!');
-			redirect("sites");
-		}
+		$config = new Configuracao_Class();
 
-		$id = decrypt( $id );
+		$configuracoes = $this->configuracao_model->listar( 100, 0, "", null, null, $config);
 
-		if ( ! is_numeric( $id ) ){
-			$this->flashmessages->success('Ocorreu um erro!');
-			redirect("sites");
-		}
-
-		$site = new Site_Class();
-		$site->setID( $id );
-
-		$site = $this->site_model->selecionar( $site );
-
-		$data['site'] = $site;
-
-		$this->form_validation->set_rules('ne_id', 'NE ID', 'required');
+		$dados['configuracoes'] = $configuracoes;
 
 		// Verificar validações.
 		if( ! $this->form_validation->run() ) {
@@ -83,37 +70,14 @@ class Configuracao extends CI_Controller {
 				endforeach;
 			endif;
 
-			$this->template->load('template.php', 'sites/editar-view.php', $data);
+			$this->template->load('template.php', 'configuracoes/editar-view.php', $dados);
 
 		} else {
-
-			// Alteramos o objeto para cadastro no banco
-			$site->setIDTim(			$this->input->post('id_tim') );
-			$site->setOperadora(		$this->input->post('operadora') );
-			$site->setRede(				$this->input->post('rede') );
-			$site->setTipoNe(			$this->input->post('tipo_ne') );
-			$site->setFornecedor(		$this->input->post('fornecedor') );
-			$site->setOperMscBsc(		$this->input->post('oper_msc_bsc') );
-	    	$site->setNeId(				$this->input->post('ne_id') );
-			$site->setRestricaoAcesso(	$this->input->post('restricao_acesso') );
-			$site->setObservacoes(		$this->input->post('observacoes') );
-			$site->setEstado(			$this->input->post('estado') );
-			$site->setCidade(			$this->input->post('cidade') );
-			$site->setDDD(				$this->input->post('ddd') );
-			$site->setEndereco(			$this->input->post('endereco') );
-			$site->setBairro(			$this->input->post('bairro') );
-			$site->setCm(				$this->input->post('cm') );
-			$site->setRemovido(			$this->input->post('removido') );
-
-			$this->site_model->atualizar( $site );
-
-			// Excluimos o objeto após sua utilização.
-			unset( $site );
-
-			$this->flashmessages->success('Site alterado com sucesso!');
-			redirect("sites");
+			
+			$this->flashmessages->success('Configurações alteradas com sucesso!');
+			redirect("configuracoes");
 		}		
 
 	}//Fim do método editar
 
-}//Fim da classe Servicos
+}//Fim da classe Configuração

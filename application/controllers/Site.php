@@ -352,4 +352,4 @@ class Site extends CI_Controller {
 
 	}//Fim do método selecionar - Ajax
 
-}//Fim da classe Servicos
+}//Fim da classe Site

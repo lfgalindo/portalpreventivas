@@ -93,7 +93,7 @@ class MY_Model extends CI_Model {
 	 * Lista os registros do banco
 	 * @return array
 	 */
-	public function listar( $maximo, $inicio, $search = "", $fields = null, $orders = null ) {
+	public function listar( $maximo, $inicio, $search = "", $fields = null, $orders = null, $objeto = null ) {
 
 		$this->db->select();
 
@@ -114,10 +114,18 @@ class MY_Model extends CI_Model {
 
 		}
 				
-		$this->db->group_start();
-		$this->db->where( 'removido !=', "1" );
-		$this->db->or_where( 'removido IS NULL' );
-		$this->db->group_end();
+		if ( ! is_null( $objeto ) ){
+
+			if ( property_exists( $objeto, 'removido' ) ){
+
+				$this->db->group_start();
+					$this->db->where( 'removido !=', "1" );
+					$this->db->or_where( 'removido IS NULL' );
+				$this->db->group_end();
+
+			}
+
+		}
 
 		if ( ! is_null( $orders ) ){
 

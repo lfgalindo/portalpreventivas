@@ -37,6 +37,7 @@ $route['arquivos/recusar/(:any)/(:any)'] 			= 'arquivo/recusar/$1/$2';
 $route['arquivos/cancelar_aprov_rec/(:any)/(:any)'] = 'arquivo/cancelar_aprov_rec/$1/$2';
 $route['arquivos/remover/(:any)/(:any)'] 			= 'arquivo/remover/$1/$2';
 
+$route['configuracoes']			= 'configuracao';
+$route['configuracoes/editar']	= 'configuracao/editar';
 
-
-$route['relatorios'] 						= 'relatorio';
+//$route['relatorios'] 						= 'relatorio';
