@@ -60,6 +60,10 @@ class Configuracao extends CI_Controller {
 
 		$dados['configuracoes'] = $configuracoes;
 
+		$this->form_validation->set_rules('qtd_pagina', 'Quantidade por página', 'required');
+
+		var_dump( $this->input->post() );die();
+
 		// Verificar validações.
 		if( ! $this->form_validation->run() ) {
 
@@ -69,6 +73,8 @@ class Configuracao extends CI_Controller {
 					$this->flashmessages->error( $errors );
 				endforeach;
 			endif;
+
+			
 
 			$this->template->load('template.php', 'configuracoes/editar-view.php', $dados);
 

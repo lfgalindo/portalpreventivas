@@ -31,7 +31,30 @@
 
 					echo '<div class="row cadastro" style="margin-top: 20px;">';
 					echo '<div class="col-md-4">' . $config['apelido'] . ':</div>';
-					echo '<div class="col-md-8">' . $config['valor'] . '</div>';
+					echo '<div class="col-md-8">';
+
+					if ( $config['nome'] == 'ext_permitidas' ){
+
+						$exts = unserialize($config['valor']);
+						$qtd = count( $exts );
+						$cont = 1;
+
+						foreach ( unserialize($config['valor']) as $ext ){
+
+							echo '.' . $ext; 
+
+							echo $cont == $qtd ? '' : ', ';
+
+							$cont++;
+						}
+
+					}
+					else{
+
+						echo $config['valor'] ;
+
+					}
+					echo '</div>';
 					echo '</div>';
 
 				}

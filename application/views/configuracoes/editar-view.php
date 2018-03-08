@@ -10,7 +10,7 @@
 
 ?>
 
-<?php echo form_open( null, array("id" => "form_cadastro") ); ?>
+<?php echo form_open(); ?>
 
 	<div class="row">
 		<div class="col-md-12">
@@ -25,20 +25,31 @@
 						echo '<div class="row cadastro" style="margin-top: 20px;">';
 						echo '<div class="col-md-4">' . $config['apelido'] . ':</div>';
 
-						echo '<div class="col-md-8">'; 
+						echo '<div class="col-md-4">'; 
 
 						if ( $config['nome'] == 'qtd_pagina' ){
 
 							echo form_input( array( 
 											'type'  => 'text', 
 											'name'  => $config['nome'],
-											'value' => $config['valor']
+											'value' => $config['valor'],
+											'class' => 'cadastro'
 								));
 
 						}
 						else if ( $config['nome'] == 'ext_permitidas' ) {
 
-							echo $config['valor'];
+							$mimes = & get_mimes();
+
+							$all_ext = array();
+
+							foreach ( $mimes as $ext => $mime )
+								$all_ext[$ext] = '.' . $ext;
+
+							$selected = unserialize( $config['valor'] );
+
+							echo form_dropdown('ext_permitidas', $all_ext, $selected , array( 'class' => 'ext_permitidas js-states form-control cadastro', 'multiple' => 'multiple' ) );
+
 
 						}
 						else if ( $config['nome'] == 'tamanho_arquivos' ) {
@@ -46,11 +57,9 @@
 							echo form_input( array( 
 											'type'  => 'text', 
 											'name'  => $config['nome'],
-											'value' => $config['valor']
+											'value' => $config['valor'],
+											'class' => 'cadastro'
 								));
-
-							echo ' Kb';
-
 						}
 
 						echo '</div>';
@@ -69,5 +78,7 @@
 <?php echo form_close(); ?>
 
 <script type="text/javascript">
+
+	$(".ext_permitidas").select2();
 
 </script>
