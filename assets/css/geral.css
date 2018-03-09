@@ -66,6 +66,10 @@ ul#menu a li i{
     margin-right: 7px;
 }
 
+.toggle-btn {
+    display: none;
+}
+
 table.listar{
     background-color: #f5f8f9;
     margin-top: 20px;
@@ -285,6 +289,15 @@ div.footer{
     width: 100%;
 }
 
+@media (min-width: 992px) {
+
+    #row_content_menu {
+        display: block;
+        height: 45px !important;
+    }
+
+}
+
 @media screen and (max-width: 992px){
 
     h6.permissao{
@@ -296,4 +309,23 @@ div.footer{
         
     }
 
+    .toggle-btn {
+        display: block;
+        cursor: pointer;
+        width: 40px;
+        text-align: center;
+    }
+
+    div#content_menu{
+        height: initial;
+    }
+
+    ul#menu {
+        flex-direction: column;
+    }
+
+    ul#menu a{
+        width: 100%;
+        padding: 15px 0px;
+    }
 }

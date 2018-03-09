@@ -48,6 +48,9 @@
 
 			<div class="row" id="row_pre_menu">
 				<div class="col-md-10 col-md-offset-1" id="pre_menu">
+
+					<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target=".row_menu"></i>
+
 					<div id="logo" class="nome_site">PORTAL DE PREVENTIVAS</div>
 					<div id="menu">
 						<?php 
@@ -69,9 +72,9 @@
 				</div>
 			</div>
 
-			<div class="row" id="row_content_menu">
+			<div class="row collapse out row_menu" id="row_content_menu">
 				<div class="col-md-10 col-md-offset-1" id="content_menu">
-					<ul id="menu">
+					<ul id="menu" class="menu-content">
 						<a href="<?php echo site_url('inicio'); ?>">
 							<li><i class="fa fa-home" aria-hidden="true"></i>Início</li>
 						</a>
@@ -128,7 +131,9 @@
 </html>
 
 <script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip(); 
-});
+	$(document).ready(function(){
+	    $('[data-toggle="tooltip"]').tooltip(); 
+	});
+
+
 </script>

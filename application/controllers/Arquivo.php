@@ -154,9 +154,12 @@ class Arquivo extends CI_Controller {
 
 		}
 
+		$ext_permitidas = unserialize( $this->configuracao_model->selecionar_valor('ext_permitidas') );
+		$tamanho_maximo = $this->configuracao_model->selecionar_valor('tamanho_arquivos');   
+
 		$config['upload_path']          = './uploads/';	
-		$config['allowed_types']        = 'bmp|jpeg|jpg|png|gif|pdf|doc|docx|rtf|txt|xls|xlsx|ppt|pptx|zip|rar|xlsm';
-		$config['max_size']             = 10000000000; 
+		$config['allowed_types']        = $ext_permitidas;
+		$config['max_size']             = $tamanho_maximo; 
 		$config['encrypt_name'] 		= TRUE;
 
 		$this->load->library('upload', $config );

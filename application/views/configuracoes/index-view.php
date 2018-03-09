@@ -43,7 +43,7 @@
 
 							echo '.' . $ext; 
 
-							echo $cont == $qtd ? '' : ', ';
+							echo $cont == $qtd ? '' : ' / ';
 
 							$cont++;
 						}

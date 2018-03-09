@@ -60,9 +60,9 @@ class Configuracao extends CI_Controller {
 
 		$dados['configuracoes'] = $configuracoes;
 
-		$this->form_validation->set_rules('qtd_pagina', 'Quantidade por página', 'required');
-
-		var_dump( $this->input->post() );die();
+		$this->form_validation->set_rules('qtd_pagina', 'Quantidade por página', 'required|numeric|integer|greater_than[0]');
+		$this->form_validation->set_rules('tamanho_arquivos', 'Tamanho máximo para envio', 'required|numeric|integer|greater_than_equal_to[0]');
+		$this->form_validation->set_rules('ext_permitidas[]', 'extensões permitidas para envio', 'required');
 
 		// Verificar validações.
 		if( ! $this->form_validation->run() ) {
@@ -74,12 +74,28 @@ class Configuracao extends CI_Controller {
 				endforeach;
 			endif;
 
-			
-
 			$this->template->load('template.php', 'configuracoes/editar-view.php', $dados);
 
 		} else {
-			
+
+			foreach( $this->input->post() as $nome => $valor ){
+
+				$config = new Configuracao_Class();
+
+				$config->setNome( $nome );
+
+				$config = $this->configuracao_model->selecionar_por_campo( $config, 'nome', 'getNome' );
+
+				if ( $config->getNome() == 'ext_permitidas' )
+					$valor = serialize( $valor );
+
+				$config->setValor( $valor );
+
+				$this->configuracao_model->atualizar( $config );
+
+				unset( $config );
+			}
+
 			$this->flashmessages->success('Configurações alteradas com sucesso!');
 			redirect("configuracoes");
 		}		

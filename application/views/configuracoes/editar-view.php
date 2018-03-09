@@ -48,7 +48,7 @@
 
 							$selected = unserialize( $config['valor'] );
 
-							echo form_dropdown('ext_permitidas', $all_ext, $selected , array( 'class' => 'ext_permitidas js-states form-control cadastro', 'multiple' => 'multiple' ) );
+							echo form_dropdown('ext_permitidas[]', $all_ext, $selected , array( 'class' => 'ext_permitidas js-states form-control cadastro', 'multiple' => 'multiple' ) );
 
 
 						}
