@@ -70,7 +70,7 @@ class Arquivo_Model extends MY_Model {
 
 		$this->db->order_by( 'data_envio', "DESC" );
 		
-		$query = $this->db->get( $this->table, 1, 1 );
+		$query = $this->db->get( $this->table, 1, 0 );
 
 		return $query->result_array();
 		

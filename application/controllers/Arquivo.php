@@ -154,10 +154,18 @@ class Arquivo extends CI_Controller {
 
 		}
 
+		$dir = './uploads/' ;
+		if ( ! file_exists( $dir ) )
+			mkdir( $dir );
+
+		$dir .= date('Y') . '-' . date('m') . '/';
+		if ( ! file_exists( $dir ) )
+			mkdir( $dir );
+
 		$ext_permitidas = unserialize( $this->configuracao_model->selecionar_valor('ext_permitidas') );
 		$tamanho_maximo = $this->configuracao_model->selecionar_valor('tamanho_arquivos');   
 
-		$config['upload_path']          = './uploads/';	
+		$config['upload_path']          = $dir;	
 		$config['allowed_types']        = $ext_permitidas;
 		$config['max_size']             = $tamanho_maximo; 
 		$config['encrypt_name'] 		= TRUE;
@@ -230,7 +238,10 @@ class Arquivo extends CI_Controller {
 
 		$arquivo = $this->arquivo_model->selecionar( $arquivo );
 
-		$file = file_get_contents( './uploads/' . $arquivo->getRaw() . $arquivo->getFormato() );
+		$ano_envio = date( 'Y', strtotime( $arquivo->getDataEnvio() ) );
+		$mes_envio = date( 'm', strtotime( $arquivo->getDataEnvio() ) );
+
+		$file = file_get_contents( './uploads/' . $ano_envio . '-' . $mes_envio . '/' . $arquivo->getRaw() . $arquivo->getFormato() );
 
 		force_download( $arquivo->getNome(), $file, null );
 
@@ -273,8 +284,11 @@ class Arquivo extends CI_Controller {
 
 		$arquivo = $this->arquivo_model->selecionar( $arquivo );
 
+		$ano_envio = date( 'Y', strtotime( $arquivo->getDataEnvio() ) );
+		$mes_envio = date( 'm', strtotime( $arquivo->getDataEnvio() ) );
+
 		// Verificar se arquivo ainda existe, pois se ele já foi recusado ele não existe mais no servidor para ser aprovado
-		if ( ! file_exists( './uploads/' . $arquivo->getRaw() . $arquivo->getFormato() ) ){
+		if ( ! file_exists( './uploads/' . $ano_envio . '-' . $mes_envio . '/' . $arquivo->getRaw() . $arquivo->getFormato() ) ){
 			$this->flashmessages->success('O arquivo não está mais no servidor, portanto não pode ser aprovado!');
 			redirect('arquivos/preventivas/' . encrypt( $id_preventiva ) );
 		}
@@ -357,8 +371,14 @@ class Arquivo extends CI_Controller {
 
 		$this->preventiva_model->atualizar( $preventiva );
 
+		$ano_envio = date( 'Y', strtotime( $arquivo->getDataEnvio() ) );
+		$mes_envio = date( 'm', strtotime( $arquivo->getDataEnvio() ) );
+
+		$file = './uploads/' . $ano_envio . '-' . $mes_envio . '/' . $arquivo->getRaw() . $arquivo->getFormato();
+
 		// Excluímos o arquivo físico para liberar espaço
-		unlink( './uploads/' . $arquivo->getRaw() . $arquivo->getFormato() );
+		if ( file_exists( $file ) && $file != './uploads/' )
+			unlink( $file );
 
 
 		// Excluimos o objeto após sua utilização.
@@ -456,9 +476,13 @@ class Arquivo extends CI_Controller {
 
 		$arquivo = $this->arquivo_model->selecionar( $arquivo );
 
-		$file = './uploads/' . $arquivo->getRaw() . $arquivo->getFormato();
+		$ano_envio = date( 'Y', strtotime( $arquivo->getDataEnvio() ) );
+		$mes_envio = date( 'm', strtotime( $arquivo->getDataEnvio() ) );
 
-        unlink($file);
+		$file = './uploads/' . $ano_envio . '-' . $mes_envio . '/' . $arquivo->getRaw() . $arquivo->getFormato();
+
+		if ( file_exists( $file ) && $file != './uploads/' )
+        	unlink($file);
 
 		$this->arquivo_model->remover( $arquivo );
 
@@ -485,14 +509,6 @@ class Arquivo extends CI_Controller {
 		}
 
 		$this->preventiva_model->atualizar( $preventiva );
-
-		echo "<pre>";
-
-		var_dump($ultimo);
-		var_dump($ultimo[0]);
-		var_dump($ultimo[0]['data_envio']); 
-
-		die();
 
 		// Excluimos o objeto após sua utilização.
 		unset( $arquivo );
@@ -524,7 +540,10 @@ class Arquivo extends CI_Controller {
 
 			$arquivo = $this->arquivo_model->selecionar( $arquivo );
 
-			$file = './uploads/' . $arquivo->getRaw() . $arquivo->getFormato();
+			$ano_envio = date( 'Y', strtotime( $arquivo->getDataEnvio() ) );
+			$mes_envio = date( 'm', strtotime( $arquivo->getDataEnvio() ) );
+
+			$file = './uploads/' . $ano_envio . '-' . $mes_envio . '/' . $arquivo->getRaw() . $arquivo->getFormato();
 
 			$result = file_exists( $file ) ? array(	"ajax" => true,	"existe" => true ) : array( "ajax" => true, "existe" => false ) ;
 
