@@ -57,6 +57,25 @@ class Arquivo_Model extends MY_Model {
 
 	}
 
+	/**
+	 * Ultimo relatório enviado
+	 * @return array
+	 */
+	public function buscar_ultimo_arquivo( $tabela, $id_reg_tabela ) {
+
+		$this->db->select();
+
+		$this->db->where( 'tabela', $tabela );
+		$this->db->where( 'id_reg_tabela', $id_reg_tabela );
+
+		$this->db->order_by( 'data_envio', "DESC" );
+		
+		$query = $this->db->get( $this->table, 1, 1 );
+
+		return $query->result_array();
+		
+	}
+
 } 
 
 ?>

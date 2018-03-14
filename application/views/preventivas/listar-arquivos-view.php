@@ -121,11 +121,13 @@
 									</button>
 								</a>
 
-								<a href="<?php echo base_url( '/arquivos/baixar/' . $id_reg_tabela_encrypt . '/') . encrypt( $arquivo['id'] ); ?>">
-									<button class="download btn-table" data-toggle="tooltip"  data-placement="bottom" title="Baixar relatório">
-										<i class="fa fa-download" aria-hidden="true"></i>
-									</button>
-								</a>
+								<?php if ( $arquivo['recusado'] != "1" ) : ?>
+									<a href="<?php echo base_url( '/arquivos/baixar/' . $id_reg_tabela_encrypt . '/') . encrypt( $arquivo['id'] ); ?>">
+										<button class="download btn-table" id="<?php echo $arquivo['id']; ?>" data-toggle="tooltip"  data-placement="bottom" title="Baixar relatório">
+											<i class="fa fa-download" aria-hidden="true"></i>
+										</button>
+									</a>
+								<?php endif; ?>
 
 								<?php if( check_permission('aprovar_relatorios_preventivas') && $arquivo['aprovado'] != "1" && $arquivo['recusado'] != "1" ): ?>
 									<a href="<?php echo base_url('/arquivos/aprovar/' . $id_reg_tabela_encrypt . '/') . encrypt( $arquivo['id'] ); ?>">
@@ -308,5 +310,45 @@
 		
 	});
 
+	$(document).on('click', 'button.download', function( e ){
+
+		e.preventDefault();
+
+		var id_arquivo = $(this).attr('id');
+		var link = $(this).parent().attr('href');
+
+		$.ajax({
+			url: "/ajax/existe_arquivo",
+			type: 'POST',
+			data: {
+				id: id_arquivo
+			},
+			success: function( response ) {
+
+				if ( response.ajax ){
+
+					if ( response.existe ) { 
+
+						swal('Pronto!', 'O download será iniciado!', 'success')
+						window.location.href = link;
+					}
+					else {
+
+						swal('Oops!', 'Esse arquivo não se encontra mais no servidor!', 'error');
+
+					}
+
+				}
+				else{
+
+					swal('Oops!', response.message, 'error');
+
+				}
+
+			}
+
+		});
+
+	});
 
 </script>

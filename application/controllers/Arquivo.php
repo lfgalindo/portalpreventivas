@@ -258,20 +258,26 @@ class Arquivo extends CI_Controller {
 
 		if ( is_numeric( $id ) ){
 			$this->flashmessages->success('Ocorreu um erro!');
-			redirect('arquivos/preventivas/' . $id_preventiva);
+			redirect('arquivos/preventivas/' . encrypt( $id_preventiva ) );
 		}
 
 		$id = decrypt( $id );
 
 		if ( ! is_numeric( $id ) ){
 			$this->flashmessages->success('Ocorreu um erro!');
-			redirect('arquivos/preventivas/' . $id_preventiva);
+			redirect('arquivos/preventivas/' . encrypt( $id_preventiva ) );
 		}
 
 		$arquivo = new Arquivo_Class();
 		$arquivo->setID( $id );
 
 		$arquivo = $this->arquivo_model->selecionar( $arquivo );
+
+		// Verificar se arquivo ainda existe, pois se ele já foi recusado ele não existe mais no servidor para ser aprovado
+		if ( ! file_exists( './uploads/' . $arquivo->getRaw() . $arquivo->getFormato() ) ){
+			$this->flashmessages->success('O arquivo não está mais no servidor, portanto não pode ser aprovado!');
+			redirect('arquivos/preventivas/' . encrypt( $id_preventiva ) );
+		}
 
 		$arquivo->setAprovado( 1 );
 		$arquivo->setDataRecusadoAprovado( date("Y-m-d H:i:s") );
@@ -350,6 +356,10 @@ class Arquivo extends CI_Controller {
 		$preventiva->setStatus( 4 );
 
 		$this->preventiva_model->atualizar( $preventiva );
+
+		// Excluímos o arquivo físico para liberar espaço
+		unlink( './uploads/' . $arquivo->getRaw() . $arquivo->getFormato() );
+
 
 		// Excluimos o objeto após sua utilização.
 		unset( $preventiva );
@@ -461,7 +471,28 @@ class Arquivo extends CI_Controller {
 
 		$preventiva->setStatus( $qtd_arquivos > 0 ? '4' : '2' );
 
-		$this->preventiva_model->atualizar( $preventiva ); 
+		if ( $qtd_arquivos > 0 ) {
+
+			$ultimo = $this->arquivo_model->buscar_ultimo_arquivo( 'preventivas', $preventiva->getID() );
+
+			$preventiva->setRelatorio( date( 'Y-m-d', strtotime( $ultimo[0]['data_envio'] ) ) );
+
+		}
+		else{
+
+			$preventiva->setRelatorio( null );
+
+		}
+
+		$this->preventiva_model->atualizar( $preventiva );
+
+		echo "<pre>";
+
+		var_dump($ultimo);
+		var_dump($ultimo[0]);
+		var_dump($ultimo[0]['data_envio']); 
+
+		die();
 
 		// Excluimos o objeto após sua utilização.
 		unset( $arquivo );
@@ -472,9 +503,8 @@ class Arquivo extends CI_Controller {
 
 	}//Fim do método remover
 
-
-	//Método para listar os registros via Ajax
-	public function ajax_listar_sites() {
+	// Método para verificar se existe esse arquivo no servidor
+	public function ajax_existe_arquivo(){
 
 		// Headers.
 		header('Content-Type: application/json');
@@ -484,34 +514,29 @@ class Arquivo extends CI_Controller {
 			if( ! $this->input->is_ajax_request() )
 				throw new Exception("A requisição não pode ser realizada dessa forma.");
 
-			if( $this->input->server('REQUEST_METHOD') != 'GET' )
-				throw new Exception("As informações devem chegar via GET.");
+			if( $this->input->server('REQUEST_METHOD') != 'POST' )
+				throw new Exception("As informações devem chegar via POST.");
 
+			$id = $this->input->post('id');
 
-			$search_string = $this->input->get('q');
+			$arquivo = new Arquivo_Class();
+			$arquivo->setID( $id );
 
-			$fields = array( 'id_tim', 'operadora', 'rede', 'tipo_ne', 'fornecedor', 'ne_id', 'observacoes', 'cidade', 'estado', 'endereco', 'bairro', 'cm' );
-			$orders = array("ne_id" => "ASC");
+			$arquivo = $this->arquivo_model->selecionar( $arquivo );
 
-			$sites = $this->site_model->listar_dropdown( $search_string, $fields, $orders );
+			$file = './uploads/' . $arquivo->getRaw() . $arquivo->getFormato();
 
-			$result = array(
-						"results" => $sites,
-						"count_filtered" => count( $sites )
-						);
+			$result = file_exists( $file ) ? array(	"ajax" => true,	"existe" => true ) : array( "ajax" => true, "existe" => false ) ;
 
 			echo json_encode( $result );
 
 		} catch( Exception $e ) {
-			echo json_encode(
-				array(
-					'message'	=> $e->getMessage()
-				)
-			);
+
+			echo json_encode( array( 'ajax' => false, 'message' => $e->getMessage() ) );
+
 		}
 
 		return;
-
-	}//Fim do método listar - Ajax
+	} // Fim do método existe arquivo
 
 }//Fim da classe Servicos

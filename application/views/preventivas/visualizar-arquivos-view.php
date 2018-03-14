@@ -22,6 +22,11 @@
 			</div>
 
 			<div class="row cadastro">
+				<div class="col-md-3">Arquivo:</div>
+				<div class="col-md-9"><?php echo $arquivo->getRaw() . $arquivo->getFormato(); ?></div>
+			</div>
+
+			<div class="row cadastro">
 				<div class="col-md-3">Tamanho:</div>
 				<div class="col-md-9"><?php echo number_format( $arquivo->getTamanho(), 2, ',', '.') . " Kb"; ?></div>
 			</div>
