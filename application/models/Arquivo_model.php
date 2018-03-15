@@ -76,6 +76,20 @@ class Arquivo_Model extends MY_Model {
 		
 	}
 
+	/**
+	 * Lista todos os arquivos - Apenas para importação
+	 * @return array
+	 */
+	public function listar_tudo() {
+
+		$this->db->select();
+		
+		$query = $this->db->get( $this->table);
+
+		return $query->result_array();
+		
+	}
+
 } 
 
 ?>

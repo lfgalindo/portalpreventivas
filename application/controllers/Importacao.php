@@ -29,6 +29,8 @@ class Importacao extends CI_Controller {
 		$this->load->model('usuario_model');
 		$this->usuario_model->setTable('usuarios');
 
+		$this->load->model('arquivo_model');
+		$this->arquivo_model->setTable('arquivos');
 
 		$this->load->library('site_class');
 		$this->load->library('usuario_class');
@@ -408,6 +410,36 @@ class Importacao extends CI_Controller {
 		}
 
 		fclose($arquivo);
+	}
+
+	public function nova_estrutura_uploads() {
+
+		$all_files = $this->arquivo_model->listar_tudo();
+
+		foreach ( $all_files as $file_bd ){
+
+			$file = './uploads/' . $file_bd['raw'] . $file_bd['formato'];
+
+			echo file_exists( $file );
+
+			if( $file_bd['recusado'] != "1" && file_exists( $file ) ){
+
+				echo 'Entrou';
+
+				$ano_envio = date( 'Y', strtotime( $file_bd['data_envio'] ) );
+				$mes_envio = date( 'm', strtotime( $file_bd['data_envio'] ) );
+
+				if ( ! file_exists( './uploads/' . $ano_envio . '-' . $mes_envio . '/' ) )
+					mkdir( './uploads/' . $ano_envio . '-' . $mes_envio . '/' );
+
+				copy( $file, './uploads/' . $ano_envio . '-' . $mes_envio . '/' . $file_bd['raw'] . $file_bd['formato']);
+
+			}
+
+		}
+
+		echo "Concluído";
+
 	}
 
 }
