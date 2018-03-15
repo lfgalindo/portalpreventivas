@@ -419,12 +419,8 @@ class Importacao extends CI_Controller {
 		foreach ( $all_files as $file_bd ){
 
 			$file = './uploads/' . $file_bd['raw'] . $file_bd['formato'];
-
-			echo file_exists( $file );
-
+			
 			if( $file_bd['recusado'] != "1" && file_exists( $file ) ){
-
-				echo 'Entrou';
 
 				$ano_envio = date( 'Y', strtotime( $file_bd['data_envio'] ) );
 				$mes_envio = date( 'm', strtotime( $file_bd['data_envio'] ) );
