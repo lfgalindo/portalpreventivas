@@ -153,7 +153,8 @@ if ( ! function_exists( 'tipos_preventivas' ) ){
 					"corp"			=> "CORP",
 					"infra" 		=> "Infra",
 					"estrutural" 	=> "Estrutural Torre",
-					"etd"			=> "ETD",
+					"etd_infra"		=> "ETD INFRA",
+					"etd_tx"		=> "ETD TX",
 					"fmt" 			=> "FMT",
 					"msan"			=> "MSAN",
 					"zeladoria"		=> "Zeladoria"
