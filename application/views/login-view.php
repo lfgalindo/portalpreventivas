@@ -22,11 +22,11 @@
 
 	<style type="text/css">
 
-			@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+			@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 
 		body{
-			background-color: #525262;
-		    font-family: 'Raleway', sans-serif;
+			background-color: #424242;
+		    font-family: 'Roboto', sans-serif;
 		}
 		html, body{
 			height: 100%;
@@ -43,10 +43,9 @@
 		    flex-direction: column;
 		}
 		form{
-			width: 100%;
-			height: 70%;
-			background-color: #eaeff2;
-			border-radius: 5px;	
+		    background-color: #f1f1f1;
+		    border-radius: 5px;
+		    padding: 50px;
 		}
 		input[type='text'],
 		input[type='password']{
@@ -55,12 +54,17 @@
 		}
 
 		.btn-green{
-		    background-color: #9fd037;
-		    border: solid 2px #9fd037;
+		    background-color: #8bb72f;
+		    border: solid 2px #8bb72f;
 		    color: #fff;
 		    border-radius: 3px;
 		    padding: 3px 30px;
-		}	
+		}
+
+		.btn-green:hover{
+		    background-color: #9ccc36;
+		    border: solid 2px #9ccc36;
+		}		
 
 		.group_inputs{
  		   text-align: center;
@@ -89,6 +93,21 @@
 		    min-width: 20%;
 		}
 
+		div.container-form{
+			 width: 100%;
+		    height: 100%;
+		    display: flex;
+		    flex-direction: column;
+		    justify-content: center;
+		    align-items: center;
+		}
+
+		input{
+			padding: 4px;
+		    border: 1px solid #dce2e7;
+		    outline-color: #9fd037;
+		    border-radius: 0px;
+		}
 
 	</style>
 
@@ -96,65 +115,60 @@
 
 		<div class="container-fluid" style="height: 100%" id="wrapper">
 			<div class="row"  style="height: 100%">
-				<div class="col-md-6 col-md-offset-3">
+				<div class="col-md-12 container-form">
 					<?php echo form_open("login/auth"); ?>
-						<div class='row center' style="height: 100%">
-							<div class="form_login col-md-6 ofset-col-md-3">
-								<div class='container-fluid'>
 
-								<div class='row' style="margin-bottom: 25px;">
-									<div class="col-md-12">
-										<h4>Faça login para continuar</h4>	
-									</div>
-								</div>
-
-								<?php
-
-									// Exibe as mensagens de erro caso tenha.
-									if( $this->flashmessages->hasMessages() ) {
-									    echo '<div class="alerts">';
-									    $this->flashmessages->display();
-									    echo '</div>';
-									}
-
-								?>
-
-								<div class='row'>
-									<div class="group_inputs col-md-12">
-
-										<?php echo form_input( array(
-												"name" => "login",
-												"id" => "login",
-												"placeholder" => "Digite o login..."
-											) ); ?>
-
-										<?php echo form_password( array(
-												"name" => "senha",
-												"id" => "senha",
-												"placeholder" => "**********"
-											) ); ?>
-
-									</div>
-								</div>
-
-								<div class='row'>
-									<div class="col-md-12 center">
-
-										<?php echo form_button( array(
-												"content" => "Entrar",
-												"type" => "submit",
-												"class" => "btn-green",
-											) ); ?>
-
-									</div>
-								</div>
-								</div>
+						<div class='row' style="margin-bottom: 25px;">
+							<div class="col-md-12">
+								<h4>Faça login para continuar</h4>	
 							</div>
 						</div>
+
+						<?php
+
+							// Exibe as mensagens de erro caso tenha.
+							if( $this->flashmessages->hasMessages() ) {
+							    echo '<div class="alerts">';
+							    $this->flashmessages->display();
+							    echo '</div>';
+							}
+
+						?>
+
+						<div class='row'>
+							<div class="group_inputs col-md-12">
+
+								<?php echo form_input( array(
+										"name" => "login",
+										"id" => "login",
+										"placeholder" => "Digite o login..."
+									) ); ?>
+
+								<?php echo form_password( array(
+										"name" => "senha",
+										"id" => "senha",
+										"placeholder" => "**********"
+									) ); ?>
+
+							</div>
+						</div>
+
+						<div class='row'>
+							<div class="col-md-12 center">
+
+								<?php echo form_button( array(
+										"content" => "Entrar",
+										"type" => "submit",
+										"class" => "btn-green",
+									) ); ?>
+
+							</div>
+						</div>
+
 					<?php echo form_close(); ?>
+
 				</div>
 			</div>
 		</div>
-
 	</body>
 </html>

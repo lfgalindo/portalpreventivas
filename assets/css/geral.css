@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 
 html, body {height:100%;}
 
@@ -9,27 +9,26 @@ html, body {height:100%;}
 }
 
 body{
-	background-color: #eaeff2;
-    font-family: 'Raleway', sans-serif;
+	background-color: #f1f1f1;
+    font-family: 'Roboto', sans-serif;
 }
 div.nome_site#logo{
     letter-spacing : 3px;
     font-weight: bold;
 }
 div#row_pre_menu{
-    background-color: #3b3b48;
+    background-color: #212121;
 }
 div#pre_menu{
 	height: 45px;
     display: flex;
     flex-direction: row;
-    background-color: #3b3b48;
     color: #fff;
     justify-content: space-between;
     align-items: center;
 }
 div#row_content_menu{
-	background-color: #525262;
+	background-color: #424242;
 }
 div#content_menu{
     height: 45px;
@@ -52,7 +51,7 @@ ul#menu a{
     width: 20%;
     display: flex;
     align-items: center;
-    color: #d1d1e4;
+    color: #f1f1f1;
 }
 
 ul#menu a:hover{
@@ -145,16 +144,16 @@ h6.title-area{
 }
 
 .btn-green{
-    background-color: #9fd037;
-    border: solid 2px #9fd037;
+    background-color: #8bb72f;
+    border: solid 2px #8bb72f;
     color: #fff;
     border-radius: 3px;
     padding: 3px 8px;
 }
 
 .btn-green:hover{
-    background-color: #8fbb32;
-    border: solid 2px #8fbb32;
+    background-color: #9ccc36;
+    border: solid 2px #9ccc36;
 }
 
 .btn-red{
@@ -278,7 +277,7 @@ span.text_info{
 
 div.footer{
     font-style: italic;
-    background-color: #525262;
+    background-color: #424242;
     height: 50px;
     display: flex;
     justify-content: center;

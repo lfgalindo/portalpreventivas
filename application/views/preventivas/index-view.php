@@ -161,79 +161,81 @@
 
 			?>
 
-			<table class="table listar">
-				<thead>
-					<tr>
-						<th> Site </th>
-						<th> Tipo TOP </th>
-						<th> End ID </th>
-						<th> Supervisor </th>
-						<th> Segmento </th>
-						<th> Status </th>
-						<th> Ações </th>
-					</tr>
-				</thead>
-
-				<tbody>
-					<?php foreach ( $preventivas as $preventiva ): ?>
+			<div class="table-responsive">
+				<table class="table listar">
+					<thead>
 						<tr>
-							<td><?php echo $preventiva['ne_id']; ?></td>
-							<td><?php echo $preventiva['tipo_top']; ?></td>
-							<td><?php echo $preventiva['end_id']; ?></td>
-							<td><?php echo $preventiva['supervisor']; ?></td>
-							<td><?php echo tipos_preventivas( $preventiva['tipo'] ); ?></td>
-							<td><?php echo situacoes_preventivas( $preventiva['status'] ); ?></td>
-							<td>
-								<a href="<?php echo base_url('/preventivas/visualizar/') . encrypt( $preventiva['id'] ); ?>">
-									<button class="visualizar btn-table" data-toggle="tooltip"  data-placement="bottom" title="Ver todos os dados">
-										<i class="fa fa-eye" aria-hidden="true"></i>
-									</button>
-								</a>
-
-								<?php if( check_permission('editar_preventivas_admin') || ( check_permission('editar_preventivas') && $preventiva['status'] == "1" ) ): ?>
-									<a href="<?php echo base_url('/preventivas/editar/') . encrypt( $preventiva['id'] ); ?>">
-										<button class="editar btn-table" data-toggle="tooltip"  data-placement="bottom" title="Alterar dados">
-											<i class="fa fa-pencil" aria-hidden="true"></i>
-										</button>
-									</a>
-								<?php endif; ?>
-
-								<?php if( check_permission('visualizar_relatorios_preventivas')  && $preventiva['status'] != "1" ): ?>
-									<a href="<?php echo base_url('/arquivos/preventivas/') . encrypt( $preventiva['id'] ); ?>">
-										<button class="editar btn-table" data-toggle="tooltip"  data-placement="bottom" title="Ver relatórios enviados">
-											<i class="fa fa-file-text-o" aria-hidden="true"></i>
-										</button>
-									</a>
-								<?php endif; ?>
-
-								<?php if( check_permission('remover_preventivas') && $preventiva['status'] == "1" ): ?>
-									<a href="<?php echo base_url('/preventivas/remover/') . encrypt( $preventiva['id'] ) . $string_get; ?>">
-										<button class="excluir btn-table" data-toggle="tooltip" data-placement="bottom" title="Remover preventiva">
-											<i class="fa fa-times" aria-hidden="true"></i>
-										</button>
-									</a>
-								<?php endif; ?>
-
-								<?php if( check_permission('executar_preventivas') && $preventiva['status'] == "1" ): ?>
-									<a href="<?php echo base_url('/preventivas/executar/') . encrypt( $preventiva['id'] ) . $string_get; ?>">
-										<button class="executar btn-table" data-toggle="tooltip"  data-placement="bottom" title="Marcar como executada">
-											<i class="fa fa-check" aria-hidden="true"></i>
-										</button>
-									</a>
-								<?php endif; ?>
-
-								<?php if( check_permission('cancelar_exec_preventivas') && $preventiva['status'] == "2" ): ?>
-									<a href="<?php echo base_url('/preventivas/executar/') . encrypt( $preventiva['id'] ) . $string_get; ?>">
-										<button class="cancelar_exec btn-table" data-toggle="tooltip"  data-placement="bottom" title="Cancelar execução">
-											<i class="fa fa-ban" aria-hidden="true"></i>
-										</button>
-									</a>
-								<?php endif; ?>
-							</td>
+							<th> Site </th>
+							<th> Tipo TOP </th>
+							<th> End ID </th>
+							<th> Supervisor </th>
+							<th> Segmento </th>
+							<th> Status </th>
+							<th> Ações </th>
 						</tr>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
+					</thead>
+
+					<tbody>
+						<?php foreach ( $preventivas as $preventiva ): ?>
+							<tr>
+								<td><?php echo $preventiva['ne_id']; ?></td>
+								<td><?php echo $preventiva['tipo_top']; ?></td>
+								<td><?php echo $preventiva['end_id']; ?></td>
+								<td><?php echo $preventiva['supervisor']; ?></td>
+								<td><?php echo tipos_preventivas( $preventiva['tipo'] ); ?></td>
+								<td><?php echo situacoes_preventivas( $preventiva['status'] ); ?></td>
+								<td>
+									<a href="<?php echo base_url('/preventivas/visualizar/') . encrypt( $preventiva['id'] ); ?>">
+										<button class="visualizar btn-table" data-toggle="tooltip"  data-placement="bottom" title="Ver todos os dados">
+											<i class="fa fa-eye" aria-hidden="true"></i>
+										</button>
+									</a>
+
+									<?php if( check_permission('editar_preventivas_admin') || ( check_permission('editar_preventivas') && $preventiva['status'] == "1" ) ): ?>
+										<a href="<?php echo base_url('/preventivas/editar/') . encrypt( $preventiva['id'] ); ?>">
+											<button class="editar btn-table" data-toggle="tooltip"  data-placement="bottom" title="Alterar dados">
+												<i class="fa fa-pencil" aria-hidden="true"></i>
+											</button>
+										</a>
+									<?php endif; ?>
+
+									<?php if( check_permission('visualizar_relatorios_preventivas')  && $preventiva['status'] != "1" ): ?>
+										<a href="<?php echo base_url('/arquivos/preventivas/') . encrypt( $preventiva['id'] ); ?>">
+											<button class="editar btn-table" data-toggle="tooltip"  data-placement="bottom" title="Ver relatórios enviados">
+												<i class="fa fa-file-text-o" aria-hidden="true"></i>
+											</button>
+										</a>
+									<?php endif; ?>
+
+									<?php if( check_permission('remover_preventivas') && $preventiva['status'] == "1" ): ?>
+										<a href="<?php echo base_url('/preventivas/remover/') . encrypt( $preventiva['id'] ) . $string_get; ?>">
+											<button class="excluir btn-table" data-toggle="tooltip" data-placement="bottom" title="Remover preventiva">
+												<i class="fa fa-times" aria-hidden="true"></i>
+											</button>
+										</a>
+									<?php endif; ?>
+
+									<?php if( check_permission('executar_preventivas') && $preventiva['status'] == "1" ): ?>
+										<a href="<?php echo base_url('/preventivas/executar/') . encrypt( $preventiva['id'] ) . $string_get; ?>">
+											<button class="executar btn-table" data-toggle="tooltip"  data-placement="bottom" title="Marcar como executada">
+												<i class="fa fa-check" aria-hidden="true"></i>
+											</button>
+										</a>
+									<?php endif; ?>
+
+									<?php if( check_permission('cancelar_exec_preventivas') && $preventiva['status'] == "2" ): ?>
+										<a href="<?php echo base_url('/preventivas/executar/') . encrypt( $preventiva['id'] ) . $string_get; ?>">
+											<button class="cancelar_exec btn-table" data-toggle="tooltip"  data-placement="bottom" title="Cancelar execução">
+												<i class="fa fa-ban" aria-hidden="true"></i>
+											</button>
+										</a>
+									<?php endif; ?>
+								</td>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			</div>
 
 			<div class="pagination">
 				<?php echo $paginacao; ?>

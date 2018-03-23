@@ -53,52 +53,54 @@
 
 			</div>
 
-			<table class="table listar">
-				<thead>
-					<tr>
-						<th> NE ID </th>
-						<th> END ID </th>
-						<th> Tipo </th>
-						<th> Cidade </th>
-						<th> Ações </th>
-					</tr>
-				</thead>
-
-				<tbody>
-					<?php foreach ( $sites as $site ): ?>
+			<div class="table-responsive">
+				<table class="table listar">
+					<thead>
 						<tr>
-							<td><?php echo $site['ne_id']; ?></td>
-							<td><?php echo $site['end_id']; ?></td>
-							<td><?php echo $site['tipo_ne']; ?></td>
-							<td><?php echo $site['cidade'] . '/' . $site['estado']; ?></td>
-							<td>
-								<a href="<?php echo base_url('/sites/visualizar/') . encrypt( $site['id'] ); ?>">
-									<button class="visualizar btn-table" data-toggle="tooltip"  data-placement="bottom" title="Ver todos os dados">
-										<i class="fa fa-eye" aria-hidden="true"></i>
-									</button>
-								</a>
-
-								<?php if( check_permission('editar_sites') ): ?>
-									<a href="<?php echo base_url('/sites/editar/') . encrypt( $site['id'] ); ?>">
-										<button class="editar btn-table" data-toggle="tooltip"  data-placement="bottom" title="Alterar dados">
-											<i class="fa fa-pencil" aria-hidden="true"></i>
-										</button>
-									</a>
-								<?php endif; ?>
-
-								<?php if( check_permission('remover_sites') ): ?>
-									<a href="<?php echo base_url('/sites/remover/') . encrypt( $site['id'] ); ?>">
-										<button class="excluir btn-table" data-toggle="tooltip" data-placement="bottom" title="Remover site">
-											<i class="fa fa-times" aria-hidden="true"></i>
-										</button>
-									</a>
-								<?php endif; ?>
-							</td>
+							<th> NE ID </th>
+							<th> END ID </th>
+							<th> Tipo </th>
+							<th> Cidade </th>
+							<th> Ações </th>
 						</tr>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
+					</thead>
 
+					<tbody>
+						<?php foreach ( $sites as $site ): ?>
+							<tr>
+								<td><?php echo $site['ne_id']; ?></td>
+								<td><?php echo $site['end_id']; ?></td>
+								<td><?php echo $site['tipo_ne']; ?></td>
+								<td><?php echo $site['cidade'] . '/' . $site['estado']; ?></td>
+								<td>
+									<a href="<?php echo base_url('/sites/visualizar/') . encrypt( $site['id'] ); ?>">
+										<button class="visualizar btn-table" data-toggle="tooltip"  data-placement="bottom" title="Ver todos os dados">
+											<i class="fa fa-eye" aria-hidden="true"></i>
+										</button>
+									</a>
+
+									<?php if( check_permission('editar_sites') ): ?>
+										<a href="<?php echo base_url('/sites/editar/') . encrypt( $site['id'] ); ?>">
+											<button class="editar btn-table" data-toggle="tooltip"  data-placement="bottom" title="Alterar dados">
+												<i class="fa fa-pencil" aria-hidden="true"></i>
+											</button>
+										</a>
+									<?php endif; ?>
+
+									<?php if( check_permission('remover_sites') ): ?>
+										<a href="<?php echo base_url('/sites/remover/') . encrypt( $site['id'] ); ?>">
+											<button class="excluir btn-table" data-toggle="tooltip" data-placement="bottom" title="Remover site">
+												<i class="fa fa-times" aria-hidden="true"></i>
+											</button>
+										</a>
+									<?php endif; ?>
+								</td>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			</div>
+			
 			<div class="pagination">
 				<?php echo $paginacao; ?>
 			</div>
