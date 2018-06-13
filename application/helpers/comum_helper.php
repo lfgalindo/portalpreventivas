@@ -53,9 +53,9 @@ if ( ! function_exists('apenas_numeros')){
 }
 
 if ( ! function_exists('nome_mes')){
-	
+
 	function nome_mes( $mes ) {
-		
+
 		$nome = "";
 
 		switch ( $mes ) {
@@ -148,15 +148,19 @@ if ( ! function_exists( 'tipos_preventivas' ) ){
 	function tipos_preventivas ( $nome_banco = null ){
 
 		$tipos = array(
+					"aterramento"	=> "Aterramento",
+					"bateria"		=> "Bateria",
 					"bts" 			=> "BTS-TX",
 					"ccc" 			=> "CCCs",
 					"corp"			=> "CORP",
-					"infra" 		=> "Infra",
-					"estrutural" 	=> "Estrutural Torre",
+					"infra" 		=> "Infraestrutura",
+					"equipamento"	=> "Equipamento",
+					"estrutural" 	=> "Estrutura Vertical",
 					"etd_infra"		=> "ETD INFRA",
 					"etd_tx"		=> "ETD TX",
 					"fmt" 			=> "FMT",
 					"msan"			=> "MSAN",
+					"mw"			=> "MW",
 					"zeladoria"		=> "Zeladoria"
 					);
 
