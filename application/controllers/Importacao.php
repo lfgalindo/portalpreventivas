@@ -47,7 +47,7 @@ class Importacao extends CI_Controller {
 		$nao_tem_site = array();
 		$incluir = array();
 
-		$arquivo = fopen ('./uploads/estrutural_marco.csv', 'r');
+		$arquivo = fopen ('./uploads/mw_junho.csv', 'r');
 
 		while( ! feof( $arquivo ) ){
 			
@@ -141,8 +141,8 @@ class Importacao extends CI_Controller {
 		echo '<link href="' . base_url() . 'assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">';
 
 
-		$tipo_preventiva = 'estrutural';
-		$data_programada = '2018-03-01';
+		$tipo_preventiva = 'mw';
+		$data_programada = '2018-06-01';
 		$qtd_nao_importadas = count( $nao_tem_supervisor ) + count( $nao_tem_site ) + count( $nao_tem_tecnico );
 		$qtd_importadas =  count( $incluir );
 
