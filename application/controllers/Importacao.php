@@ -33,6 +33,7 @@ class Importacao extends CI_Controller {
 		$this->arquivo_model->setTable('arquivos');
 
 		$this->load->library('site_class');
+		$this->load->library('arquivo_class');
 		$this->load->library('usuario_class');
 		$this->load->library('preventiva_class');
 
@@ -435,6 +436,54 @@ class Importacao extends CI_Controller {
 		}
 
 		echo "Concluído";
+
+	}
+
+	public function remover_preventivas_por_tipo(){
+
+
+		$all_preventivas = $this->preventiva_model->listar_preventivas_por_tipo('bts');
+
+
+		foreach ( $all_preventivas as $preventiva) {
+			
+			$preventiva_obj = new Preventiva_Class();
+			$preventiva_obj->setID( $preventiva['id'] );
+
+			$preventiva_obj = $this->preventiva_model->selecionar( $preventiva_obj );
+
+			echo "Preventiva: " . $preventiva_obj->getID() . "<br>";
+
+			$arquivos = $this->arquivo_model->listar_arquivos( 1000, 0, 'preventivas', $preventiva_obj->getID() );
+
+			foreach ($arquivos as $arquivo) {
+			
+				$arquivo_obj = new Arquivo_Class();
+				$arquivo_obj->setID( $arquivo['id'] );
+
+				$arquivo_obj = $this->arquivo_model->selecionar( $arquivo_obj );
+
+				$ano_envio = date( 'Y', strtotime( $arquivo_obj->getDataEnvio() ) );
+				$mes_envio = date( 'm', strtotime( $arquivo_obj->getDataEnvio() ) );
+
+				$file = './uploads/' . $ano_envio . '-' . $mes_envio . '/' . $arquivo_obj->getRaw() . $arquivo_obj->getFormato();
+
+				if ( file_exists( $file ) && $file != './uploads/' )
+					unlink( $file );
+					
+				echo "-- Remover arquivo: " . $file . "<br>";
+				$this->arquivo_model->remover( $arquivo_obj );
+
+				unset( $arquivo_obj );
+
+			}
+
+			echo "<br>";
+			$this->preventiva_model->remover( $preventiva_obj );
+
+			unset( $preventiva_obj );
+
+		}
 
 	}
 

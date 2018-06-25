@@ -49,8 +49,11 @@ class Usuario extends CI_Controller {
 		$dados['search_string'] = $search_string;
 
 		// Montar paginação
+		$usuario = new Usuario_Class();
+
 		$maximo = $this->configuracao_model->selecionar_valor('qtd_pagina');
 		$inicio = $this->input->get('inicio') ? $this->input->get('inicio') : 0;
+		$total_registros = $this->usuario_model->contar_registros( $search_string, $fields, $usuario );
 
 		$config['enable_query_strings'] = true;
 		$config['page_query_string'] 	= true;
@@ -60,13 +63,15 @@ class Usuario extends CI_Controller {
 		$config['last_link'] 			= "Última";
 		$config['first_link'] 			= "Primeira";
 		$config['base_url'] 			= base_url('usuarios');	 
-		$config['total_rows'] 			= $this->usuario_model->contar_registros( $search_string, $fields );
+		$config['total_rows'] 			= $total_registros;
 
 		$this->pagination->initialize( $config );
 
+		$dados["total_registros"] = $total_registros;
+
 		$dados["paginacao"] = $this->pagination->create_links();
 
-		$usuarios = $this->usuario_model->listar( $maximo, $inicio, $search_string, $fields, $orders );
+		$usuarios = $this->usuario_model->listar( $maximo, $inicio, $search_string, $fields, $orders, $usuario );
 
 		$dados['usuarios'] = $usuarios;
 

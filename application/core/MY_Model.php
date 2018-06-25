@@ -146,7 +146,7 @@ class MY_Model extends CI_Model {
 	 * Conta os registros existentes no banco.
 	 * @return int
 	 */
-	public function contar_registros( $search = "", $fields = null ) {
+	public function contar_registros( $search = "", $fields = null, $objeto = null ) {
 
 		if ( $search != "" || $fields != null ){
 
@@ -165,10 +165,18 @@ class MY_Model extends CI_Model {
 
 		}
 
-		$this->db->group_start();
-		$this->db->where( 'removido !=', "1" );
-		$this->db->or_where( 'removido IS NULL' );
-		$this->db->group_end();
+		if ( ! is_null( $objeto ) ){
+
+			if ( property_exists( $objeto, 'removido' ) ){
+
+				$this->db->group_start();
+					$this->db->where( 'removido !=', "1" );
+					$this->db->or_where( 'removido IS NULL' );
+				$this->db->group_end();
+
+			}
+
+		}
 
 		$this->db->from( $this->table );
 

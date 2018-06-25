@@ -61,6 +61,8 @@ class Preventiva_Model extends MY_Model {
 
        	$this->db->where('programada >= ', $data_inicio);
         $this->db->where('programada <= ', $data_fim);
+
+        $this->db->where( 'tipo !=', 'bts' ); // REMOVER
         
 		if ( ! is_null( $orders ) ){
 
@@ -253,6 +255,16 @@ class Preventiva_Model extends MY_Model {
 
 		return false;
 
+	}
+
+	public function listar_preventivas_por_tipo( $tipo ) {
+
+		$this->db->where( 'tipo', $tipo );
+
+		$query = $this->db->get( $this->table );
+		
+		return $query->result_array();
+		
 	}
 
 } 

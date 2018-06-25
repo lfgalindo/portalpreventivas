@@ -150,7 +150,6 @@ if ( ! function_exists( 'tipos_preventivas' ) ){
 		$tipos = array(
 					"aterramento"	=> "Aterramento",
 					"bateria"		=> "Bateria",
-					"bts" 			=> "BTS-TX",
 					"ccc" 			=> "CCCs",
 					"corp"			=> "CORP",
 					"infra" 		=> "Infraestrutura",
