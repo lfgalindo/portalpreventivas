@@ -149,17 +149,19 @@ if ( ! function_exists( 'tipos_preventivas' ) ){
 
 		$tipos = array(
 					"aterramento"	=> "Aterramento",
-					"bateria"		=> "Bateria",
-					"ccc" 			=> "CCCs",
-					"corp"			=> "CORP",
-					"infra" 		=> "Infraestrutura",
+					"bateria"			=> "Bateria",
+					"ccc" 				=> "CCCs",
+					"corp"				=> "CORP",
+					"gmg"					=> "GMG",
+					"infra" 			=> "Infraestrutura",
 					"equipamento"	=> "Equipamento",
 					"estrutural" 	=> "Estrutura Vertical",
 					"etd_infra"		=> "ETD INFRA",
-					"etd_tx"		=> "ETD TX",
-					"fmt" 			=> "FMT",
-					"msan"			=> "MSAN",
-					"mw"			=> "MW",
+					"etd_tx"			=> "ETD TX",
+					"fmt" 				=> "FMT",
+					"msan"				=> "MSAN",
+					"mw"					=> "MW",
+					"satelite"		=> "Satélite",
 					"zeladoria"		=> "Zeladoria"
 					);
 

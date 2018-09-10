@@ -43,25 +43,28 @@ class Importacao extends CI_Controller {
 
 	public function index() {
 
+		$data_programada = '2018-09-01';
+		$tipo_preventiva = 'mw';
+
 		$nao_tem_tecnico = array();
 		$nao_tem_supervisor = array();
 		$nao_tem_site = array();
 		$incluir = array();
 
-		$arquivo = fopen ('./uploads/mw_junho.csv', 'r');
+		$arquivo = fopen ('./uploads/' . $tipo_preventiva . '-setembro.csv', 'r');
 
 		while( ! feof( $arquivo ) ){
-			
+
 			$linha = fgets($arquivo, 1024);
-			
+
 			$dados = explode(';', $linha);
-			
+
 			if ( ! empty( $linha ) ){
 
 				$existe_site = false;
 				$existe_supervisor = false;
 				$existe_tecnico = false;
-				
+
 				if ( $this->site_model->existe_cadastro( 'ne_id', $dados[0] ) ){
 
 					$site = new Site_Class();
@@ -74,23 +77,23 @@ class Importacao extends CI_Controller {
 				}
 
 				if ( $this->usuario_model->existe_cadastro( 'nome', trim($dados[1]) ) ){
-	
+
 					$supervisor = new Usuario_Class();
 					$supervisor->setNome( trim($dados[1]) );
 
 					$supervisor = $this->usuario_model->selecionar_por_campo( $supervisor, 'nome', 'getNome' );
-				
+
 					$existe_supervisor = true;
 
 				}
 
 				if ( $this->usuario_model->existe_cadastro( 'nome', trim($dados[2]) ) ){
-	
+
 					$tecnico = new Usuario_Class();
 					$tecnico->setNome( trim($dados[2]) );
 
 					$tecnico = $this->usuario_model->selecionar_por_campo( $tecnico, 'nome', 'getNome' );
-				
+
 					$existe_tecnico = true;
 
 				}
@@ -141,9 +144,6 @@ class Importacao extends CI_Controller {
 
 		echo '<link href="' . base_url() . 'assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">';
 
-
-		$tipo_preventiva = 'mw';
-		$data_programada = '2018-06-01';
 		$qtd_nao_importadas = count( $nao_tem_supervisor ) + count( $nao_tem_site ) + count( $nao_tem_tecnico );
 		$qtd_importadas =  count( $incluir );
 
@@ -151,7 +151,7 @@ class Importacao extends CI_Controller {
 		echo '<table class="table table-striped">';
 		echo '<tr>';
 		echo '<th colspan="2" style="text-align:center"> Dados da importação </td>';
-		
+
 
 		echo '<tr>';
 		echo '<th>Programada:</th>';
@@ -188,7 +188,7 @@ class Importacao extends CI_Controller {
 			echo '<table class="table table-striped">';
 			echo '<tr>';
 			echo '<th colspan="3" style="text-align:center"> Preventivas não importadas - Motivo: Não possui supervisor cadastrado </td>';
-			
+
 			echo '<tr>';
 			echo '<th>Site</td>';
 			echo '<th>Supervisor</td>';
@@ -216,7 +216,7 @@ class Importacao extends CI_Controller {
 			echo '<table class="table table-striped">';
 			echo '<tr>';
 			echo '<th colspan="3" style="text-align:center"> Preventivas não importadas - Motivo: Não possui site cadastrado </td>';
-			
+
 			echo '<tr>';
 			echo '<th>Site</td>';
 			echo '<th>Supervisor</td>';
@@ -244,7 +244,7 @@ class Importacao extends CI_Controller {
 			echo '<table class="table table-striped">';
 			echo '<tr>';
 			echo '<th colspan="3" style="text-align:center"> Preventivas não importadas - Motivo: Não possui técnico cadastrado </td>';
-			
+
 			echo '<tr>';
 			echo '<th>Site</td>';
 			echo '<th>Supervisor</td>';
@@ -270,7 +270,7 @@ class Importacao extends CI_Controller {
 		echo '<table class="table table-striped">';
 		echo '<tr>';
 		echo '<th colspan="3" style="text-align:center"> Preventivas importadas </td>';
-		
+
 		echo '<tr>';
 		echo '<th>Site</td>';
 		echo '<th>Supervisor</td>';
@@ -311,15 +311,15 @@ class Importacao extends CI_Controller {
 		$cont = 0;
 
 		while( ! feof( $arquivo ) && $cont < 10 ){
-			
+
 			//$cont++;
 
 			$linha = fgets($arquivo, 1024);
-			
+
 			$dados = explode(';', $linha);
-			
+
 			if ( ! empty( $linha ) ){
-				
+
 				if ( $this->site_model->existe_cadastro( 'ne_id', $dados[0] ) ){
 
 					$site = new Site_Class();
@@ -350,17 +350,17 @@ class Importacao extends CI_Controller {
 		$cont = 0;
 
 		while( ! feof( $arquivo ) && $cont < 25 ){
-			
+
 			//$cont++;
 
 			$linha = fgets($arquivo, 1024);
-			
+
 			$dados = explode(';', $linha);
-			
+
 			if ( ! empty( $linha ) ){
 
 				$site = new Site_Class();
-				
+
 				if ( $this->site_model->existe_cadastro( 'ne_id', $dados[5] ) ){
 
 					$site->setNeId( utf8_encode($dados[5]) );
@@ -420,7 +420,7 @@ class Importacao extends CI_Controller {
 		foreach ( $all_files as $file_bd ){
 
 			$file = './uploads/' . $file_bd['raw'] . $file_bd['formato'];
-			
+
 			if( $file_bd['recusado'] != "1" && file_exists( $file ) ){
 
 				$ano_envio = date( 'Y', strtotime( $file_bd['data_envio'] ) );
@@ -446,7 +446,7 @@ class Importacao extends CI_Controller {
 
 
 		foreach ( $all_preventivas as $preventiva) {
-			
+
 			$preventiva_obj = new Preventiva_Class();
 			$preventiva_obj->setID( $preventiva['id'] );
 
@@ -457,7 +457,7 @@ class Importacao extends CI_Controller {
 			$arquivos = $this->arquivo_model->listar_arquivos( 1000, 0, 'preventivas', $preventiva_obj->getID() );
 
 			foreach ($arquivos as $arquivo) {
-			
+
 				$arquivo_obj = new Arquivo_Class();
 				$arquivo_obj->setID( $arquivo['id'] );
 
@@ -470,7 +470,7 @@ class Importacao extends CI_Controller {
 
 				if ( file_exists( $file ) && $file != './uploads/' )
 					unlink( $file );
-					
+
 				echo "-- Remover arquivo: " . $file . "<br>";
 				$this->arquivo_model->remover( $arquivo_obj );
 
